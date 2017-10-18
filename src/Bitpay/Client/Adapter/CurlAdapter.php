@@ -94,8 +94,7 @@ class CurlAdapter implements AdapterInterface
     private function getCurlDefaultOptions(RequestInterface $request)
     {
         return array(
-            CURLOPT_URL            => $request->getUri(),
-            CURLOPT_PORT           => $request->getPort(),
+            CURLOPT_URL            => $request->getFullUri(),
             CURLOPT_CUSTOMREQUEST  => $request->getMethod(),
             CURLOPT_HTTPHEADER     => $request->getHeaderFields(),
             CURLOPT_TIMEOUT        => 10,

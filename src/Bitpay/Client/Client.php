@@ -53,19 +53,13 @@ class Client implements ClientInterface
     protected $privateKey;
 
     /**
-     * @var NetworkInterface
+     * @var uri
      */
-    protected $network;
+    protected $uri;
 
-    /**
-     * The network is either livenet or testnet and tells the client where to
-     * send the requests.
-     *
-     * @param NetworkInterface
-     */
-    public function setNetwork(NetworkInterface $network)
+    public function setUri($uri)
     {
-        $this->network = $network;
+        $this->uri = trim($uri);
     }
 
     /**
@@ -650,15 +644,7 @@ class Client implements ClientInterface
             throw new \Exception('Please set your Private Key');
         }
 
-        if (true == property_exists($this->network, 'isPortRequiredInUrl')) {
-            if ($this->network->isPortRequiredInUrl === true) {
-                $url = $request->getUriWithPort();
-            } else {
-                $url = $request->getUri();
-            }
-        } else {
-            $url = $request->getUri();
-        }
+        $url = $request->getFullUri();
 
         $message = sprintf(
             '%s%s',
@@ -677,8 +663,7 @@ class Client implements ClientInterface
     protected function createNewRequest()
     {
         $request = new Request();
-        $request->setHost($this->network->getApiHost());
-        $request->setPort($this->network->getApiPort());
+        $request->setUri($this->uri);
         $this->prepareRequestHeaders($request);
 
         return $request;

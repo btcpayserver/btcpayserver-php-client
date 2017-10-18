@@ -25,28 +25,6 @@ interface RequestInterface
     public function getMethod();
 
     /**
-     * Should always return https
-     *
-     * @return string
-     */
-    public function getSchema();
-
-    /**
-     * Returns the host to send the request to. The host would be something
-     * such as `test.bitpay.com` or `bitpay.com`
-     *
-     * @return string
-     */
-    public function getHost();
-
-    /**
-     * Returns port to send request on
-     *
-     * @return integer
-     */
-    public function getPort();
-
-    /**
      * example of path is `api/invoice` as this is appended to $host
      *
      * @return string
@@ -58,7 +36,7 @@ interface RequestInterface
      *
      * @return string
      */
-    public function getUri();
+    public function getFullUri();
 
     /**
      * Checks the request to see if the method matches a known value
