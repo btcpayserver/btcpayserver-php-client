@@ -532,6 +532,10 @@ class Client implements ClientInterface
             throw new \Bitpay\Client\BitpayException($this->response->getStatusCode().": ".$body['error']);
         }
 
+        if($this->response->getStatusCode() !== 200) {
+            throw new \Exception('invalid status code: '. $this->response->getStatusCode());
+        }
+
         $tkn = $body['data'][0];
         $createdAt = new \DateTime();
         $pairingExpiration = new \DateTime();
