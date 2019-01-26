@@ -84,6 +84,8 @@ interface InvoiceInterface
      */
     public function getPrice();
 
+    public function getTaxIncluded();
+
     /**
      * This is the currency code set for the price setting.  The pricing currencies
      * currently supported are USD, EUR, BTC, and all of the codes listed on this page:

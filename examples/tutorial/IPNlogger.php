@@ -62,8 +62,9 @@ $invoiceId = $invoice->getId();
 $invoiceStatus = $invoice->getStatus();
 $invoiceExceptionStatus = $invoice->getExceptionStatus();
 $invoicePrice = $invoice->getPrice();
+$taxIncluded = $invoice->getTaxIncluded();
 
-fwrite($myfile, $date . " : IPN received for BitPay invoice ".$invoiceId." . Status = " .$invoiceStatus." / exceptionStatus = " . $invoiceExceptionStatus." Price = ". $invoicePrice. "\n");
+fwrite($myfile, $date . " : IPN received for BitPay invoice ".$invoiceId." . Status = " .$invoiceStatus." / exceptionStatus = " . $invoiceExceptionStatus." Price = ". $invoicePrice." Tax Included = ". $taxIncluded."\n");
 fwrite($myfile, "Raw IPN: ". $raw_post_data."\n");
 
 //Respond with HTTP 200, so BitPay knows the IPN has been received correctly

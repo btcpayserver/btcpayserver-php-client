@@ -165,6 +165,14 @@ class Invoice implements InvoiceInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public function getTaxIncluded()
+    {
+        return $this->getItem()->getTaxIncluded();
+    }
+
+    /**
      * @param float $price
      *
      * @return InvoiceInterface
@@ -173,6 +181,20 @@ class Invoice implements InvoiceInterface
     {
         if (!empty($price)) {
             $this->getItem()->setPrice($price);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param float $taxIncluded
+     *
+     * @return InvoiceInterface
+     */
+    public function setTaxIncluded($taxIncluded)
+    {
+        if (!empty($taxIncluded)) {
+            $this->getItem()->setTaxIncluded($taxIncluded);
         }
 
         return $this;

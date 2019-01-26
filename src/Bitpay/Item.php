@@ -30,6 +30,11 @@ class Item implements ItemInterface
     protected $price;
 
     /**
+     * @var float
+     */
+    protected $taxIncluded;
+
+    /**
      * @var integer
      */
     protected $quantity;
@@ -97,6 +102,16 @@ class Item implements ItemInterface
     }
 
     /**
+     * @inheritdoc
+     *
+     * @return float
+     */
+    public function getTaxIncluded()
+    {
+        return $this->taxIncluded;
+    }
+
+    /**
      * @param mixed $price A float, integer, or en_US formatted numeric string
      *
      * @return ItemInterface
@@ -108,6 +123,17 @@ class Item implements ItemInterface
         }
 
         $this->price = (float)$price;
+
+        return $this;
+    }
+
+    public function setTaxIncluded($taxIncluded)
+    {
+        if (is_string($taxIncluded)) {
+            $this->checkPriceFormat($taxIncluded);
+        }
+
+        $this->taxIncluded = (float)$taxIncluded;
 
         return $this;
     }
