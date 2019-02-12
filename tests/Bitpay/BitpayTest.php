@@ -47,7 +47,6 @@ class BitpayTest extends \PHPUnit_Framework_TestCase
         $bitpay = new \Bitpay\Bitpay(
             array(
                 'bitpay' => array(
-                    'network'     => 'testnet',
                     'private_key' => vfsStream::url('tmp/key.pri'),
                     'public_key'  => vfsStream::url('tmp/key.pub'),
                 )
