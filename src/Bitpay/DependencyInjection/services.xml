@@ -7,19 +7,14 @@
  -->
 <container xmlns="http://symfony.com/schema/dic/services">
     <parameters>
-        <parameter key="network.class">Bitpay\Network\Livenet</parameter>
         <parameter key="adapter.class">Bitpay\Client\Adapter\CurlAdapter</parameter>
         <parameter key="key_manager.class">Bitpay\KeyManager</parameter>
         <parameter key="key_storage.class">Bitpay\Storage\FilesystemStorage</parameter>
     </parameters>
     <services>
-        <service id="network" class="%network.class%" />
         <service id="adapter" class="%adapter.class%" />
 
         <service id="client" class="Bitpay\Client\Client">
-            <call method="setNetwork">
-                <argument type="service" id="network" />
-            </call>
             <call method="setAdapter">
                 <argument type="service" id="adapter" />
             </call>

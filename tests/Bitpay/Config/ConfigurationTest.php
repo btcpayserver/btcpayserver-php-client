@@ -21,7 +21,6 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('public_key', $processedConfig);
         $this->assertArrayHasKey('private_key', $processedConfig);
         $this->assertArrayHasKey('sin_key', $processedConfig);
-        $this->assertArrayHasKey('network', $processedConfig);
         $this->assertArrayHasKey('adapter', $processedConfig);
         $this->assertArrayHasKey('key_storage', $processedConfig);
         $this->assertArrayHasKey('key_storage_password', $processedConfig);

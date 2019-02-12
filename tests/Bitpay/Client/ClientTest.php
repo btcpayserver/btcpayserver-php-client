@@ -22,7 +22,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->client = new Client();
-        $this->client->setNetwork(new \Bitpay\Network\Testnet());
         $this->client->setToken($this->getMockToken());
         $this->client->setPublicKey($this->getMockPublicKey());
         $this->client->setPrivateKey($this->getMockPrivateKey());
