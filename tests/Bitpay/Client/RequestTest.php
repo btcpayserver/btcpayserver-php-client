@@ -8,6 +8,9 @@ namespace Bitpay\Client;
 
 class RequestTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Request */
+    private $request;
+
     public function setUp()
     {
         $this->request = new Request();
@@ -77,35 +80,10 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->request->isMethod('unknown method'));
     }
 
-    public function testGetPort()
+    public function testSetUri()
     {
-        $this->assertSame(443, $this->request->getPort());
-    }
-
-    public function testSetPort()
-    {
-        $this->request->setPort(444);
-        $this->assertSame(444, $this->request->getPort());
-    }
-
-
-    public function testGetSchema()
-    {
-        $this->assertSame('https', $this->request->getSchema());
-    }
-
-    public function testGetHost()
-    {
-        $this->assertNull($this->request->getHost());
-    }
-
-    /**
-     * @depends testGetHost
-     */
-    public function testSetHost()
-    {
-        $this->request->setHost('test.bitpay.com');
-        $this->assertSame('test.bitpay.com', $this->request->getHost());
+        $this->request->setUri('https://btcpay.server/');
+        $this->assertSame('https://btcpay.server/', $this->request->getUri());
     }
 
     public function testGetPath()
@@ -120,26 +98,6 @@ class RequestTest extends \PHPUnit_Framework_TestCase
     {
         $this->request->setPath('api/invoice');
         $this->assertSame('api/invoice', $this->request->getPath());
-    }
-
-    /**
-     * @depends testSetHost
-     * @depends testGetPath
-     */
-    public function testGetUri()
-    {
-        $this->request->setHost('test.bitpay.com');
-        $this->assertSame('https://test.bitpay.com/', $this->request->getUri());
-    }
-
-    /**
-     * @depends testSetHost
-     * @depends testGetPath
-     */
-    public function testGetUriWithPort()
-    {
-        $this->request->setHost('test.bitpay.com');
-        $this->assertSame('https://test.bitpay.com:443/', $this->request->getUriWithPort());
     }
 
     public function testGetHeaders()
@@ -182,15 +140,15 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @depends testGetMethod
-     * @depends testGetUri
+     * @depends testSetUri
      * @depends testGetHeaders
      * @depends testGetBody
      */
     public function testToStringWithoutBody()
     {
-        $this->request->setHost('test.bitpay.com');
+        $this->request->setUri('https://btcpay.server:443');
         $raw = array(
-            'POST https://test.bitpay.com:443/ HTTP/1.1',
+            'POST https://btcpay.server:443/ HTTP/1.1',
             'Content-Type: application/json',
         );
         $raw = implode("\r\n", $raw);
@@ -199,16 +157,16 @@ class RequestTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @depends testGetMethod
-     * @depends testGetUri
+     * @depends testSetUri
      * @depends testGetHeaders
      * @depends testGetBody
      */
     public function testToStringWithBody()
     {
-        $this->request->setHost('test.bitpay.com');
+        $this->request->setUri('https://btcpay.server:443');
         $this->request->setBody('{"json":true}');
         $raw = array(
-            'POST https://test.bitpay.com:443/ HTTP/1.1',
+            'POST https://btcpay.server:443/ HTTP/1.1',
             'Content-Type: application/json',
             'Content-Length: 13',
             '',
