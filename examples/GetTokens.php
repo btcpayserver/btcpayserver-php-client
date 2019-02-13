@@ -14,6 +14,14 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
+/**
+ * To load up keys that you have previously saved, you need to use the same
+ * storage engine. You also need to tell it the location of the key you want
+ * to load.
+ */
+$storageEngine = new \Bitpay\Storage\FilesystemStorage();
+$privateKey    = $storageEngine->load('/tmp/bitpay.pri');
+$publicKey     = $storageEngine->load('/tmp/bitpay.pub');
 
 /**
  * Create a new client. You can see the example of how to configure this using
@@ -22,7 +30,6 @@ require __DIR__ . '/../vendor/autoload.php';
 $bitpay = new \Bitpay\Bitpay(
     array(
         'bitpay' => array(
-            'network'     => 'testnet', // testnet or livenet, default is livenet
             'public_key'  => '/tmp/bitpay.pub', //see tutorial/001.php and 002.php
             'private_key' => '/tmp/bitpay.pri',
             'key_storage' => 'Bitpay\Storage\EncryptedFilesystemStorage',
@@ -35,6 +42,13 @@ $bitpay = new \Bitpay\Bitpay(
  * Create the client that will be used to send requests to BitPay's API
  */
 $client = $bitpay->get('client');
+
+$client->setPrivateKey($privateKey);
+$client->setPublicKey($publicKey);
+/**
+ * Add your btcpayserver url
+ */
+$client->setUri('https://btcpay.server/');
 
 $tokens = $client->getTokens();
 print_r($tokens);
