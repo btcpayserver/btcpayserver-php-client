@@ -22,6 +22,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->client = new Client();
+        $this->client->setUri('https://btcpay.server/');
         $this->client->setToken($this->getMockToken());
         $this->client->setPublicKey($this->getMockPublicKey());
         $this->client->setPrivateKey($this->getMockPrivateKey());
@@ -52,6 +53,16 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function testCheckPriceAndCurrencyWithException() {
         $client = new ChildOfClient();
         $res = $client->checkPriceAndCurrency(.991, 'ABC');
+    }
+
+    /**
+     * @expectedException \Bitpay\Client\BitpayException
+     * @expectedExceptionMessage You should provider the url of your BTCPAY server
+     */
+    public function testBtcPayServerUrlNotProvided()
+    {
+        $client = new Client();
+        $client->getTokens();
     }
 
     /**
