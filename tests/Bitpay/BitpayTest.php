@@ -15,9 +15,7 @@ class BitpayTest extends \PHPUnit_Framework_TestCase
     {
         $bitpay = new \Bitpay\Bitpay(
             array(
-                'bitpay' => array(
-                    'network' => 'testnet',
-                )
+                'bitpay' => array()
             )
         );
     }
@@ -31,7 +29,7 @@ class BitpayTest extends \PHPUnit_Framework_TestCase
     public function testGet()
     {
         $bitpay = new \Bitpay\Bitpay();
-        $this->assertInstanceOf('Bitpay\Network\Livenet', $bitpay->get('network'));
+        $this->assertInstanceOf('Bitpay\Client\Adapter\CurlAdapter', $bitpay->get('adapter'));
     }
 
     /**
@@ -49,7 +47,6 @@ class BitpayTest extends \PHPUnit_Framework_TestCase
         $bitpay = new \Bitpay\Bitpay(
             array(
                 'bitpay' => array(
-                    'network'     => 'testnet',
                     'private_key' => vfsStream::url('tmp/key.pri'),
                     'public_key'  => vfsStream::url('tmp/key.pub'),
                 )

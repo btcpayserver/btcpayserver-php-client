@@ -22,7 +22,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->client = new Client();
-        $this->client->setNetwork(new \Bitpay\Network\Testnet());
         $this->client->setToken($this->getMockToken());
         $this->client->setPublicKey($this->getMockPublicKey());
         $this->client->setPrivateKey($this->getMockPrivateKey());
@@ -260,6 +259,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $invoice->method('getItem')->willReturn($item);
         $invoice->method('getBuyer')->willReturn($buyer);
         $invoice->method('setId')->will($this->returnSelf());
+        $invoice->method('setToken')->will($this->returnSelf());
         $invoice->method('setUrl')->will($this->returnSelf());
         $invoice->method('setStatus')->will($this->returnSelf());
         //$invoice->method('setBtcPrice')->will($this->returnSelf());
@@ -293,6 +293,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $invoice->method('getItem')->willReturn($item);
         $invoice->method('getBuyer')->willReturn($buyer);
         $invoice->method('setId')->will($this->returnSelf());
+        $invoice->method('setToken')->will($this->returnSelf());
         $invoice->method('setUrl')->will($this->returnSelf());
         $invoice->method('setStatus')->will($this->returnSelf());
         //$invoice->method('setBtcPrice')->will($this->returnSelf());
@@ -616,7 +617,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $invoice = $this->getMockBuilder('Bitpay\InvoiceInterface')
             ->setMethods(
                 array(
-                    'getPrice', 'getCurrency', 'getItem', 'getBuyer', 'getTransactionSpeed',
+                    'getPrice', 'getTaxIncluded', 'getCurrency', 'getItem', 'getBuyer', 'getTransactionSpeed',
                     'getNotificationEmail', 'getNotificationUrl', 'getRedirectUrl', 'getPosData', 'getStatus',
                     'isFullNotifications', 'getId', 'getUrl', 'getBtcPrice', 'getInvoiceTime',
                     'getExpirationTime', 'getCurrentTime', 'getOrderId', 'getItemDesc', 'getItemCode',
@@ -624,7 +625,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                     'getBuyerState', 'getBuyerZip', 'getBuyerCountry', 'getBuyerEmail', 'getBuyerPhone',
                     'getExceptionStatus', 'getBtcPaid', 'getRate', 'getToken', 'getRefundAddresses',
                     'setId', 'setUrl', 'setStatus', 'setBtcPrice', 'setPrice', 'setInvoiceTime', 'setExpirationTime',
-                    'setCurrentTime', 'setBtcPaid', 'setRate', 'setToken', 'setExceptionStatus', 'isExtendedNotifications'
+                    'setCurrentTime', 'setBtcPaid', 'setRate', 'setToken', 'setExceptionStatus', 'isExtendedNotifications',
+                    'setPosData',
                 )
             )
             ->getMock();
@@ -702,6 +704,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
                     'getCode',
                     'getDescription',
                     'getPrice',
+                    'getTaxIncluded',
                     'getQuantity',
                     'isPhysical',
                 )

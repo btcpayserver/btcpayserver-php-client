@@ -30,7 +30,6 @@ class BitpayExtension implements ExtensionInterface
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__));
         $loader->load('services.xml');
 
-        $container->setParameter('network.class', 'Bitpay\Network\\'.ContainerBuilder::camelize($config['network']));
         $container->setParameter(
             'adapter.class',
             'Bitpay\Client\Adapter\\'.ContainerBuilder::camelize($config['adapter']).'Adapter'
