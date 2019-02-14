@@ -26,7 +26,7 @@
             </call>
         </service>
 
-        <service id="key_storage" class="%key_storage.class%" public="false">
+        <service id="key_storage" class="%key_storage.class%">
             <argument>%bitpay.key_storage_password%</argument>
         </service>
 
