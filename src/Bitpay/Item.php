@@ -183,7 +183,6 @@ class Item implements ItemInterface
      * values with more than 6 decimals.
      *
      * @param string $price The price value to check
-     * @throws \Exception
      */
     protected function checkPriceFormat($price)
     {
