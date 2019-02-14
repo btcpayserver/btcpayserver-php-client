@@ -7,9 +7,8 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $client = new \Bitpay\Client\Client();
 $client->setAdapter(new \Bitpay\Client\Adapter\CurlAdapter());
-$client->setNetwork(new \Bitpay\Network\Testnet());
 $request = new \Bitpay\Client\Request();
-$request->setHost('test.bitpay.com');
+$request->setUri('https://btcpay.server/');
 $request->setMethod(\Bitpay\Client\Request::METHOD_GET);
 $request->setPath('rates/USD');
 

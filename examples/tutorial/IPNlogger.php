@@ -44,10 +44,8 @@ if (true === empty($ipn -> id)) {
 // This is needed, since the IPN does not contain any authentication
 
 $client        = new \Bitpay\Client\Client();
-$network       = new \Bitpay\Network\Testnet();
-//$network = new \Bitpay\Network\Livenet();
 $adapter       = new \Bitpay\Client\Adapter\CurlAdapter();
-$client->setNetwork($network);
+$client->setUri('https://btcpay.server/');
 $client->setAdapter($adapter);
 
 $token = new \Bitpay\Token();
@@ -69,4 +67,3 @@ fwrite($myfile, "Raw IPN: ". $raw_post_data."\n");
 //Respond with HTTP 200, so BitPay knows the IPN has been received correctly
 //If BitPay receives <> HTTP 200, then BitPay will try to send the IPN again with increasing intervals for two more hours.
 header("HTTP/1.1 200 OK");
-?>

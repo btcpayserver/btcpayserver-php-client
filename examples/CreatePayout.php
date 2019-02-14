@@ -44,16 +44,14 @@ $private->setHex('662be90968bc659873d723374213fa5bf7a30c24f0f0713aa798eb7daa7230
 $public = new \Bitpay\PublicKey();
 $public->generate($private);
 
-$network = new \Bitpay\Network\Testnet();
 $adapter = new \Bitpay\Client\Adapter\CurlAdapter();
-
 
 $bitpay = new \Bitpay\Bitpay();
 
 $client = new \Bitpay\Client\Client();
 $client->setPrivateKey($private);
 $client->setPublicKey($public);
-$client->setNetwork($network);
+$client->setUri('https://btcpay.server/');
 $client->setAdapter($adapter);
 
 $client->createPayout($payout);

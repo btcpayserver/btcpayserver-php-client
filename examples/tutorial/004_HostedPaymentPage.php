@@ -19,11 +19,10 @@ $storageEngine = new \Bitpay\Storage\EncryptedFilesystemStorage('YourTopSecretPa
 $privateKey    = $storageEngine->load('/tmp/bitpay.pri');
 $publicKey     = $storageEngine->load('/tmp/bitpay.pub');
 $client        = new \Bitpay\Client\Client();
-$network       = new \Bitpay\Network\Testnet();
 $adapter       = new \Bitpay\Client\Adapter\CurlAdapter();
 $client->setPrivateKey($privateKey);
 $client->setPublicKey($publicKey);
-$client->setNetwork($network);
+$client->setUri('https://btcpay.server/');
 $client->setAdapter($adapter);
 // ---------------------------
 

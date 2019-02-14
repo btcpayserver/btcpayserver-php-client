@@ -16,10 +16,8 @@ require __DIR__.'/../../vendor/autoload.php';
 // Now fetch the invoice from BitPay
 
 $client        = new \Bitpay\Client\Client();
-//$network       = new \Bitpay\Network\Testnet();
-$network = new \Bitpay\Network\Livenet();
 $adapter       = new \Bitpay\Client\Adapter\CurlAdapter();
-$client->setNetwork($network);
+$client->setUri('https://btcpay.server/');
 $client->setAdapter($adapter);
 
 $token = new \Bitpay\Token();
@@ -38,5 +36,3 @@ echo (string) $request.PHP_EOL.PHP_EOL.PHP_EOL;
 echo (string) $response.PHP_EOL.PHP_EOL;
 
 print_r($invoice);
-
-?>

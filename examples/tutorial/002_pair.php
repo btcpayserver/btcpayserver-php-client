@@ -29,15 +29,6 @@ $publicKey     = $storageEngine->load('/tmp/bitpay.pub');
 $client = new \Bitpay\Client\Client();
 
 /**
- * The network is either livenet or testnet. You can also create your
- * own as long as it implements the NetworkInterface. In this example
- * we will use testnet
- */
-//$network = new \Bitpay\Network\Testnet();
-$network = new \Bitpay\Network\Livenet();
-
-
-/**
  * The adapter is what will make the calls to BitPay and return the response
  * from BitPay. This can be updated or changed as long as it implements the
  * AdapterInterface
@@ -49,7 +40,12 @@ $adapter = new \Bitpay\Client\Adapter\CurlAdapter();
  */
 $client->setPrivateKey($privateKey);
 $client->setPublicKey($publicKey);
-$client->setNetwork($network);
+
+/**
+ * Add your btcpayserver url
+ */
+$client->setUri('https://btcpay.server/');
+
 $client->setAdapter($adapter);
 
 /**
