@@ -528,7 +528,7 @@ class Client implements ClientInterface
             throw new \Bitpay\Client\BitpayException($this->response->getStatusCode().": ".$body['error']);
         }
 
-        if($this->response->getStatusCode() !== 200) {
+        if($this->response->getStatusCode() >= 400) {
             throw new \Exception('invalid status code: '. $this->response->getStatusCode());
         }
 
