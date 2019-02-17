@@ -33,8 +33,15 @@ Add to your composer.json file by hand.
     ...
     "require": {
         ...
-        "bitpay/php-client": "~2.2"
-    }
+        "bitpay/php-client": "dev-master"
+    },
+    "repositories": [
+        ...
+        {
+            "type": "vcs",
+            "url": "https://github.com/btcpayserver/php-bitpay-client"
+        }
+    ],
     ...
 }
 ```
