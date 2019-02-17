@@ -24,11 +24,11 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('adapter', $processedConfig);
         $this->assertArrayHasKey('key_storage', $processedConfig);
         $this->assertArrayHasKey('key_storage_password', $processedConfig);
-        $this->assertCount(7, $processedConfig);
+        $this->assertCount(6, $processedConfig);
     }
 
     /**
-     * @expectedException Exception
+     * @expectedException \Exception
      */
     public function testClassNotFoundKeyStorageConfig()
     {
@@ -44,7 +44,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Exception
+     * @expectedException \Exception
      */
     public function testClassDoesNotImplementInterfaceKeyStorageConfig()
     {

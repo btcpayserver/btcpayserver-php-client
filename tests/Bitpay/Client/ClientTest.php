@@ -48,14 +48,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Exception
-     */
-    public function testCheckPriceAndCurrencyWithException() {
-        $client = new ChildOfClient();
-        $res = $client->checkPriceAndCurrency(.991, 'ABC');
-    }
-
-    /**
      * @expectedException \Bitpay\Client\BitpayException
      * @expectedExceptionMessage You should provider the url of your BTCPAY server
      */
@@ -176,7 +168,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateInvoice()
     {
-
         $buyer = $this->getMockBuyer();
         $buyer->method('getAddress')->will($this->returnValue(array()));
 
@@ -191,7 +182,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $item = new \Bitpay\Item();
         $item->setPrice('19.95');
         $invoice->setItem($item);
-
 
         $response = $this->getMockResponse();
         $response->method('getBody')->willReturn(file_get_contents(__DIR__ . '/../../DataFixtures/invoice.json'));
@@ -249,73 +239,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $adapter = $this->getMockAdapter();
         $adapter->method('sendRequest')->willReturn($response);
         $this->client->setAdapter($adapter);
-
-        $this->client->createInvoice($invoice);
-    }
-
-    /**
-     *  @expectedException Exception
-     */
-    public function testCreateInvoiceWithTooMuchPrecisionForAnythingButBitcoin()
-    {
-        $item = $this->getMockItem();
-        $currency = $this->getMockCurrency();
-        $currency->method('getCode')->will($this->returnValue("USD"));
-        $item->method('getPrice')->will($this->returnValue(9.999));
-
-        $buyer = $this->getMockBuyer();
-        $buyer->method('getAddress')->will($this->returnValue(array()));
-
-        $invoice = $this->getMockInvoice();
-        $invoice->method('getItem')->willReturn($item);
-        $invoice->method('getBuyer')->willReturn($buyer);
-        $invoice->method('setId')->will($this->returnSelf());
-        $invoice->method('setToken')->will($this->returnSelf());
-        $invoice->method('setUrl')->will($this->returnSelf());
-        $invoice->method('setStatus')->will($this->returnSelf());
-        //$invoice->method('setBtcPrice')->will($this->returnSelf());
-        $invoice->method('setPrice')->will($this->returnSelf());
-        $invoice->method('setInvoiceTime')->will($this->returnSelf());
-        $invoice->method('setExpirationTime')->will($this->returnSelf());
-        $invoice->method('setCurrentTime')->will($this->returnSelf());
-        //$invoice->method('setBtcPaid')->will($this->returnSelf());
-        $invoice->method('setRate')->will($this->returnSelf());
-        $invoice->method('setExceptionStatus')->will($this->returnSelf());
-        $invoice->method('getCurrency')->willReturn($currency);
-
-        $this->client->createInvoice($invoice);
-    }
-
-
-    /**
-     *  @expectedException Exception
-     */
-    public function testCreateInvoiceWithTooMuchPrecisionEvenForBitcoin()
-    {
-        $item = $this->getMockItem();
-        $currency = $this->getMockCurrency();
-        $currency->method('getCode')->will($this->returnValue("BTC"));
-        $item->method('getPrice')->will($this->returnValue(.9999999));
-
-        $buyer = $this->getMockBuyer();
-        $buyer->method('getAddress')->will($this->returnValue(array()));
-
-        $invoice = $this->getMockInvoice();
-        $invoice->method('getItem')->willReturn($item);
-        $invoice->method('getBuyer')->willReturn($buyer);
-        $invoice->method('setId')->will($this->returnSelf());
-        $invoice->method('setToken')->will($this->returnSelf());
-        $invoice->method('setUrl')->will($this->returnSelf());
-        $invoice->method('setStatus')->will($this->returnSelf());
-        //$invoice->method('setBtcPrice')->will($this->returnSelf());
-        $invoice->method('setPrice')->will($this->returnSelf());
-        $invoice->method('setInvoiceTime')->will($this->returnSelf());
-        $invoice->method('setExpirationTime')->will($this->returnSelf());
-        $invoice->method('setCurrentTime')->will($this->returnSelf());
-        //$invoice->method('setBtcPaid')->will($this->returnSelf());
-        $invoice->method('setRate')->will($this->returnSelf());
-        $invoice->method('setExceptionStatus')->will($this->returnSelf());
-        $invoice->method('getCurrency')->willReturn($currency);
 
         $this->client->createInvoice($invoice);
     }
