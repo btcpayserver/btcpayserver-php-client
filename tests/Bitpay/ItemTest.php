@@ -83,9 +83,6 @@ class ItemTest extends \PHPUnit_Framework_TestCase
         // throw an error
     }
 
-    /**
-     *  @expectedException \Bitpay\Client\ArgumentException
-     */
     public function testBadStringPrice()
     {
         // Accepts standard integer string
@@ -139,14 +136,6 @@ class ItemTest extends \PHPUnit_Framework_TestCase
         $this->item->setPrice("9.4329082");
         $this->assertSame(9.4329082, $this->item->getPrice());
         setlocale(LC_NUMERIC, 'en_US');
-    }
-
-    /**
-     * @expectedException        \Bitpay\Client\ArgumentException
-     */
-    public function testSetPriceExceptionNoNumber()
-    {
-        $this->item->setPrice(".");
     }
 
 

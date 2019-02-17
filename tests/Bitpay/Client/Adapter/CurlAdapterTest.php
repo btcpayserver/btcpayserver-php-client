@@ -29,24 +29,25 @@ class CurlAdapterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(), $adapter->getCurlOptions());
     }
 
+    /**
+     * @expectedException \Bitpay\Client\ConnectionException
+     */
     public function testSendRequestWithException()
     {
-        $this->setExpectedException('Bitpay\Client\ConnectionException');
-        
         $curl_options = array(
-            CURLOPT_URL            => "www.example.com",
+            CURLOPT_URL            => 'btcpay.example.com',
             CURLOPT_SSL_VERIFYPEER => 1,
             CURLOPT_SSL_VERIFYHOST => 2,
         );
 
         $adapter = new CurlAdapter($curl_options);
-        $response = $adapter->sendRequest($this->request);
+        $adapter->sendRequest($this->request);
     }
 
     public function testSendRequestWithoutException()
     {
         $curl_options = array(
-            CURLOPT_URL            => "www.bitpay.com",
+            CURLOPT_URL            => 'www.bitpay.com',
             CURLOPT_SSL_VERIFYPEER => 1,
             CURLOPT_SSL_VERIFYHOST => 2,
         );
