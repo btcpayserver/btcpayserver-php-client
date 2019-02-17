@@ -659,9 +659,14 @@ class Client implements ClientInterface
 
     /**
      * @return RequestInterface
+     *
+     * @throws BitpayException
      */
     protected function createNewRequest()
     {
+        if ($this->uri === null) {
+            throw new BitpayException('You should provider the url of your BTCPAY server');
+        }
         $request = new Request();
         $request->setUri($this->uri);
         $this->prepareRequestHeaders($request);
