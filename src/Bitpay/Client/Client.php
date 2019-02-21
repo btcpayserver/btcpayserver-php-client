@@ -111,7 +111,7 @@ class Client implements ClientInterface
         $invoiceTime = is_numeric($data['invoiceTime']) ? intval($data['invoiceTime']/1000) : $data['invoiceTime'];
         $expirationTime = is_numeric($data['expirationTime']) ? intval($data['expirationTime']/1000) : $data['expirationTime'];
         $currentTime = is_numeric($data['currentTime']) ? intval($data['currentTime']/1000) : $data['currentTime'];
-        
+
         $invoiceToken = new \Bitpay\Token();
         $invoice
             ->setToken($invoiceToken->setToken($data['token']))
@@ -184,6 +184,12 @@ class Client implements ClientInterface
             'nonce'             => Util::nonce(),
             'token'             => $this->token->getToken(),
         );
+
+        foreach(array_keys($body) as $key) {
+          if(null === $body[$key]) {
+            unset($body[$key]);
+          }
+        }
 
         $request->setBody(json_encode($body));
         $this->addIdentityHeader($request);
@@ -598,7 +604,7 @@ class Client implements ClientInterface
         }
 
         $data = $body['data'];
-        
+
         $invoice = new \Bitpay\Invoice();
         $invoice = $this->fillInvoiceData($invoice, $data);
 
@@ -606,7 +612,7 @@ class Client implements ClientInterface
     }
 
 
-    
+
 
 
     /**
