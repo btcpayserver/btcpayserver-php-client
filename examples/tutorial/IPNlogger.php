@@ -34,7 +34,7 @@ if (true === empty($ipn)) {
     throw new \Exception('Could not decode the JSON payload from BitPay.');
 }
 
-if (true === empty($ipn -> id)) {
+if (true === empty($ipn->id)) {
     fwrite($myfile, $date . " : Error. Invalid Bitpay payment notification message received - did not receive invoice ID.\n");
     fclose($myfile);
     throw new \Exception('Invalid Bitpay payment notification message received - did not receive invoice ID.');
@@ -42,15 +42,20 @@ if (true === empty($ipn -> id)) {
 
 // Now fetch the invoice from BitPay
 // This is needed, since the IPN does not contain any authentication
-
+$storageEngine = new \Bitpay\Storage\EncryptedFilesystemStorage('YourTopSecretPassword');
+$privateKey    = $storageEngine->load('/tmp/bitpay.pri');
+$publicKey     = $storageEngine->load('/tmp/bitpay.pub');
 $client        = new \Bitpay\Client\Client();
 $adapter       = new \Bitpay\Client\Adapter\CurlAdapter();
+$client->setPrivateKey($privateKey);
+$client->setPublicKey($publicKey);
 $client->setUri('https://btcpay.server/');
 $client->setAdapter($adapter);
 
 $token = new \Bitpay\Token();
 $token->setToken('UpdateThisValue'); // UPDATE THIS VALUE
 $client->setToken($token);
+$token->setFacade('merchant');
 
 /**
  * This is where we will fetch the invoice object
