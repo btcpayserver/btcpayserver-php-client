@@ -1,10 +1,10 @@
 <?php
 /**
- * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * @license Copyright 2019 BTCPayServer, MIT License
  * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
-namespace Bitpay;
+namespace BTCPayServer;
 
 class PointTest extends \PHPUnit_Framework_TestCase
 {
@@ -61,12 +61,12 @@ class PointTest extends \PHPUnit_Framework_TestCase
         $data  = serialize($point);
 
         $this->assertSame(
-            'C:12:"Bitpay\Point":30:{a:2:{i:0;s:1:"1";i:1;s:1:"2";}}',
+            'C:12:"BTCPayServer\Point":30:{a:2:{i:0;s:1:"1";i:1;s:1:"2";}}',
             $data
         );
 
         $pointA = unserialize($data);
-        $this->assertInstanceOf('Bitpay\PointInterface', $pointA);
+        $this->assertInstanceOf('BTCPayServer\PointInterface', $pointA);
         $this->assertSame('1', $pointA->getX());
         $this->assertSame('2', $pointA->getY());
     }

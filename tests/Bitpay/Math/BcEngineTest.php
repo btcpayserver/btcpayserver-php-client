@@ -1,10 +1,10 @@
 <?php
 /**
- * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * @license Copyright 2019 BTCPayServer, MIT License
  * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
-namespace Bitpay\Math;
+namespace BTCPayServer\Math;
 
 class BcEngineTest extends \PHPUnit_Framework_TestCase
 {

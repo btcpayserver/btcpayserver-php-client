@@ -9,7 +9,7 @@ Private
 -------
 
 ``` {.sourceCode .php}
-$priv = new \Bitpay\PrivateKey();
+$priv = new \BTCPayServer\PrivateKey();
 $priv->generate();
 ```
 
@@ -17,7 +17,7 @@ Public
 ------
 
 ``` {.sourceCode .php}
-$pub = new \Bitpay\PublicKey();
+$pub = new \BTCPayServer\PublicKey();
 $pub->setPrivateKey($priv);
 $pub->generate();
 ```
@@ -26,7 +26,7 @@ SIN
 ---
 
 ``` {.sourceCode .php}
-$sin = new \Bitpay\SinKey();
+$sin = new \BTCPayServer\SinKey();
 $sin->setPublicKey($pub);
 $sin->generate();
 ```
@@ -44,10 +44,10 @@ Keys can be store on the filesystem using the following code. Keys MUST
 have already been generated.
 
 ``` {.sourceCode .php}
-$privateKey = new \Bitpay\PrivateKey('/path/to/private.key');
+$privateKey = new \BTCPayServer\PrivateKey('/path/to/private.key');
 $privateKey->generate();
 
-$keyManager = new \Bitpay\KeyManager(new \Bitpay\Storage\FilesystemStorage());
+$keyManager = new \BTCPayServer\KeyManager(new \BTCPayServer\Storage\FilesystemStorage());
 $keyManager->persist($privateKey);
 ```
 
@@ -62,11 +62,11 @@ Encrypted on Filesystem
 -----------------------
 
 ``` {.sourceCode .php}
-$privateKey = new \Bitpay\PrivateKey('/path/to/private.key');
+$privateKey = new \BTCPayServer\PrivateKey('/path/to/private.key');
 $privateKey->generate();
 
 $password   = 'satoshi';
-$keyManager = new \Bitpay\KeyManager(new \Bitpay\Storage\EncryptedFilesystemStorage($password));
+$keyManager = new \BTCPayServer\KeyManager(new \BTCPayServer\Storage\EncryptedFilesystemStorage($password));
 $keyManager->persist($privateKey);
 ```
 

@@ -1,13 +1,13 @@
 <?php
 /**
- * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * @license Copyright 2019 BTCPayServer, MIT License
  * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
-namespace Bitpay;
+namespace BTCPayServer;
 
 /**
- * @see https://github.com/bitpay/bitcore/blob/master/test/test.Key.js
+ * @see https://github.com/btcpayserver/bitcore/blob/master/test/test.Key.js
  */
 class PublicKeyTest extends \PHPUnit_Framework_TestCase
 {
@@ -83,7 +83,7 @@ class PublicKeyTest extends \PHPUnit_Framework_TestCase
 
     public function testCreate()
     {
-        $this->assertInstanceOf('Bitpay\PublicKey', PublicKey::create());
+        $this->assertInstanceOf('BTCPayServer\PublicKey', PublicKey::create());
     }
 
     public function testGenerate()
@@ -142,7 +142,7 @@ class PublicKeyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see https://github.com/bitpay/bitcore/blob/master/test/test.Key.js
+     * @see https://github.com/btcpayserver/bitcore/blob/master/test/test.Key.js
      * @depends testGenerate
      */
     public function testToString()
@@ -190,7 +190,7 @@ class PublicKeyTest extends \PHPUnit_Framework_TestCase
     public function testCreateFromPrivateKey()
     {
         $key = PublicKey::createFromPrivateKey($this->getMockPrivateKey());
-        $this->assertInstanceOf('Bitpay\PublicKey', $key);
+        $this->assertInstanceOf('BTCPayServer\PublicKey', $key);
     }
 
     public function testIsValid()
@@ -208,7 +208,7 @@ class PublicKeyTest extends \PHPUnit_Framework_TestCase
         $pub->setPrivateKey($this->getMockPrivateKey());
         $sin = $pub->getSin();
 
-        $this->assertInstanceOf('Bitpay\SinKey', $sin);
+        $this->assertInstanceOf('BTCPayServer\SinKey', $sin);
     }
 
     public function testGetSinOnlyOnce()
@@ -236,7 +236,7 @@ class PublicKeyTest extends \PHPUnit_Framework_TestCase
     private function getMockPrivateKey($hex = null)
     {
         $hex = ($hex === null) ? $this->hexKeys[0]['private'] : $hex;
-        $key = $this->getMock('Bitpay\PrivateKey');
+        $key = $this->getMock('BTCPayServer\PrivateKey');
         $key->method('isValid')->will($this->returnValue(true));
 
         $key

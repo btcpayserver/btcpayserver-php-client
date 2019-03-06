@@ -5,10 +5,10 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$private = new \Bitpay\PrivateKey();
+$private = new \BTCPayServer\PrivateKey();
 //if you've got a hex-encoded private key string, you can use it to create a private key
 $private->setHex('662be90968bc659873d723374213fa5bf7a30c24f0f0713aa798eb7daa7230fc');
-$public = new \Bitpay\PublicKey();
+$public = new \BTCPayServer\PublicKey();
 $public->generate($private);
 $sin = $public->getSin();
 
@@ -27,7 +27,7 @@ $keys = file_get_contents(getenv('HOME') . '/.php-bitpay-client/key.pem');
 if (isset($keys) && strlen($keys) > 0) {
     $keys = chop($keys);
 
-    $private = new \Bitpay\PrivateKey();
+    $private = new \BTCPayServer\PrivateKey();
     $private->setHex($private->pemDecode($keys)['private_key']);
     printf("\n\n");
     printf("Public Key:  %s\n", $private->getPublicKey());

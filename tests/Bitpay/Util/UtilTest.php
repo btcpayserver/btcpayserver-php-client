@@ -1,12 +1,12 @@
 <?php
 /**
- * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * @license Copyright 2019 BTCPayServer, MIT License
  * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
-namespace Bitpay\Util;
+namespace BTCPayServer\Util;
 
-use Bitpay\Point;
+use BTCPayServer\Point;
 
 /**
  * @package Bitcore
@@ -78,7 +78,7 @@ class UtilTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @see https://github.com/bitpay/bitcore/blob/master/test/test.util.js
+     * @see https://github.com/btcpayserver/bitcore/blob/master/test/test.util.js
      */
     public function testTwoSha256()
     {
@@ -168,7 +168,7 @@ class UtilTest extends \PHPUnit_Framework_TestCase
     public function testDoubleAndAdd()
     {
         $point = Util::doubleAndAdd('0', new Point(0, 0));
-        $this->assertInstanceOf('Bitpay\PointInterface', $point);
+        $this->assertInstanceOf('BTCPayServer\PointInterface', $point);
         $this->assertTrue($point->isInfinity());
         $point = Util::doubleAndAdd('1', new Point(1, 1));
         $this->assertEquals('1', $point->getX());

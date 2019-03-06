@@ -1,10 +1,10 @@
 <?php
 /**
- * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * @license Copyright 2019 BTCPayServer, MIT License
  * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
-namespace Bitpay\Util;
+namespace BTCPayServer\Util;
 
 /**
  * @package Bitcore
@@ -51,7 +51,7 @@ class SecureRandomTest extends \PHPUnit_Framework_TestCase
 
     private function disableOpenSSL()
     {
-        $ref = new \ReflectionProperty('Bitpay\Util\SecureRandom', 'hasOpenSSL');
+        $ref = new \ReflectionProperty('BTCPayServer\Util\SecureRandom', 'hasOpenSSL');
         $ref->setAccessible(true);
         $ref->setValue(false);
         $ref->setAccessible(false);
@@ -59,7 +59,7 @@ class SecureRandomTest extends \PHPUnit_Framework_TestCase
 
     private function enableOpenSSL()
     {
-        $ref = new \ReflectionProperty('Bitpay\Util\SecureRandom', 'hasOpenSSL');
+        $ref = new \ReflectionProperty('BTCPayServer\Util\SecureRandom', 'hasOpenSSL');
         $ref->setAccessible(true);
         $ref->setValue(null);
         $ref->setAccessible(false);

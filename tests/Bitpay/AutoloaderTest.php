@@ -1,10 +1,10 @@
 <?php
 /**
- * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * @license Copyright 2019 BTCPayServer, MIT License
  * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
-namespace Bitpay;
+namespace BTCPayServer;
 
 class AutoloaderTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,7 +21,7 @@ class AutoloaderTest extends \PHPUnit_Framework_TestCase
     {
         Autoloader::register();
         $functions = spl_autoload_functions();
-        $this->assertSame(array('Bitpay\Autoloader','autoload'), $functions[0]);
+        $this->assertSame(array('BTCPayServer\Autoloader','autoload'), $functions[0]);
     }
 
     public function testUnregister()
@@ -36,9 +36,9 @@ class AutoloaderTest extends \PHPUnit_Framework_TestCase
     {
         Autoloader::register();
 
-        Autoloader::autoload('Bitpay\Bitpay');
+        Autoloader::autoload('BTCPayServer\BTCPayServer');
         // Is only required once
-        Autoloader::autoload('Bitpay\Bitpay');
+        Autoloader::autoload('BTCPayServer\BTCPayServer');
     }
 
     /**
@@ -53,14 +53,14 @@ class AutoloaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testException()
     {
-        Autoloader::autoload('Bitpay\ClassThatWillNeverBeCreated');
+        Autoloader::autoload('BTCPayServer\ClassThatWillNeverBeCreated');
     }
 
-    public function testNoExceptionForBitpayClasslike()
+    public function testNoExceptionForBTCPayServerClasslike()
     {
         Autoloader::register();
 
         // Magento Classes
-        Autoloader::autoload('Bitpay_Core_Model');
+        Autoloader::autoload('BTCPayServer_Core_Model');
     }
 }

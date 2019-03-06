@@ -7,7 +7,7 @@
  * Requirements:
  *   - Basic PHP Knowledge
  *   - Private and Public keys from 001.php
- *   - Account on https://test.bitpay.com
+ *   - Account on https://test.btcpayserver.com
  *   - Pairing code
  */
 require __DIR__.'/../../vendor/autoload.php';
@@ -17,23 +17,23 @@ require __DIR__.'/../../vendor/autoload.php';
  * storage engine. You also need to tell it the location of the key you want
  * to load.
  */
-$storageEngine = new \Bitpay\Storage\EncryptedFilesystemStorage('YourTopSecretPassword');
-$privateKey    = $storageEngine->load('/tmp/bitpay.pri');
-$publicKey     = $storageEngine->load('/tmp/bitpay.pub');
+$storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage('YourTopSecretPassword');
+$privateKey    = $storageEngine->load('/tmp/btcpayserver.pri');
+$publicKey     = $storageEngine->load('/tmp/btcpayserver.pub');
 
 /**
  * Create the client, there's a lot to it and there are some easier ways, I am
  * showing the long form here to show how various things are injected into the
  * client.
  */
-$client = new \Bitpay\Client\Client();
+$client = new \BTCPayServer\Client\Client();
 
 /**
  * The adapter is what will make the calls to BTCPayServer and return the response
  * from BTCPayServer. This can be updated or changed as long as it implements the
  * AdapterInterface
  */
-$adapter = new \Bitpay\Client\Adapter\CurlAdapter();
+$adapter = new \BTCPayServer\Client\Adapter\CurlAdapter();
 
 /**
  * Now all the objects are created and we can inject them into the client
@@ -49,7 +49,7 @@ $client->setUri('https://btcpay.server/');
 $client->setAdapter($adapter);
 
 /**
- * Visit https://test.bitpay.com/api-tokens and create a new pairing code. Pairing
+ * Visit https://test.btcpayserver.com/api-tokens and create a new pairing code. Pairing
  * codes can only be used once and the generated code is valid for only 24 hours.
  */
 $pairingCode = 'InsertPairingCodeHere';
@@ -58,7 +58,7 @@ $pairingCode = 'InsertPairingCodeHere';
  * Currently this part is required, however future versions of the PHP SDK will
  * be refactor and this part may become obsolete.
  */
-$sin = \Bitpay\SinKey::create()->setPublicKey($publicKey)->generate();
+$sin = \BTCPayServer\SinKey::create()->setPublicKey($publicKey)->generate();
 /**** end ****/
 
 try {

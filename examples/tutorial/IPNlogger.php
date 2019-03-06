@@ -5,7 +5,7 @@
  * 004 - IPN logger
  *
  * Requirements:
- *   - Account on https://test.bitpay.com
+ *   - Account on https://test.btcpayserver.com
  *   - Baisic PHP Knowledge
  *   - Private and Public keys from 001.php
  *   - Token value obtained from 002.php
@@ -21,9 +21,9 @@ $raw_post_data = file_get_contents('php://input');
 $date = date('m/d/Y h:i:s a', time());
 
 if (false === $raw_post_data) {
-    fwrite($myfile, $date . " : Error. Could not read from the php://input stream or invalid Bitpay IPN received.\n");
+    fwrite($myfile, $date . " : Error. Could not read from the php://input stream or invalid BTCPayServer IPN received.\n");
     fclose($myfile);
-    throw new \Exception('Could not read from the php://input stream or invalid Bitpay IPN received.');
+    throw new \Exception('Could not read from the php://input stream or invalid BTCPayServer IPN received.');
 }
 
 $ipn = json_decode($raw_post_data);
@@ -35,24 +35,24 @@ if (true === empty($ipn)) {
 }
 
 if (true === empty($ipn->id)) {
-    fwrite($myfile, $date . " : Error. Invalid Bitpay payment notification message received - did not receive invoice ID.\n");
+    fwrite($myfile, $date . " : Error. Invalid BTCPayServer payment notification message received - did not receive invoice ID.\n");
     fclose($myfile);
-    throw new \Exception('Invalid Bitpay payment notification message received - did not receive invoice ID.');
+    throw new \Exception('Invalid BTCPayServer payment notification message received - did not receive invoice ID.');
 }
 
 // Now fetch the invoice from BTCPayServer
 // This is needed, since the IPN does not contain any authentication
-$storageEngine = new \Bitpay\Storage\EncryptedFilesystemStorage('YourTopSecretPassword');
-$privateKey    = $storageEngine->load('/tmp/bitpay.pri');
-$publicKey     = $storageEngine->load('/tmp/bitpay.pub');
-$client        = new \Bitpay\Client\Client();
-$adapter       = new \Bitpay\Client\Adapter\CurlAdapter();
+$storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage('YourTopSecretPassword');
+$privateKey    = $storageEngine->load('/tmp/btcpayserver.pri');
+$publicKey     = $storageEngine->load('/tmp/btcpayserver.pub');
+$client        = new \BTCPayServer\Client\Client();
+$adapter       = new \BTCPayServer\Client\Adapter\CurlAdapter();
 $client->setPrivateKey($privateKey);
 $client->setPublicKey($publicKey);
 $client->setUri('https://btcpay.server/');
 $client->setAdapter($adapter);
 
-$token = new \Bitpay\Token();
+$token = new \BTCPayServer\Token();
 $token->setToken('UpdateThisValue'); // UPDATE THIS VALUE
 $client->setToken($token);
 $token->setFacade('merchant');

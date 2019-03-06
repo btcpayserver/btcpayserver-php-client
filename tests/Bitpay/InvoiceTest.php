@@ -1,10 +1,10 @@
 <?php
 /**
- * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * @license Copyright 2019 BTCPayServer, MIT License
  * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
-namespace Bitpay;
+namespace BTCPayServer;
 
 class InvoiceTest extends \PHPUnit_Framework_TestCase
 {
@@ -51,7 +51,7 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
     public function testGetItem()
     {
         $this->assertNotNull($this->invoice);
-        $this->assertInstanceOf('Bitpay\ItemInterface', $this->invoice->getItem());
+        $this->assertInstanceOf('BTCPayServer\ItemInterface', $this->invoice->getItem());
     }
 
     /**
@@ -68,7 +68,7 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
     public function testGetBuyer()
     {
         $this->assertNotNull($this->invoice);
-        $this->assertInstanceOf('Bitpay\BuyerInterface', $this->invoice->getBuyer());
+        $this->assertInstanceOf('BTCPayServer\BuyerInterface', $this->invoice->getBuyer());
     }
 
     /**
@@ -110,8 +110,8 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
     public function testSetNotificationEmail()
     {
         $this->assertNotNull($this->invoice);
-        $this->invoice->setNotificationEmail('support@bitpay.com');
-        $this->assertSame('support@bitpay.com', $this->invoice->getNotificationEmail());
+        $this->invoice->setNotificationEmail('support@btcpayserver.com');
+        $this->assertSame('support@btcpayserver.com', $this->invoice->getNotificationEmail());
     }
 
     public function testGetNotificationUrl()
@@ -126,8 +126,8 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
     public function testSetNotificationUrl()
     {
         $this->assertNotNull($this->invoice);
-        $this->invoice->setNotificationUrl('https://bitpay.com');
-        $this->assertSame('https://bitpay.com', $this->invoice->getNotificationUrl());
+        $this->invoice->setNotificationUrl('https://btcpayserver.com');
+        $this->assertSame('https://btcpayserver.com', $this->invoice->getNotificationUrl());
     }
 
     public function testGetRedirectUrl()
@@ -142,8 +142,8 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
     public function testSetRedirectUrl()
     {
         $this->assertNotNull($this->invoice);
-        $this->invoice->setRedirectUrl('https://bitpay.com');
-        $this->assertSame('https://bitpay.com', $this->invoice->getRedirectUrl());
+        $this->invoice->setRedirectUrl('https://btcpayserver.com');
+        $this->assertSame('https://btcpayserver.com', $this->invoice->getRedirectUrl());
     }
 
     public function testGetPosData()
@@ -158,8 +158,8 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
     public function testSetPosData()
     {
         $this->assertNotNull($this->invoice);
-        $this->invoice->setPosData('https://bitpay.com');
-        $this->assertSame('https://bitpay.com', $this->invoice->getPosData());
+        $this->invoice->setPosData('https://btcpayserver.com');
+        $this->assertSame('https://btcpayserver.com', $this->invoice->getPosData());
     }
 
     public function testGetStatus()
@@ -212,8 +212,8 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
     public function testSetUrl()
     {
         $this->assertNotNull($this->invoice);
-        $this->invoice->setUrl('https://bitpay.com/invoice?id=af7as6fd97ad6fa');
-        $this->assertSame('https://bitpay.com/invoice?id=af7as6fd97ad6fa', $this->invoice->getUrl());
+        $this->invoice->setUrl('https://btcpayserver.com/invoice?id=af7as6fd97ad6fa');
+        $this->assertSame('https://btcpayserver.com/invoice?id=af7as6fd97ad6fa', $this->invoice->getUrl());
     }
 
     public function testGetBtcPrice()
@@ -515,7 +515,7 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetToken()
     {
-        $invoiceToken = new \Bitpay\Token();
+        $invoiceToken = new \BTCPayServer\Token();
         $this->assertNotNull($this->invoice);
         $this->invoice->setToken($invoiceToken);
         $this->assertSame($invoiceToken, $this->invoice->getToken());
@@ -530,16 +530,16 @@ class InvoiceTest extends \PHPUnit_Framework_TestCase
 
     private function getMockItem()
     {
-        return new \Bitpay\Item();
+        return new \BTCPayServer\Item();
     }
 
     private function getMockBuyer()
     {
-        return new \Bitpay\Buyer();
+        return new \BTCPayServer\Buyer();
     }
 
     private function getMockCurrency()
     {
-        return new \Bitpay\Currency();
+        return new \BTCPayServer\Currency();
     }
 }

@@ -1,10 +1,10 @@
 <?php
 /**
- * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * @license Copyright 2019 BTCPayServer, MIT License
  * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
-namespace Bitpay;
+namespace BTCPayServer;
 
 class AccessTokenTest extends \PHPUnit_Framework_TestCase
 {
@@ -25,9 +25,9 @@ class AccessTokenTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNotNull($token);
 
-        $token->setEmail('support@bitpay.com');
+        $token->setEmail('support@btcpayserver.com');
 
-        $this->assertSame('support@bitpay.com', $token->getEmail());
+        $this->assertSame('support@btcpayserver.com', $token->getEmail());
     }
 
     public function testLabel()

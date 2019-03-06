@@ -1,10 +1,10 @@
 <?php
 /**
- * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * @license Copyright 2019 BTCPayServer, MIT License
  * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
-namespace Bitpay\Config;
+namespace BTCPayServer\Config;
 
 use Symfony\Component\Config\Definition\Processor;
 
@@ -66,7 +66,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
             new Configuration(),
             array(
                 'bitpay' => array(
-                    'key_storage' => '\\Bitpay\\Storage\\EncryptedFilesystemStorage'
+                    'key_storage' => '\\BTCPayServer\\Storage\\EncryptedFilesystemStorage'
                 )
             )
         );

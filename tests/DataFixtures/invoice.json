@@ -2,12 +2,12 @@
     "facade":"pos/invoice",
     "data":
         {
-            "url":"https://test.bitpay.com/invoice?id=abcdefghijkmnopqrstuvw",
+            "url":"https://test.btcpayserver.com/invoice?id=abcdefghijkmnopqrstuvw",
             "paymentUrls":
                 {
                     "BIP21":"bitcoin:mabcdefghijkmnopqrstuvw123456789AB?amount=0.0632",
-                    "BIP72":"bitcoin:mabcdefghijkmnopqrstuvw123456789AB?amount=0.0632&r=https://test.bitpay.com/i/abcdefghijkmnopqrstuvw",
-                    "BIP72b":"bitcoin:?r=https://test.bitpay.com/i/E8XNwAbkMQJpADZNd8rkA5","BIP73":"https://test.bitpay.com/i/abcdefghijkmnopqrstuvw"
+                    "BIP72":"bitcoin:mabcdefghijkmnopqrstuvw123456789AB?amount=0.0632&r=https://test.btcpayserver.com/i/abcdefghijkmnopqrstuvw",
+                    "BIP72b":"bitcoin:?r=https://test.btcpayserver.com/i/E8XNwAbkMQJpADZNd8rkA5","BIP73":"https://test.btcpayserver.com/i/abcdefghijkmnopqrstuvw"
                 },
             "posData":"",
             "status":"new",

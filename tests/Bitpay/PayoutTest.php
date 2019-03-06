@@ -1,10 +1,10 @@
 <?php
 /**
- * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * @license Copyright 2019 BTCPayServer, MIT License
  * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
-namespace Bitpay;
+namespace BTCPayServer;
 
 class PayoutTest extends \PHPUnit_Framework_TestCase
 {
@@ -188,7 +188,7 @@ class PayoutTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetNotificationEmail()
     {
-        $email = 'support@bitpay.com';
+        $email = 'support@btcpayserver.com';
         $this->payout->setNotificationEmail($email);
         $this->assertNotNull($this->payout->getNotificationEmail());
         $this->assertSame($email, $this->payout->getNotificationEmail());
@@ -205,7 +205,7 @@ class PayoutTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetNotificationUrl()
     {
-        $url = 'https://bitpay.com/';
+        $url = 'https://btcpayserver.com/';
         $this->payout->setNotificationUrl($url);
         $this->assertNotNull($this->payout->getNotificationUrl());
         $this->assertSame($url, $this->payout->getNotificationUrl());
@@ -334,6 +334,6 @@ class PayoutTest extends \PHPUnit_Framework_TestCase
 
     private function getMockCurrency()
     {
-        return new \Bitpay\Currency();
+        return new \BTCPayServer\Currency();
     }
 }

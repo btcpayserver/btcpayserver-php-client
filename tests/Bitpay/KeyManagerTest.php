@@ -1,10 +1,10 @@
 <?php
 /**
- * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * @license Copyright 2019 BTCPayServer, MIT License
  * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
-namespace Bitpay;
+namespace BTCPayServer;
 
 class KeyManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -47,11 +47,11 @@ class KeyManagerTest extends \PHPUnit_Framework_TestCase
 
     private function getMockKey()
     {
-        return new \Bitpay\PublicKey('/tmp/mock.key');
+        return new \BTCPayServer\PublicKey('/tmp/mock.key');
     }
 
     private function getMockStorage()
     {
-        return new \Bitpay\Storage\MockStorage();
+        return new \BTCPayServer\Storage\MockStorage();
     }
 }

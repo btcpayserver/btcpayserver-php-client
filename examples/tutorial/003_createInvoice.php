@@ -5,7 +5,7 @@
  * 003 - Creating Invoices
  *
  * Requirements:
- *   - Account on https://test.bitpay.com
+ *   - Account on https://test.btcpayserver.com
  *   - Basic PHP Knowledge
  *   - Private and Public keys from 001.php
  *   - Token value obtained from 002.php
@@ -13,11 +13,11 @@
 require __DIR__.'/../../vendor/autoload.php';
 
 // See 002.php for explanation
-$storageEngine = new \Bitpay\Storage\EncryptedFilesystemStorage('YourTopSecretPassword'); // Password may need to be updated if you changed it
-$privateKey    = $storageEngine->load('/tmp/bitpay.pri');
-$publicKey     = $storageEngine->load('/tmp/bitpay.pub');
-$client        = new \Bitpay\Client\Client();
-$adapter       = new \Bitpay\Client\Adapter\CurlAdapter();
+$storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage('YourTopSecretPassword'); // Password may need to be updated if you changed it
+$privateKey    = $storageEngine->load('/tmp/btcpayserver.pri');
+$publicKey     = $storageEngine->load('/tmp/btcpayserver.pub');
+$client        = new \BTCPayServer\Client\Client();
+$adapter       = new \BTCPayServer\Client\Adapter\CurlAdapter();
 $client->setPrivateKey($privateKey);
 $client->setPublicKey($publicKey);
 $client->setUri('https://btcpay.server/');
@@ -27,7 +27,7 @@ $client->setAdapter($adapter);
 /**
  * The last object that must be injected is the token object.
  */
-$token = new \Bitpay\Token();
+$token = new \BTCPayServer\Token();
 $token->setToken('UpdateThisValue'); // UPDATE THIS VALUE
 
 /**
@@ -39,9 +39,9 @@ $client->setToken($token);
  * This is where we will start to create an Invoice object, make sure to check
  * the InvoiceInterface for methods that you can use.
  */
-$invoice = new \Bitpay\Invoice();
+$invoice = new \BTCPayServer\Invoice();
 
-$buyer = new \Bitpay\Buyer();
+$buyer = new \BTCPayServer\Buyer();
 $buyer
     ->setEmail('buyeremail@test.com');
 
@@ -51,7 +51,7 @@ $invoice->setBuyer($buyer);
 /**
  * Item is used to keep track of a few things
  */
-$item = new \Bitpay\Item();
+$item = new \BTCPayServer\Item();
 $item
     ->setCode('skuNumber')
     ->setDescription('General Description of Item')
@@ -64,15 +64,15 @@ $invoice->setItem($item);
  * Setting this to one of the supported currencies will create an invoice using
  * the exchange rate for that currency.
  *
- * @see https://test.bitpay.com/bitcoin-exchange-rates for supported currencies
+ * @see https://test.btcpayserver.com/bitcoin-exchange-rates for supported currencies
  */
-$invoice->setCurrency(new \Bitpay\Currency('USD'));
+$invoice->setCurrency(new \BTCPayServer\Currency('USD'));
 
 // Configure the rest of the invoice
 $invoice
     ->setOrderId('OrderIdFromYourSystem')
     // You will receive IPN's at this URL, should be HTTPS for security purposes!
-    ->setNotificationUrl('https://store.example.com/bitpay/callback');
+    ->setNotificationUrl('https://store.example.com/btcpayserver/callback');
 
 
 /**

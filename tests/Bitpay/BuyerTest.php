@@ -1,10 +1,10 @@
 <?php
 /**
- * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * @license Copyright 2019 BTCPayServer, MIT License
  * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
-namespace Bitpay;
+namespace BTCPayServer;
 
 class BuyerTest extends \PHPUnit_Framework_TestCase
 {
@@ -43,8 +43,8 @@ class BuyerTest extends \PHPUnit_Framework_TestCase
     public function testSetEmail()
     {
         $this->assertNotNull($this->user);
-        $this->user->setEmail('support@bitpay.com');
-        $this->assertSame('support@bitpay.com', $this->user->getEmail());
+        $this->user->setEmail('support@btcpayserver.com');
+        $this->assertSame('support@btcpayserver.com', $this->user->getEmail());
     }
 
     public function testGetFirstName()

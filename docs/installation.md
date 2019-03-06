@@ -6,7 +6,7 @@ Add the following to your composer.json
 
 ``` {.sourceCode .json}
 "require": {
-    "bitpay/php-client": "~2.0"
+    "btcpayserver/php-client": "~2.0"
 }
 ```
 
@@ -21,7 +21,7 @@ Once you have added this to your composer.json file you will need to
 install the library in your project.
 
 ``` {.sourceCode .bash}
-php composer.phar update bitpay/php-client
+php composer.phar update btcpayserver/php-client
 ```
 
 Composer Alternative
@@ -31,7 +31,7 @@ By running this composer command, you will add the library to
 composer.json and install the latest version.
 
 ``` {.sourceCode .bash}
-php composer.phar require "bitpay/php-client ~2.0"
+php composer.phar require "btcpayserver/php-client ~2.0"
 ```
 
 Setup

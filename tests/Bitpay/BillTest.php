@@ -1,10 +1,10 @@
 <?php
 /**
- * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * @license Copyright 2019 BTCPayServer, MIT License
  * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
-namespace Bitpay;
+namespace BTCPayServer;
 
 class BillTest extends \PHPUnit_Framework_TestCase
 {
@@ -35,7 +35,7 @@ class BillTest extends \PHPUnit_Framework_TestCase
     public function testGetCurrency()
     {
         $this->assertNotNull($this->bill);
-        $this->assertInstanceOf('Bitpay\CurrencyInterface', $this->bill->getCurrency());
+        $this->assertInstanceOf('BTCPayServer\CurrencyInterface', $this->bill->getCurrency());
     }
 
     /**
@@ -45,7 +45,7 @@ class BillTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertNotNull($this->bill);
         $this->bill->setCurrency($this->getMockCurrency());
-        $this->assertInstanceOf('Bitpay\CurrencyInterface', $this->bill->getCurrency());
+        $this->assertInstanceOf('BTCPayServer\CurrencyInterface', $this->bill->getCurrency());
     }
 
     public function testGetName()
@@ -162,8 +162,8 @@ class BillTest extends \PHPUnit_Framework_TestCase
     public function testSetEmail()
     {
         $this->assertNotNull($this->bill);
-        $this->bill->setEmail('support@bitpay.com');
-        $this->assertSame('support@bitpay.com', $this->bill->getEmail());
+        $this->bill->setEmail('support@btcpayserver.com');
+        $this->assertSame('support@btcpayserver.com', $this->bill->getEmail());
     }
 
     public function testGetPhone()
@@ -232,11 +232,11 @@ class BillTest extends \PHPUnit_Framework_TestCase
 
     private function getMockItem()
     {
-        return $this->getMock('Bitpay\ItemInterface');
+        return $this->getMock('BTCPayServer\ItemInterface');
     }
 
     private function getMockCurrency()
     {
-        return $this->getMock('Bitpay\CurrencyInterface');
+        return $this->getMock('BTCPayServer\CurrencyInterface');
     }
 }

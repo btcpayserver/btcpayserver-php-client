@@ -22,7 +22,7 @@ Add upstream Remote
 Adding a remote helps keep you up to date with the lastest code updates.
 
 ``` {.sourceCode .bash}
-git remote add -f upstream git@github.com:bitpay/php-client.git
+git remote add -f upstream git@github.com:btcpayserver/php-client.git
 ```
 
 Creating Branches

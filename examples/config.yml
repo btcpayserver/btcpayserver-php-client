@@ -3,8 +3,8 @@
 #
 # Example config using a yml file
 #
-bitpay:
+btcpayserver:
     network: testnet
-    public_key: /tmp/bitpay.pub
-    private_key: /tmp/bitpay.pri
+    public_key: /tmp/btcpayserver.pub
+    private_key: /tmp/btcpayserver.pri
     key_storage_password: YourTopSecretPassword

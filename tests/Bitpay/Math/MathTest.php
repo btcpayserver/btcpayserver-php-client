@@ -1,10 +1,10 @@
 <?php
 /**
- * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * @license Copyright 2019 BTCPayServer, MIT License
  * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
-namespace Bitpay\Math;
+namespace BTCPayServer\Math;
 
 function function_exists($func)
 {
@@ -17,9 +17,9 @@ class MathTest extends \PHPUnit_Framework_TestCase
 	{
 		Math::setEngine(null);
 		$this->assertNull(Math::getEngine());
-		$engine = $this->getMock('Bitpay\Math\EngineInterface');
+		$engine = $this->getMock('BTCPayServer\Math\EngineInterface');
 		Math::setEngine($engine);
-		$this->assertInstanceOf('Bitpay\Math\EngineInterface', Math::getEngine());
+		$this->assertInstanceOf('BTCPayServer\Math\EngineInterface', Math::getEngine());
 	}
 
   /**

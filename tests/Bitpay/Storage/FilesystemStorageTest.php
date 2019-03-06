@@ -1,10 +1,10 @@
 <?php
 /**
- * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * @license Copyright 2019 BTCPayServer, MIT License
  * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
-namespace Bitpay\Storage;
+namespace BTCPayServer\Storage;
 
 use org\bovigo\vfs\vfsStream;
 
@@ -18,7 +18,7 @@ class FilesystemStorageTest extends \PHPUnit_Framework_TestCase
     public function testPersist()
     {
         $storage = new FilesystemStorage();
-        $storage->persist(new \Bitpay\PublicKey(vfsStream::url('tmp/public.key')));
+        $storage->persist(new \BTCPayServer\PublicKey(vfsStream::url('tmp/public.key')));
         $this->assertTrue($this->root->hasChild('tmp/public.key'));
     }
 
@@ -28,10 +28,10 @@ class FilesystemStorageTest extends \PHPUnit_Framework_TestCase
 
         vfsStream::newFile('public.key')
             ->at($this->root)
-            ->setContent('C:16:"Bitpay\PublicKey":62:{a:5:{i:0;s:20:"vfs://tmp/public.key";i:1;N;i:2;N;i:3;N;i:4;N;}}');
+            ->setContent('C:16:"BTCPayServer\PublicKey":62:{a:5:{i:0;s:20:"vfs://tmp/public.key";i:1;N;i:2;N;i:3;N;i:4;N;}}');
 
         $key = $storage->load(vfsStream::url('tmp/public.key'));
-        $this->assertInstanceOf('Bitpay\PublicKey', $key);
+        $this->assertInstanceOf('BTCPayServer\PublicKey', $key);
     }
 
     /**
@@ -51,7 +51,7 @@ class FilesystemStorageTest extends \PHPUnit_Framework_TestCase
         $storage = new FilesystemStorage();
         vfsStream::newFile('public.key', 0600)
             ->at($this->root)
-            ->setContent('C:16:"Bitpay\PublicKey":62:{a:5:{i:0;s:20:"vfs://tmp/public.key";i:1;N;i:2;N;i:3;N;i:4;N;}}')
+            ->setContent('C:16:"BTCPayServer\PublicKey":62:{a:5:{i:0;s:20:"vfs://tmp/public.key";i:1;N;i:2;N;i:3;N;i:4;N;}}')
             ->chown(vfsStream::OWNER_ROOT)
             ->chgrp(vfsStream::GROUP_ROOT);
         $storage->load(vfsStream::url('tmp/public.key'));

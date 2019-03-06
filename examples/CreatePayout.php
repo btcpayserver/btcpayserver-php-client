@@ -15,22 +15,22 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $time = gmdate("Y-m-d\TH:i:s\.", 1414691179)."000Z";
 
-$token = new \Bitpay\Token();
+$token = new \BTCPayServer\Token();
 $token
 	->setFacade('payroll')
 	->setToken('<your payroll facade-enable token>'); //this is a special api that requires a explicit payroll relationship with BTCPayServer
 
-$instruction1 = new \Bitpay\PayoutInstruction();
+$instruction1 = new \BTCPayServer\PayoutInstruction();
 $instruction1
 	->setAmount(100)
 	->setAddress('2NA5EVH9HHHhM5RxSEWf54gP4v397EmFTxi')
 	->setLabel('Paying Chris');
 
-$payout = new \Bitpay\Payout();
+$payout = new \BTCPayServer\Payout();
 $payout
 	->setEffectiveDate($time)
 	->setAmount(100)
-	->setCurrency(new \Bitpay\Currency('USD'))
+	->setCurrency(new \BTCPayServer\Currency('USD'))
 	->setPricingMethod('bitcoinbestbuy')
 	->setReference('a reference, can be json')
 	->setNotificationEmail('me@example.com')
@@ -38,17 +38,17 @@ $payout
 	->setToken($token)
 	->addInstruction($instruction1);
 
-$private = new \Bitpay\PrivateKey();
+$private = new \BTCPayServer\PrivateKey();
 $private->setHex('662be90968bc659873d723374213fa5bf7a30c24f0f0713aa798eb7daa7230fc'); //this is your private key in some form (see GetKeys.php)
 
-$public = new \Bitpay\PublicKey();
+$public = new \BTCPayServer\PublicKey();
 $public->generate($private);
 
-$adapter = new \Bitpay\Client\Adapter\CurlAdapter();
+$adapter = new \BTCPayServer\Client\Adapter\CurlAdapter();
 
-$bitpay = new \Bitpay\Bitpay();
+$bitpay = new \BTCPayServer\BTCPayServer();
 
-$client = new \Bitpay\Client\Client();
+$client = new \BTCPayServer\Client\Client();
 $client->setPrivateKey($private);
 $client->setPublicKey($public);
 $client->setUri('https://btcpay.server/');

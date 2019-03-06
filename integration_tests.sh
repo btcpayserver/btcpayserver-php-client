@@ -71,10 +71,10 @@ echo "Using Email: $EMAIL"
 echo "Using URL: $URL"
 
 echo "Removing old keys..."
-if [ -e /tmp/bitpay.pub ]
+if [ -e /tmp/btcpayserver.pub ]
 then
-	rm -rf /tmp/bitpay.pub
-	rm -rf /tmp/bitpay.pri
+	rm -rf /tmp/btcpayserver.pub
+	rm -rf /tmp/btcpayserver.pri
 	rm -rf /tmp/token.json
 fi
 

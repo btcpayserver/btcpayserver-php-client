@@ -19,20 +19,20 @@ require __DIR__ . '/../vendor/autoload.php';
  * storage engine. You also need to tell it the location of the key you want
  * to load.
  */
-$storageEngine = new \Bitpay\Storage\FilesystemStorage();
-$privateKey    = $storageEngine->load('/tmp/bitpay.pri');
-$publicKey     = $storageEngine->load('/tmp/bitpay.pub');
+$storageEngine = new \BTCPayServer\Storage\FilesystemStorage();
+$privateKey    = $storageEngine->load('/tmp/btcpayserver.pri');
+$publicKey     = $storageEngine->load('/tmp/btcpayserver.pub');
 
 /**
  * Create a new client. You can see the example of how to configure this using
  * a yml file as well.
  */
-$bitpay = new \Bitpay\Bitpay(
+$bitpay = new \BTCPayServer\BTCPayServer(
     array(
         'bitpay' => array(
-            'public_key'  => '/tmp/bitpay.pub', //see tutorial/001.php and 002.php
-            'private_key' => '/tmp/bitpay.pri',
-            'key_storage' => 'Bitpay\Storage\EncryptedFilesystemStorage',
+            'public_key'  => '/tmp/btcpayserver.pub', //see tutorial/001.php and 002.php
+            'private_key' => '/tmp/btcpayserver.pri',
+            'key_storage' => 'BTCPayServer\Storage\EncryptedFilesystemStorage',
             'key_storage_password' => 'YourTopSecretPassword'
         )
     )

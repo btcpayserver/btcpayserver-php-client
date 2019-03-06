@@ -1,19 +1,19 @@
 <?php
 /**
- * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * @license Copyright 2019 BTCPayServer, MIT License
  * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
-namespace Bitpay;
+namespace BTCPayServer;
 
 use org\bovigo\vfs\vfsStream;
 
-class BitpayTest extends \PHPUnit_Framework_TestCase
+class BTCPayServerTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testConstruct()
     {
-        $bitpay = new \Bitpay\Bitpay(
+        $bitpay = new \BTCPayServer\BTCPayServer(
             array(
                 'bitpay' => array()
             )
@@ -22,14 +22,14 @@ class BitpayTest extends \PHPUnit_Framework_TestCase
 
     public function testGetContainer()
     {
-        $bitpay = new \Bitpay\Bitpay();
+        $bitpay = new \BTCPayServer\BTCPayServer();
         $this->assertInstanceOf('Symfony\Component\DependencyInjection\ContainerInterface', $bitpay->getContainer());
     }
 
     public function testGet()
     {
-        $bitpay = new \Bitpay\Bitpay();
-        $this->assertInstanceOf('Bitpay\Client\Adapter\CurlAdapter', $bitpay->get('adapter'));
+        $bitpay = new \BTCPayServer\BTCPayServer();
+        $this->assertInstanceOf('BTCPayServer\Client\Adapter\CurlAdapter', $bitpay->get('adapter'));
     }
 
     /**
@@ -37,14 +37,14 @@ class BitpayTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetInvalidService()
     {
-        $bitpay = new \Bitpay\Bitpay();
+        $bitpay = new \BTCPayServer\BTCPayServer();
         $bitpay->get('coins');
     }
 
     public function testConfigAbleToPersistAndLoadKeys()
     {
         $root   = vfsStream::setup('tmp');
-        $bitpay = new \Bitpay\Bitpay(
+        $bitpay = new \BTCPayServer\BTCPayServer(
             array(
                 'bitpay' => array(
                     'private_key' => vfsStream::url('tmp/key.pri'),
@@ -53,9 +53,9 @@ class BitpayTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $pri = new \Bitpay\PrivateKey(vfsStream::url('tmp/key.pri'));
+        $pri = new \BTCPayServer\PrivateKey(vfsStream::url('tmp/key.pri'));
         $pri->generate();
-        $pub = new \Bitpay\PublicKey(vfsStream::url('tmp/key.pub'));
+        $pub = new \BTCPayServer\PublicKey(vfsStream::url('tmp/key.pub'));
         $pub->setPrivateKey($pri)->generate();
 
         /**

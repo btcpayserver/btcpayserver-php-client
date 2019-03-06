@@ -7,15 +7,15 @@ few steps.
 Pairing {#pairing-1}
 =======
 
-Create an instance of the Bitpay class.
+Create an instance of the BTCPayServer class.
 
 ``` {.sourceCode .php}
-$bitpay = new \Bitpay\Bitpay(
+$bitpay = new \BTCPayServer\BTCPayServer(
     array(
         'bitpay' => array(
             'network'     => 'testnet', // testnet or livenet, default is livenet
-            'public_key'  => getenv('HOME').'/.bitpay/api.pub',
-            'private_key' => getenv('HOME').'/.bitpay/api.key',
+            'public_key'  => getenv('HOME').'/.btcpayserver/api.pub',
+            'private_key' => getenv('HOME').'/.btcpayserver/api.key',
         )
     )
 );
@@ -24,21 +24,21 @@ $bitpay = new \Bitpay\Bitpay(
 Next you will need to get the client.
 
 ``` {.sourceCode .php}
-// @var \Bitpay\Client\Client
+// @var \BTCPayServer\Client\Client
 $client = $bitpay->get('client');
 ```
 
 You will next need to create a SIN based on your Public Key.
 
 ``` {.sourceCode .php}
-// @var \Bitpay\KeyManager
+// @var \BTCPayServer\KeyManager
 $manager   = $bitpay->get('key_manager');
-$publicKey = $manager->load($bitpay->getContainer()->getParameter('bitpay.public_key'));
-$sin = new \Bitpay\SinKey();
+$publicKey = $manager->load($bitpay->getContainer()->getParameter('btcpayserver.public_key'));
+$sin = new \BTCPayServer\SinKey();
 $sin->setPublicKey($publicKey);
 $sin->generate();
 
-// @var \Bitpay\TokenInterface
+// @var \BTCPayServer\TokenInterface
 $token = $client->createToken(
     array(
         'id'          => (string) $sin,

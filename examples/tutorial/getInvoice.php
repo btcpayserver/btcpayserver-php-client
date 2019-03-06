@@ -5,7 +5,7 @@
  * getInvoice
  *
  * Requirements:
- *   - Account on https://test.bitpay.com
+ *   - Account on https://test.btcpayserver.com
  *   - Baisic PHP Knowledge
  *   - Private and Public keys from 001.php
  *   - Token value obtained from 002.php
@@ -15,17 +15,17 @@ require __DIR__.'/../../vendor/autoload.php';
 
 // Now fetch the invoice from BTCPayServer
 
-$storageEngine = new \Bitpay\Storage\EncryptedFilesystemStorage('YourTopSecretPassword');
-$privateKey    = $storageEngine->load('/tmp/bitpay.pri');
-$publicKey     = $storageEngine->load('/tmp/bitpay.pub');
-$client        = new \Bitpay\Client\Client();
-$adapter       = new \Bitpay\Client\Adapter\CurlAdapter();
+$storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage('YourTopSecretPassword');
+$privateKey    = $storageEngine->load('/tmp/btcpayserver.pri');
+$publicKey     = $storageEngine->load('/tmp/btcpayserver.pub');
+$client        = new \BTCPayServer\Client\Client();
+$adapter       = new \BTCPayServer\Client\Adapter\CurlAdapter();
 $client->setPrivateKey($privateKey);
 $client->setPublicKey($publicKey);
 $client->setUri('https://btcpay.server/');
 $client->setAdapter($adapter);
 
-$token = new \Bitpay\Token();
+$token = new \BTCPayServer\Token();
 $token->setToken('UpdateThisValue'); // UPDATE THIS VALUE
 $token->setFacade('merchant');
 

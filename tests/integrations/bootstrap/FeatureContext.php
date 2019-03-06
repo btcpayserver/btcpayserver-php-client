@@ -79,11 +79,11 @@ class FeatureContext extends BehatContext
             $this->port_required_in_url = true;
         }
 
-        if (parse_url($this->base_url, PHP_URL_HOST) == 'test.bitpay.com') {
-            $this->network = new \Bitpay\Network\Testnet();
+        if (parse_url($this->base_url, PHP_URL_HOST) == 'test.btcpayserver.com') {
+            $this->network = new \BTCPayServer\Network\Testnet();
         } else {
             $url = parse_url($this->base_url, PHP_URL_HOST);
-            $this->network = new \Bitpay\Network\Customnet($url, $this->port, $this->port_required_in_url);
+            $this->network = new \BTCPayServer\Network\Customnet($url, $this->port, $this->port_required_in_url);
         }
 
         if ((null == $this->email) || (null == $this->password)) {
@@ -112,11 +112,11 @@ class FeatureContext extends BehatContext
     /**
      * @Given /^the user is authenticated with BTCPayServer$/
      */
-    public function theUserIsAuthenticatedWithBitpay()
+    public function theUserIsAuthenticatedWithBTCPayServer()
     {
-        if(true == !file_exists('/tmp/token.json') || true == !file_exists('/tmp/bitpay.pri') || true == !file_exists('/tmp/bitpay.pub')){
-            $this->theUserPairsWithBitpayWithAValidPairingCode();
-            $this->theUserIsPairedWithBitpay();
+        if(true == !file_exists('/tmp/token.json') || true == !file_exists('/tmp/btcpayserver.pri') || true == !file_exists('/tmp/btcpayserver.pub')){
+            $this->theUserPairsWithBTCPayServerWithAValidPairingCode();
+            $this->theUserIsPairedWithBTCPayServer();
         }
     }
 
@@ -132,20 +132,20 @@ class FeatureContext extends BehatContext
             $network = $this->network;
             $client = createClient($network, $privateKey, $publicKey);
 
-            $token = new \Bitpay\Token();
+            $token = new \BTCPayServer\Token();
             $token->setToken($token_id);
             $client->setToken($token);
 
-            $invoice = new \Bitpay\Invoice();
+            $invoice = new \BTCPayServer\Invoice();
 
-            $item = new \Bitpay\Item();
+            $item = new \BTCPayServer\Item();
             $item
                 ->setCode('skuNumber')
                 ->setDescription('General Description of Item')
                 ->setPrice($price);
             $invoice->setItem($item);
 
-            $invoice->setCurrency(new \Bitpay\Currency($currency));
+            $invoice->setCurrency(new \BTCPayServer\Currency($currency));
             $client->createInvoice($invoice);
             $this->response = $client->getResponse();
             $body = $this->response->getBody();
@@ -172,13 +172,13 @@ class FeatureContext extends BehatContext
         }
         if ($responseCurrency !== $currency){
             throw new Exception("Error: Currency is different", 1);
-        }    
+        }
     }
 
     /**
      * @Given /^the user pairs with BTCPayServer with a valid pairing code$/
      */
-    public function theUserPairsWithBitpayWithAValidPairingCode()
+    public function theUserPairsWithBTCPayServerWithAValidPairingCode()
     {
         // Login
 
@@ -223,7 +223,7 @@ class FeatureContext extends BehatContext
     /**
      * @Then /^the user is paired with BTCPayServer$/
      */
-    public function theUserIsPairedWithBitpay()
+    public function theUserIsPairedWithBTCPayServer()
     {
         // Create Keys
         list($privateKey, $publicKey, $sinKey) = generateAndPersistKeys();
@@ -306,7 +306,7 @@ class FeatureContext extends BehatContext
     /**
      * @When /^the client fails to pair with BTCPayServer because (open|closed) port ([0-9]+) is an incorrect port$/
      */
-    public function theClientFailsToPairWithBitpayBecauseOfAnIncorrectPort($status, $port)
+    public function theClientFailsToPairWithBTCPayServerBecauseOfAnIncorrectPort($status, $port)
     {
         try {
             // Stupid rate limiters
@@ -317,7 +317,7 @@ class FeatureContext extends BehatContext
 
             //Set Client
             $url = parse_url($this->base_url, PHP_URL_HOST);
-            $network = new \Bitpay\Network\Customnet($url, $port, true);
+            $network = new \BTCPayServer\Network\Customnet($url, $port, true);
             $curl_options = array(
                         CURLOPT_SSL_VERIFYPEER => false,
                         CURLOPT_SSL_VERIFYHOST => false,
@@ -345,9 +345,9 @@ class FeatureContext extends BehatContext
      */
     public function thatAUserKnowsAnInvoiceId()
     {
-        if(true == !file_exists('/tmp/token.json') || true == !file_exists('/tmp/bitpay.pri') || true == !file_exists('/tmp/bitpay.pub')){
-            $this->theUserPairsWithBitpayWithAValidPairingCode();
-            $this->theUserIsPairedWithBitpay();
+        if(true == !file_exists('/tmp/token.json') || true == !file_exists('/tmp/btcpayserver.pri') || true == !file_exists('/tmp/btcpayserver.pub')){
+            $this->theUserPairsWithBTCPayServerWithAValidPairingCode();
+            $this->theUserIsPairedWithBTCPayServer();
         }
         $this->theUserCreatesAnInvoiceFor(1.99, 'USD');
     }
@@ -368,6 +368,6 @@ class FeatureContext extends BehatContext
         $responseInvoiceId = $response->getId();
         if($responseInvoiceId !== $this->invoiceId){
             throw new Exception("Invoice ids don't match");
-        } 
+        }
     }
 }

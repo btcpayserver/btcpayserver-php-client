@@ -15,7 +15,7 @@ require __DIR__ . '/../vendor/autoload.php';
 /**
  * Create an Item object that will be used later
  */
-$item = new \Bitpay\Item();
+$item = new \BTCPayServer\Item();
 $item
     ->setCode('skuNumber')
     ->setDescription('General Description of Item')
@@ -24,7 +24,7 @@ $item
 /**
  * Create Buyer object that will be used later.
  */
-$buyer = new \Bitpay\Buyer();
+$buyer = new \BTCPayServer\Buyer();
 $buyer
     ->setFirstName('Some')
     ->setLastName('Customer')
@@ -44,7 +44,7 @@ $buyer
 /**
  * Create the invoice
  */
-$invoice = new \Bitpay\Invoice();
+$invoice = new \BTCPayServer\Invoice();
 // Add the item to the invoice
 $invoice->setItem($item);
 // Add the buyers info to invoice
@@ -53,13 +53,13 @@ $invoice->setBuyer($buyer);
 $invoice
     ->setOrderId('OrderIdFromYourSystem')
     // You will receive IPN's at this URL, should be HTTPS for security purposes!
-    ->setNotificationUrl('https://store.example.com/bitpay/callback');
+    ->setNotificationUrl('https://store.example.com/btcpayserver/callback');
 
 /**
  * BTCPayServer offers services for many different currencies. You will need to
  * configure the currency in which you are selling products with.
  */
-$currency = new \Bitpay\Currency();
+$currency = new \BTCPayServer\Currency();
 $currency->setCode('USD');
 
 // Set the invoice currency
@@ -70,14 +70,14 @@ $invoice->setCurrency($currency);
  * storage engine. You also need to tell it the location of the key you want
  * to load.
  */
-$storageEngine = new \Bitpay\Storage\FilesystemStorage();
+$storageEngine = new \BTCPayServer\Storage\FilesystemStorage();
 $privateKey    = $storageEngine->load('/tmp/private.key');
 $publicKey     = $storageEngine->load('/tmp/public.key');
 
 /**
  * Create a new client.
  */
-$bitpay = new \Bitpay\Bitpay();
+$bitpay = new \BTCPayServer\BTCPayServer();
 
 /**
  * Create the client that will be used to send requests to BTCPayServer's API
@@ -95,7 +95,7 @@ $client->setUri('https://btcpay.server/');
  * You will need to set the token that was returned when you paired your
  * keys.
  */
-$token = new \Bitpay\Token();
+$token = new \BTCPayServer\Token();
 $token->setToken('your token here');
 
 $client->setToken($token);

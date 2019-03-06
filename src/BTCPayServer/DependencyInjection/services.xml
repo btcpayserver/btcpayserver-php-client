@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+/**
+ * @license Copyright 2011-2017 BTCPayServer, MIT License
+ * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
+ */
+ -->
+<container xmlns="http://symfony.com/schema/dic/services">
+    <parameters>
+        <parameter key="adapter.class">BTCPayServer\Client\Adapter\CurlAdapter</parameter>
+        <parameter key="key_manager.class">BTCPayServer\KeyManager</parameter>
+        <parameter key="key_storage.class">BTCPayServer\Storage\FilesystemStorage</parameter>
+    </parameters>
+    <services>
+        <service id="adapter" class="%adapter.class%" />
+
+        <service id="client" class="BTCPayServer\Client\Client">
+            <call method="setAdapter">
+                <argument type="service" id="adapter" />
+            </call>
+            <call method="setPublicKey">
+                <argument type="service" id="public_key" />
+            </call>
+            <call method="setPrivateKey">
+                <argument type="service" id="private_key" />
+            </call>
+        </service>
+
+        <service id="key_storage" class="%key_storage.class%">
+            <argument>%btcpayserver.key_storage_password%</argument>
+        </service>
+
+        <service id="key_manager" class="%key_manager.class%">
+            <argument type="service" id="key_storage" />
+        </service>
+
+        <service id="public_key" class="BTCPayServer\PublicKey">
+            <argument>%btcpayserver.public_key%</argument>
+        </service>
+
+        <service id="private_key" class="BTCPayServer\PrivateKey">
+            <argument>%btcpayserver.private_key%</argument>
+        </service>
+    </services>
+</container>

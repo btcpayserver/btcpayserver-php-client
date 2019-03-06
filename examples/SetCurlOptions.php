@@ -13,4 +13,4 @@ $curl_options = array(
 
 // If nothing is passed into the CurlAdapter
 // then default values are used
-$adapter = new Bitpay\Client\Adapter\CurlAdapter($curl_options);
+$adapter = new BTCPayServer\Client\Adapter\CurlAdapter($curl_options);

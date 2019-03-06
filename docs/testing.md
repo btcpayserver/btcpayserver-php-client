@@ -40,7 +40,7 @@ which you can view by opening the HTML files generated in the
 You can also run phpunit on just one file, for example:
 
 ``` {.sourceCode .bash}
-php bin/phpunit -c build/ tests/Bitpay/PrivateKeyTest.php
+php bin/phpunit -c build/ tests/BTCPayServer/PrivateKeyTest.php
 ```
 
 Running tests on just one file can be helpful since you are not running
@@ -110,7 +110,7 @@ integration\_tests.sh like so:
 source ./integration_tests.sh 'https://bobert.bp:8090' bobert@gmail.com 'abc123%^&@ac'
 ```
 
-You can configure which instance of bitpay.com this will test with to by
+You can configure which instance of btcpayserver.com this will test with to by
 changing the url in the behat.yml file. Make sure you replace username
 and password with the credentials used to log into the bitpay site you
 are testing with.

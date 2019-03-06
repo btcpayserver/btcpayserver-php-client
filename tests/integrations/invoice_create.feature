@@ -19,7 +19,7 @@ Feature: creating an invoice
   @javascript
   Scenario Outline: The invoice contains illegal characters
     When the user creates an invoice for <price> <currency>
-    Then they will receive a "Bitpay\Client\ArgumentException" matching <message>
+    Then they will receive a "BTCPayServer\Client\ArgumentException" matching <message>
   Examples:
     | price   | currency  | message                                      |
     | "1,023" | "USD"     | 'Price must be formatted as a float'         |

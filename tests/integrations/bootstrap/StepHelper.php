@@ -2,17 +2,17 @@
 
 function generateAndPersistKeys()
 {
-    $privateKey = new \Bitpay\PrivateKey('/tmp/bitpay.pri');
+    $privateKey = new \BTCPayServer\PrivateKey('/tmp/btcpayserver.pri');
     $privateKey->generate();
-    $publicKey = new \Bitpay\PublicKey('/tmp/bitpay.pub');
+    $publicKey = new \BTCPayServer\PublicKey('/tmp/btcpayserver.pub');
     $publicKey->setPrivateKey($privateKey);
     $publicKey->generate();
-    $sinKey = new \Bitpay\SinKey('/tmp/sin.key');
+    $sinKey = new \BTCPayServer\SinKey('/tmp/sin.key');
     $sinKey->setPublicKey($publicKey);
     $sinKey->generate();
 
     //Persist Keys
-    $storageEngine = new \Bitpay\Storage\EncryptedFilesystemStorage('YourTopSecretPassword');
+    $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage('YourTopSecretPassword');
     $storageEngine->persist($privateKey);
     $storageEngine->persist($publicKey);
 
@@ -21,9 +21,9 @@ function generateAndPersistKeys()
 
 function loadKeys()
 {
-    $storageEngine = new \Bitpay\Storage\EncryptedFilesystemStorage('YourTopSecretPassword');
-    $privateKey    = $storageEngine->load('/tmp/bitpay.pri');
-    $publicKey     = $storageEngine->load('/tmp/bitpay.pub');
+    $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage('YourTopSecretPassword');
+    $privateKey    = $storageEngine->load('/tmp/btcpayserver.pri');
+    $publicKey     = $storageEngine->load('/tmp/btcpayserver.pub');
     $token_id      = file_get_contents('/tmp/token.json');
 
     return array($privateKey, $publicKey, $token_id);
@@ -37,8 +37,8 @@ function createClient($network, $privateKey = null, $publicKey = null, $curl_opt
             CURLOPT_SSL_VERIFYHOST => false,
         );
     }
-    $adapter = new \Bitpay\Client\Adapter\CurlAdapter($curl_options);
-    $client = new \Bitpay\Client\Client();
+    $adapter = new \BTCPayServer\Client\Adapter\CurlAdapter($curl_options);
+    $client = new \BTCPayServer\Client\Client();
 
     if(true === !is_null($privateKey)) {
         $client->setPrivateKey($privateKey);

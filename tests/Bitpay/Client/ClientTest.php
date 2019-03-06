@@ -1,10 +1,10 @@
 <?php
 /**
- * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * @license Copyright 2019 BTCPayServer, MIT License
  * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
-namespace Bitpay\Client;
+namespace BTCPayServer\Client;
 
 date_default_timezone_set('UTC');
 
@@ -27,7 +27,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->client->setPublicKey($this->getMockPublicKey());
         $this->client->setPrivateKey($this->getMockPrivateKey());
         $adapter = $this->getMockAdapter();
-        $adapter->method('sendRequest')->willReturn($this->getMock('Bitpay\Client\ResponseInterface'));
+        $adapter->method('sendRequest')->willReturn($this->getMock('BTCPayServer\Client\ResponseInterface'));
         $this->client->setAdapter($adapter);
     }
 
@@ -48,7 +48,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Bitpay\Client\BitpayException
+     * @expectedException \BTCPayServer\Client\BTCPayServerException
      * @expectedExceptionMessage You should provider the url of your BTCPAY server
      */
     public function testBtcPayServerUrlNotProvided()
@@ -74,7 +74,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $token = $this->getMockToken();
 
-        $payout = new \Bitpay\Payout();
+        $payout = new \BTCPayServer\Payout();
         $payout
             ->setCurrency($currency)
             ->setEffectiveDate("1415853007000")
@@ -91,46 +91,46 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $token = $this->getMockToken();
 
-        $payout = new \Bitpay\Payout();
+        $payout = new \BTCPayServer\Payout();
         $payout
             ->setCurrency($currency)
             ->setEffectiveDate("1415853007000")
             ->setPricingMethod('bitcoinbestbuy')
-            ->setNotificationUrl('https://bitpay.com')
-            ->setNotificationEmail('support@bitpay.com')
+            ->setNotificationUrl('https://btcpayserver.com')
+            ->setNotificationEmail('support@btcpayserver.com')
             ->setPricingMethod('bitcoinbestbuy')
             ->setReference('your reference, can be json')
             ->setAmount(5625)
             ->setToken($token);
 
         $btc_amounts = array(
-            \Bitpay\PayoutInstruction::STATUS_UNPAID => null,
-            \Bitpay\PayoutInstruction::STATUS_PAID => '0'
+            \BTCPayServer\PayoutInstruction::STATUS_UNPAID => null,
+            \BTCPayServer\PayoutInstruction::STATUS_PAID => '0'
         );
-        $instruction0 = new \Bitpay\PayoutInstruction();
+        $instruction0 = new \BTCPayServer\PayoutInstruction();
         $instruction0
             ->setId('Sra19AFU57Rx53rKQbbRKZ')
             ->setAmount(1875)
             ->setLabel('2')
-            ->setStatus(\Bitpay\PayoutInstruction::STATUS_UNPAID)
+            ->setStatus(\BTCPayServer\PayoutInstruction::STATUS_UNPAID)
             ->setBtc($btc_amounts)
             ->setAddress('mzzsJ8G9KBmHPPVYaMxpYRetWRRec78FvF');
 
-        $instruction1 = new \Bitpay\PayoutInstruction();
+        $instruction1 = new \BTCPayServer\PayoutInstruction();
         $instruction1
             ->setId('5SCdU1xNsEwrUFqKChYuAR')
             ->setAmount(1875)
             ->setLabel('3')
-            ->setStatus(\Bitpay\PayoutInstruction::STATUS_UNPAID)
+            ->setStatus(\BTCPayServer\PayoutInstruction::STATUS_UNPAID)
             ->setBtc($btc_amounts)
             ->setAddress('mre3amN8KCFuy7gWCjhFXjuqkmoJMkd2gx');
 
-        $instruction2 = new \Bitpay\PayoutInstruction();
+        $instruction2 = new \BTCPayServer\PayoutInstruction();
         $instruction2
             ->setId('5cHNbnmNuo8gRawnrFZsPy')
             ->setAmount(1875)
             ->setLabel('4')
-            ->setStatus(\Bitpay\PayoutInstruction::STATUS_UNPAID)
+            ->setStatus(\BTCPayServer\PayoutInstruction::STATUS_UNPAID)
             ->setBtc($btc_amounts)
             ->setAddress('mre3amN8KCFuy7gWCjhFXjuqkmoJMkd2gx');
 
@@ -147,18 +147,18 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->client->setAdapter($adapter);
 
         $payout = $this->client->createPayout($payout);
-        $this->assertInstanceOf('Bitpay\PayoutInterface', $payout);
+        $this->assertInstanceOf('BTCPayServer\PayoutInterface', $payout);
         $this->assertEquals('7m7hSF3ws1LhnWUf17CXsJ', $payout->getId());
         $this->assertEquals('Lwbnf9XAPCxDmy8wsRH3ct', $payout->getAccountId());
-        $this->assertEquals(\Bitpay\Payout::STATUS_NEW, $payout->getStatus());
+        $this->assertEquals(\BTCPayServer\Payout::STATUS_NEW, $payout->getStatus());
         $this->assertEquals(5625, $payout->getAmount());
         $this->assertEquals(null, $payout->getRate());
         $this->assertEquals(null, $payout->getBtcAmount());
         $this->assertEquals('bitcoinbestbuy', $payout->getPricingMethod());
         $this->assertEquals('your reference, can be json', $payout->getReference());
         $this->assertEquals('1415853007000', $payout->getEffectiveDate());
-        $this->assertEquals('https://bitpay.com', $payout->getNotificationUrl());
-        $this->assertEquals('support@bitpay.com', $payout->getNotificationEmail());
+        $this->assertEquals('https://btcpayserver.com', $payout->getNotificationUrl());
+        $this->assertEquals('support@btcpayserver.com', $payout->getNotificationEmail());
         $this->assertEquals('8mZ37Gt91Wr7GXGPnB9zj1zwTcLGweRDka4axVBPi9Uxiiv7zZWvEKSgmFddQZA1Jy', $payout->getResponseToken());
         $instructions = $payout->getInstructions();
         $this->assertSame($instruction0, $instructions[0]);
@@ -174,12 +174,12 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $currency = $this->getMockCurrency();
         $currency->method('getCode')->will($this->returnValue('USD'));
 
-        $invoice = new \Bitpay\Invoice();
+        $invoice = new \BTCPayServer\Invoice();
         $invoice->setOrderId('TEST-01');
 
         $invoice->setCurrency($currency);
 
-        $item = new \Bitpay\Item();
+        $item = new \BTCPayServer\Item();
         $item->setPrice('19.95');
         $invoice->setItem($item);
 
@@ -191,9 +191,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->client->setAdapter($adapter);
 
         $invoice = $this->client->createInvoice($invoice);
-        $this->assertInstanceOf('Bitpay\InvoiceInterface', $invoice);
+        $this->assertInstanceOf('BTCPayServer\InvoiceInterface', $invoice);
         $this->assertEquals('abcdefghijkmnopqrstuvw', $invoice->getId());
-        $this->assertEquals('https://test.bitpay.com/invoice?id=abcdefghijkmnopqrstuvw', $invoice->getUrl());
+        $this->assertEquals('https://test.btcpayserver.com/invoice?id=abcdefghijkmnopqrstuvw', $invoice->getUrl());
         $this->assertEquals('new', $invoice->getStatus());
         //$this->assertEquals('0.0632', $invoice->getBtcPrice());
         $this->assertEquals(19.95, $invoice->getPrice());
@@ -316,7 +316,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInternalType('array', $currencies);
         $this->assertGreaterThan(0, count($currencies));
-        $this->assertInstanceOf('Bitpay\CurrencyInterface', $currencies[0]);
+        $this->assertInstanceOf('BTCPayServer\CurrencyInterface', $currencies[0]);
     }
 
     public function testGetPayouts()
@@ -330,7 +330,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $payouts = $this->client->getPayouts();
         $this->assertInternalType('array', $payouts);
-        $this->assertInstanceOf('Bitpay\PayoutInterface', $payouts[0]);
+        $this->assertInstanceOf('BTCPayServer\PayoutInterface', $payouts[0]);
 
     }
 
@@ -393,13 +393,13 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->client->setAdapter($adapter);
 
         $token = $this->client->createToken();
-        $this->assertInstanceOf('Bitpay\TokenInterface', $token);
+        $this->assertInstanceOf('BTCPayServer\TokenInterface', $token);
 
         $response = $this->getMockResponse();
         $response->method('getBody')->willReturn(file_get_contents(__DIR__ . '/../../DataFixtures/tokens_pairing.json'));
 
         $token = $this->client->createToken();
-        $this->assertInstanceOf('Bitpay\TokenInterface', $token);
+        $this->assertInstanceOf('BTCPayServer\TokenInterface', $token);
     }
 
     /**
@@ -424,25 +424,25 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $adapter = $this->getMockAdapter();
         $adapter->method('sendRequest')->willReturn($response);
         $this->client->setAdapter($adapter);
-        $token = new \Bitpay\Token();
+        $token = new \BTCPayServer\Token();
         $token->setToken('asdfsds');
 
         // No token/public facade
         $invoice = $this->client->getInvoice('5NxFkXcJbCSivtQRJa4kHP');
         $this->assertSame('invoices/5NxFkXcJbCSivtQRJa4kHP', $this->client->getRequest()->getPath());
-        $this->assertInstanceOf('Bitpay\InvoiceInterface', $invoice);
+        $this->assertInstanceOf('BTCPayServer\InvoiceInterface', $invoice);
 
         // pos token/public facade
         $this->client->setToken($token->setFacade('pos'));
         $invoice = $this->client->getInvoice('5NxFkXcJbCSivtQRJa4kHP');
         $this->assertSame('invoices/5NxFkXcJbCSivtQRJa4kHP', $this->client->getRequest()->getPath());
-        $this->assertInstanceOf('Bitpay\InvoiceInterface', $invoice);
+        $this->assertInstanceOf('BTCPayServer\InvoiceInterface', $invoice);
 
         // merchant token/merchant facade
         $this->client->setToken($token->setFacade('merchant'));
         $invoice = $this->client->getInvoice('5NxFkXcJbCSivtQRJa4kHP');
         $this->assertSame('invoices/5NxFkXcJbCSivtQRJa4kHP?token=asdfsds', $this->client->getRequest()->getPath());
-        $this->assertInstanceOf('Bitpay\InvoiceInterface', $invoice);
+        $this->assertInstanceOf('BTCPayServer\InvoiceInterface', $invoice);
     }
 
     /**
@@ -467,7 +467,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $adapter->method('sendRequest')->willReturn($response);
         $this->client->setAdapter($adapter);
         $payout = $this->client->getPayout('7m7hSF3ws1LhnWUf17CXsJ');
-        $this->assertInstanceOf('Bitpay\PayoutInterface', $payout);
+        $this->assertInstanceOf('BTCPayServer\PayoutInterface', $payout);
         $this->assertSame($payout->getId(), '7AboMecD4jSMXbH7DaJJvm');
         $this->assertSame($payout->getAccountId(), 'Lwbnf9XAPCxDmy8wsRH3ct');
         $this->assertSame($payout->getStatus(), 'complete');
@@ -514,7 +514,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $payout = $this->client->deletePayout($payout);
 
-        $this->assertSame($payout->getStatus(), \Bitpay\Payout::STATUS_CANCELLED);
+        $this->assertSame($payout->getStatus(), \BTCPayServer\Payout::STATUS_CANCELLED);
     }
 
     /**
@@ -542,13 +542,13 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->client->setAdapter($adapter);
 
         $payout = $this->client->deletePayout($payout);
-        $this->assertSame($payout->getStatus(), \Bitpay\Payout::STATUS_CANCELLED);
+        $this->assertSame($payout->getStatus(), \BTCPayServer\Payout::STATUS_CANCELLED);
     }
 
 
     private function getMockInvoice()
     {
-        $invoice = $this->getMockBuilder('Bitpay\InvoiceInterface')
+        $invoice = $this->getMockBuilder('BTCPayServer\InvoiceInterface')
             ->setMethods(
                 array(
                     'getPrice', 'getTaxIncluded', 'getCurrency', 'getItem', 'getBuyer', 'getTransactionSpeed',
@@ -570,7 +570,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     private function getMockPayout()
     {
-        $invoice = $this->getMockBuilder('Bitpay\PayoutInterface')
+        $invoice = $this->getMockBuilder('BTCPayServer\PayoutInterface')
             ->setMethods(
                 array(
                     'getId',
@@ -612,7 +612,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     private function getMockBuyer()
     {
-        return $this->getMockBuilder('Bitpay\BuyerInterface')
+        return $this->getMockBuilder('BTCPayServer\BuyerInterface')
             ->setMethods(
                 array(
                     'getPhone',
@@ -632,7 +632,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     private function getMockItem()
     {
-        return $this->getMockBuilder('Bitpay\ItemInterface')
+        return $this->getMockBuilder('BTCPayServer\ItemInterface')
             ->setMethods(
                 array(
                     'getCode',
@@ -648,7 +648,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     private function getMockCurrency()
     {
-        return $this->getMockBuilder('Bitpay\CurrencyInterface')
+        return $this->getMockBuilder('BTCPayServer\CurrencyInterface')
             ->setMethods(
                 array(
                     'getCode',
@@ -667,26 +667,26 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
     private function getMockToken()
     {
-        return $this->getMock('Bitpay\TokenInterface');
+        return $this->getMock('BTCPayServer\TokenInterface');
     }
 
     private function getMockAdapter()
     {
-        return $this->getMock('Bitpay\Client\Adapter\AdapterInterface');
+        return $this->getMock('BTCPayServer\Client\Adapter\AdapterInterface');
     }
 
     private function getMockPublicKey()
     {
-        return $this->getMock('Bitpay\PublicKey');
+        return $this->getMock('BTCPayServer\PublicKey');
     }
 
     private function getMockPrivateKey()
     {
-        return $this->getMock('Bitpay\PrivateKey');
+        return $this->getMock('BTCPayServer\PrivateKey');
     }
 
     private function getMockResponse()
     {
-        return $this->getMock('Bitpay\Client\ResponseInterface');
+        return $this->getMock('BTCPayServer\Client\ResponseInterface');
     }
 }

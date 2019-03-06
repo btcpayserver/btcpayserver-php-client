@@ -1,12 +1,12 @@
 <?php
 /**
- * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * @license Copyright 2019 BTCPayServer, MIT License
  * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
-namespace Bitpay\Client\Adapter;
+namespace BTCPayServer\Client\Adapter;
 
-use Bitpay\Client\Request;
+use BTCPayServer\Client\Request;
 
 class CurlAdapterTest extends \PHPUnit_Framework_TestCase
 {
@@ -30,7 +30,7 @@ class CurlAdapterTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Bitpay\Client\ConnectionException
+     * @expectedException \BTCPayServer\Client\ConnectionException
      */
     public function testSendRequestWithException()
     {
@@ -47,7 +47,7 @@ class CurlAdapterTest extends \PHPUnit_Framework_TestCase
     public function testSendRequestWithoutException()
     {
         $curl_options = array(
-            CURLOPT_URL            => 'www.bitpay.com',
+            CURLOPT_URL            => 'www.btcpayserver.com',
             CURLOPT_SSL_VERIFYPEER => 1,
             CURLOPT_SSL_VERIFYHOST => 2,
         );

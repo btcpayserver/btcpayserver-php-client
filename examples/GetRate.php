@@ -5,11 +5,11 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$client = new \Bitpay\Client\Client();
-$client->setAdapter(new \Bitpay\Client\Adapter\CurlAdapter());
-$request = new \Bitpay\Client\Request();
+$client = new \BTCPayServer\Client\Client();
+$client->setAdapter(new \BTCPayServer\Client\Adapter\CurlAdapter());
+$request = new \BTCPayServer\Client\Request();
 $request->setUri('https://btcpay.server/');
-$request->setMethod(\Bitpay\Client\Request::METHOD_GET);
+$request->setMethod(\BTCPayServer\Client\Request::METHOD_GET);
 $request->setPath('rates/USD');
 
 $response = $client->sendRequest($request);

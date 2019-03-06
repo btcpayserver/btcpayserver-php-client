@@ -3,10 +3,10 @@
  * Copyright (c) 2014-2017 BTCPayServer
  *
  * 004 - Hosted payment page: create & display invoice
- * For details on displaying invoices, see https://bitpay.com/docs/display-invoice
+ * For details on displaying invoices, see https://btcpayserver.com/docs/display-invoice
  *
  * Requirements:
- *   - Account on https://test.bitpay.com
+ *   - Account on https://test.btcpayserver.com
  *   - Basic PHP Knowledge
  *   - Private and Public keys from 001.php
  *   - Token value obtained from 002.php
@@ -15,11 +15,11 @@
 require __DIR__.'/../../vendor/autoload.php';
 
 // See 002.php for explanation
-$storageEngine = new \Bitpay\Storage\EncryptedFilesystemStorage('YourTopSecretPassword'); // Password may need to be updated if you changed it
-$privateKey    = $storageEngine->load('/tmp/bitpay.pri');
-$publicKey     = $storageEngine->load('/tmp/bitpay.pub');
-$client        = new \Bitpay\Client\Client();
-$adapter       = new \Bitpay\Client\Adapter\CurlAdapter();
+$storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage('YourTopSecretPassword'); // Password may need to be updated if you changed it
+$privateKey    = $storageEngine->load('/tmp/btcpayserver.pri');
+$publicKey     = $storageEngine->load('/tmp/btcpayserver.pub');
+$client        = new \BTCPayServer\Client\Client();
+$adapter       = new \BTCPayServer\Client\Adapter\CurlAdapter();
 $client->setPrivateKey($privateKey);
 $client->setPublicKey($publicKey);
 $client->setUri('https://btcpay.server/');
@@ -29,7 +29,7 @@ $client->setAdapter($adapter);
 /**
  * The last object that must be injected is the token object.
  */
-$token = new \Bitpay\Token();
+$token = new \BTCPayServer\Token();
 $token->setToken('UpdateThisValue'); // UPDATE THIS VALUE
 
 /**
@@ -41,9 +41,9 @@ $client->setToken($token);
  * This is where we will start to create an Invoice object, make sure to check
  * the InvoiceInterface for methods that you can use.
  */
-$invoice = new \Bitpay\Invoice();
+$invoice = new \BTCPayServer\Invoice();
 
-$buyer = new \Bitpay\Buyer();
+$buyer = new \BTCPayServer\Buyer();
 $buyerEmail = "buyeremail@test.com";
 $buyer
     ->setEmail($buyerEmail);
@@ -54,7 +54,7 @@ $invoice->setBuyer($buyer);
 /**
  * Item is used to keep track of a few things
  */
-$item = new \Bitpay\Item();
+$item = new \BTCPayServer\Item();
 $item
     ->setCode('skuNumber')
     ->setDescription('General Description of Item')
@@ -67,15 +67,15 @@ $invoice->setItem($item);
  * Setting this to one of the supported currencies will create an invoice using
  * the exchange rate for that currency.
  *
- * @see https://test.bitpay.com/bitcoin-exchange-rates for supported currencies
+ * @see https://test.btcpayserver.com/bitcoin-exchange-rates for supported currencies
  */
-$invoice->setCurrency(new \Bitpay\Currency('USD'));
+$invoice->setCurrency(new \BTCPayServer\Currency('USD'));
 
 // Configure the rest of the invoice
 $invoice
     ->setOrderId('OrderIdFromYourSystem')
     // You will receive IPN's at this URL, should be HTTPS for security purposes!
-    ->setNotificationUrl('https://store.example.com/bitpay/callback');
+    ->setNotificationUrl('https://store.example.com/btcpayserver/callback');
 
 
 /**
@@ -97,17 +97,17 @@ try {
   <body bgcolor="rgb(21,28,111)" textcolor="rgb(255,255,255)">
     <button onclick="openInvoice()">Pay Now</button>
     <br><br><br>
-    For more information about BTCPayServer's modal CSS invoice, please see <a href="https://bitpay.com/docs/display-invoice" target="_blank">https://bitpay.com/docs/display-invoice</a>
+    For more information about BTCPayServer's modal CSS invoice, please see <a href="https://btcpayserver.com/docs/display-invoice" target="_blank">https://btcpayserver.com/docs/display-invoice</a>
   </body>
-  <script src="https://bitpay.com/bitpay.js"> </script>
+  <script src="https://btcpayserver.com/btcpayserver.js"> </script>
   <script>
     function openInvoice() {
       var network = "testnet"
       if (network == "testnet")
-        bitpay.setApiUrlPrefix("https://test.bitpay.com")
+        btcpayserver.setApiUrlPrefix("https://test.btcpayserver.com")
       else
-        bitpay.setApiUrlPrefix("https://bitpay.com")
-      bitpay.showInvoice("<?php echo $invoice->getId();?>");
+        btcpayserver.setApiUrlPrefix("https://btcpayserver.com")
+      btcpayserver.showInvoice("<?php echo $invoice->getId();?>");
     }
   </script>
 </html>
