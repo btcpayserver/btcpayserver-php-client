@@ -85,17 +85,17 @@ qthelp:
 	@echo
 	@echo "Build finished; now you can run "qcollectiongenerator" with the" \
 	      ".qhcp project file in $(BUILDDIR)/qthelp, like this:"
-	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/BitPayPHPLibrary.qhcp"
+	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/BTCPayServerPHPLibrary.qhcp"
 	@echo "To view the help file:"
-	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/BitPayPHPLibrary.qhc"
+	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/BTCPayServerPHPLibrary.qhc"
 
 devhelp:
 	$(SPHINXBUILD) -b devhelp $(ALLSPHINXOPTS) $(BUILDDIR)/devhelp
 	@echo
 	@echo "Build finished."
 	@echo "To view the help file:"
-	@echo "# mkdir -p $$HOME/.local/share/devhelp/BitPayPHPLibrary"
-	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/BitPayPHPLibrary"
+	@echo "# mkdir -p $$HOME/.local/share/devhelp/BTCPayServerPHPLibrary"
+	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/BTCPayServerPHPLibrary"
 	@echo "# devhelp"
 
 epub:

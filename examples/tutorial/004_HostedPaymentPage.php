@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2014-2017 BitPay
+ * Copyright (c) 2014-2017 BTCPayServer
  *
  * 004 - Hosted payment page: create & display invoice
  * For details on displaying invoices, see https://bitpay.com/docs/display-invoice
@@ -62,7 +62,7 @@ $item
 $invoice->setItem($item);
 
 /**
- * BitPay supports multiple different currencies. Most shopping cart applications
+ * BTCPayServer supports multiple different currencies. Most shopping cart applications
  * and applications in general have defined set of currencies that can be used.
  * Setting this to one of the supported currencies will create an invoice using
  * the exchange rate for that currency.
@@ -93,11 +93,11 @@ try {
 }
 ?>
 <html>
-  <head><title>BitPay - Modal CSS invoice demo</title></head>
+  <head><title>BTCPayServer - Modal CSS invoice demo</title></head>
   <body bgcolor="rgb(21,28,111)" textcolor="rgb(255,255,255)">
     <button onclick="openInvoice()">Pay Now</button>
     <br><br><br>
-    For more information about BitPay's modal CSS invoice, please see <a href="https://bitpay.com/docs/display-invoice" target="_blank">https://bitpay.com/docs/display-invoice</a>
+    For more information about BTCPayServer's modal CSS invoice, please see <a href="https://bitpay.com/docs/display-invoice" target="_blank">https://bitpay.com/docs/display-invoice</a>
   </body>
   <script src="https://bitpay.com/bitpay.js"> </script>
   <script>

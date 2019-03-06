@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2014-2015 BitPay
+ * Copyright (c) 2014-2015 BTCPayServer
  */
 
 /**
@@ -18,7 +18,7 @@ $time = gmdate("Y-m-d\TH:i:s\.", 1414691179)."000Z";
 $token = new \Bitpay\Token();
 $token
 	->setFacade('payroll')
-	->setToken('<your payroll facade-enable token>'); //this is a special api that requires a explicit payroll relationship with BitPay
+	->setToken('<your payroll facade-enable token>'); //this is a special api that requires a explicit payroll relationship with BTCPayServer
 
 $instruction1 = new \Bitpay\PayoutInstruction();
 $instruction1

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2014-2015 BitPay
+ * Copyright (c) 2014-2015 BTCPayServer
  *
  * 001 - Generate and Persist Keys
  *

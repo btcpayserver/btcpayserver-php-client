@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2014-2015 BitPay
+ * Copyright (c) 2014-2015 BTCPayServer
  *
  * 002 - Pairing
  *
@@ -29,8 +29,8 @@ $publicKey     = $storageEngine->load('/tmp/bitpay.pub');
 $client = new \Bitpay\Client\Client();
 
 /**
- * The adapter is what will make the calls to BitPay and return the response
- * from BitPay. This can be updated or changed as long as it implements the
+ * The adapter is what will make the calls to BTCPayServer and return the response
+ * from BTCPayServer. This can be updated or changed as long as it implements the
  * AdapterInterface
  */
 $adapter = new \Bitpay\Client\Adapter\CurlAdapter();

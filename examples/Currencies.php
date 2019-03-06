@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2014-2015 BitPay
+ * Copyright (c) 2014-2015 BTCPayServer
  */
 
 require __DIR__ . '/../vendor/autoload.php';

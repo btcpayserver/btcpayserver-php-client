@@ -1,7 +1,7 @@
 <?php
 /**
- * @license Copyright 2011-2014 BitPay Inc., MIT License 
- * see https://github.com/bitpay/php-bitpay-client/blob/master/LICENSE
+ * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
 namespace Bitpay\Client;
@@ -51,7 +51,7 @@ class Request implements RequestInterface
         // Set some sane default headers
         $this->headers = array(
             'Content-Type'         => 'application/json',
-            'X-BitPay-Plugin-Info' => null,
+            'X-BTCPayServer-Plugin-Info' => null,
         );
 
         $this->port = 443;

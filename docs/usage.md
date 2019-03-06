@@ -18,7 +18,7 @@ if (true === file_exists($autoloader) &&
     require_once $autoloader;
     \Bitpay\Autoloader::register();
 } else {
-    throw new Exception('BitPay Library could not be loaded');
+    throw new Exception('BTCPayServer Library could not be loaded');
 }
 ```
 
@@ -36,12 +36,12 @@ Services
 ========
 
 Inside the container there are a few services that will help you develop
-your application to work with BitPay. For example, the `client` service
+your application to work with BTCPayServer. For example, the `client` service
 allows you to make requests to our API and receive responses back
 without having to do too much work.
 
 You can see a list of services you have access to by checking out the
-[services.xml](https://github.com/bitpay/php-bitpay-client/blob/master/src/Bitpay/DependencyInjection/services.xml)
+[services.xml](https://github.com/btcpayserver/php-bitpay-client/blob/master/src/Bitpay/DependencyInjection/services.xml)
 file.
 
 To gain access to any of these services, you first need to instantiate
@@ -59,12 +59,12 @@ $bitpay = \Bitpay\Bitpay($configuration);
 Sending your own Requests
 =========================
 
-You can easily send your own requests to BitPay's API with a little
+You can easily send your own requests to BTCPayServer's API with a little
 work. For all the requests you can make, please see the [API
 Documentation](https://bitpay.com/api) on the website.
 
 To get started you need to create your
-[Request](https://github.com/bitpay/php-bitpay-client/blob/master/src/Bitpay/Client/Request.php)
+[Request](https://github.com/btcpayserver/php-bitpay-client/blob/master/src/Bitpay/Client/Request.php)
 
 ``` {.sourceCode .php}
 $request = new \Bitpay\Client\Request();
@@ -85,5 +85,5 @@ $response = $client->sendRequest($request);
 
 That's all there is to it. Just make your Request object and have the
 Client send it. You'll get a
-[Response](https://github.com/bitpay/php-bitpay-client/blob/master/src/Bitpay/Client/ResponseInterface.php)
+[Response](https://github.com/btcpayserver/php-bitpay-client/blob/master/src/Bitpay/Client/ResponseInterface.php)
 object in return which you can use to do whatever it is you need to do.

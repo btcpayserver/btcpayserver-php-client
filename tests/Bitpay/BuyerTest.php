@@ -1,7 +1,7 @@
 <?php
 /**
- * @license Copyright 2011-2014 BitPay Inc., MIT License
- * see https://github.com/bitpay/php-bitpay-client/blob/master/LICENSE
+ * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
 namespace Bitpay;
@@ -59,8 +59,8 @@ class BuyerTest extends \PHPUnit_Framework_TestCase
     public function testSetFirstName()
     {
         $this->assertNotNull($this->user);
-        $this->user->setFirstName('BitPay');
-        $this->assertSame('BitPay', $this->user->getFirstName());
+        $this->user->setFirstName('BTCPayServer');
+        $this->assertSame('BTCPayServer', $this->user->getFirstName());
     }
 
     public function testGetLastName()

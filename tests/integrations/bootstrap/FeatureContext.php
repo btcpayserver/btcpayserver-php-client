@@ -110,7 +110,7 @@ class FeatureContext extends BehatContext
     }
 
     /**
-     * @Given /^the user is authenticated with BitPay$/
+     * @Given /^the user is authenticated with BTCPayServer$/
      */
     public function theUserIsAuthenticatedWithBitpay()
     {
@@ -176,7 +176,7 @@ class FeatureContext extends BehatContext
     }
 
     /**
-     * @Given /^the user pairs with BitPay with a valid pairing code$/
+     * @Given /^the user pairs with BTCPayServer with a valid pairing code$/
      */
     public function theUserPairsWithBitpayWithAValidPairingCode()
     {
@@ -221,7 +221,7 @@ class FeatureContext extends BehatContext
     }
 
     /**
-     * @Then /^the user is paired with BitPay$/
+     * @Then /^the user is paired with BTCPayServer$/
      */
     public function theUserIsPairedWithBitpay()
     {
@@ -304,7 +304,7 @@ class FeatureContext extends BehatContext
     }
 
     /**
-     * @When /^the client fails to pair with BitPay because (open|closed) port ([0-9]+) is an incorrect port$/
+     * @When /^the client fails to pair with BTCPayServer because (open|closed) port ([0-9]+) is an incorrect port$/
      */
     public function theClientFailsToPairWithBitpayBecauseOfAnIncorrectPort($status, $port)
     {

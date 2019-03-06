@@ -1,7 +1,7 @@
 <?php
 /**
- * @license Copyright 2011-2014 BitPay Inc., MIT License 
- * see https://github.com/bitpay/php-bitpay-client/blob/master/LICENSE
+ * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
 namespace Bitpay\Client;
@@ -20,12 +20,12 @@ interface ClientInterface
     const LIVENET = '0x00';
 
     /**
-     * These can be changed/updated so when the request is sent to BitPay it
+     * These can be changed/updated so when the request is sent to BTCPayServer it
      * gives insight into what is making the calls.
      *
      * @see RFC2616 section 14.43 for User-Agent Format
      */
-    const NAME    = 'BitPay PHP-Client';
+    const NAME    = 'BTCPayServer PHP-Client';
     const VERSION = '2.2.20';
 
     //public function createApplication(ApplicationInterface $application);

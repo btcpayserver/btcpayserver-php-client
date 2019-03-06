@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2014-2015 BitPay
+ * Copyright (c) 2014-2015 BTCPayServer
  */
 
 /**
@@ -39,7 +39,7 @@ $bitpay = new \Bitpay\Bitpay(
 );
 
 /**
- * Create the client that will be used to send requests to BitPay's API
+ * Create the client that will be used to send requests to BTCPayServer's API
  */
 $client = $bitpay->get('client');
 

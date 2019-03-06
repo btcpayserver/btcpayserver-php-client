@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2014-2015 BitPay
+ * Copyright (c) 2014-2015 BTCPayServer
  *
  * WARNING - This example will NOT work until you have generated your public
  * and private keys. Please see the example documentation on generating your
@@ -56,7 +56,7 @@ $invoice
     ->setNotificationUrl('https://store.example.com/bitpay/callback');
 
 /**
- * BitPay offers services for many different currencies. You will need to
+ * BTCPayServer offers services for many different currencies. You will need to
  * configure the currency in which you are selling products with.
  */
 $currency = new \Bitpay\Currency();
@@ -80,7 +80,7 @@ $publicKey     = $storageEngine->load('/tmp/public.key');
 $bitpay = new \Bitpay\Bitpay();
 
 /**
- * Create the client that will be used to send requests to BitPay's API
+ * Create the client that will be used to send requests to BTCPayServer's API
  */
 $client = $bitpay->get('client');
 

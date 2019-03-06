@@ -1,7 +1,7 @@
 <?php
 /**
- * @license Copyright 2011-2014 BitPay Inc., MIT License
- * see https://github.com/bitpay/php-bitpay-client/blob/master/LICENSE
+ * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
 namespace Bitpay;
@@ -43,7 +43,7 @@ interface InvoiceInterface
     const STATUS_CONFIRMED = 'confirmed';
 
     /**
-     * When an invoice is complete, it means that BitPay.com has credited the
+     * When an invoice is complete, it means that BTCPayServer.com has credited the
      * merchant’s account for the invoice.  Currently, 6 confirmation blocks on the
      * bitcoin network are required for an invoice to be complete.  Note, in the future (for
      * qualified payers), invoices may move to a complete status immediately upon
@@ -62,7 +62,7 @@ interface InvoiceInterface
      * An invoice is considered invalid when it was paid, but payment was not confirmed
      * within 1 hour after receipt.  It is possible that some transactions on the bitcoin
      * network can take longer than 1 hour to be included in a block.  In such
-     * circumstances, once payment is confirmed, BitPay.com will make arrangements
+     * circumstances, once payment is confirmed, BTCPayServer.com will make arrangements
      * with the merchant regarding the funds (which can either be credited to the
      * merchant account on another invoice, or returned to the buyer).
      */
@@ -226,7 +226,7 @@ interface InvoiceInterface
     public function getExpirationTime();
 
     /**
-     * The current time on the BitPay.com system (by subtracting the current time from
+     * The current time on the BTCPayServer.com system (by subtracting the current time from
      * the expiration time, the amount of time remaining for payment can be
      * determined). Time format is “2014­01­01T19:01:01.123Z”.
      *
@@ -235,7 +235,7 @@ interface InvoiceInterface
     public function getCurrentTime();
 
     /**
-     * Used to display your public order number to the buyer on the BitPay invoice. In
+     * Used to display your public order number to the buyer on the BTCPayServer invoice. In
      * the merchant Account Summary page, this value is used to identify the ledger
      * entry. Maximum string length is 100 characters.
      *

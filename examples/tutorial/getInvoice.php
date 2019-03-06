@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2014-2017 BitPay
+ * Copyright (c) 2014-2017 BTCPayServer
  *
  * getInvoice
  *
@@ -13,7 +13,7 @@
  */
 require __DIR__.'/../../vendor/autoload.php';
 
-// Now fetch the invoice from BitPay
+// Now fetch the invoice from BTCPayServer
 
 $storageEngine = new \Bitpay\Storage\EncryptedFilesystemStorage('YourTopSecretPassword');
 $privateKey    = $storageEngine->load('/tmp/bitpay.pri');

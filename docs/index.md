@@ -1,5 +1,5 @@
-##  BitPay PHP Library Documentation
-This is end user documentation for the BitPay PHP library. This document
+##  BTCPayServer PHP Library Documentation
+This is end user documentation for the BTCPayServer PHP library. This document
 SHOULD answer all questions a developer has and helps new developers
 gain a deeper understanding of the PHP Client Library.
 

@@ -1,12 +1,12 @@
 ##  Invoices
 Creating an invoice allows you to accept payment in bitcoins. You can
-also query the BitPay's system to find out more information about the
+also query the BTCPayServer's system to find out more information about the
 invoice that you created.
 
 Working with an Invoice Object
 ==============================
 
-Every invoice can have lots of data that can be used and sent to BitPay
+Every invoice can have lots of data that can be used and sent to BTCPayServer
 as reference. Feel free to take a look at `Bitpay\InvoiceInterface` for
 code comments on what each method returns and a more in depth
 explanation.
@@ -19,7 +19,7 @@ $invoice = new \Bitpay\Invoice();
 
 > **note**
 >
-> You can also set an Order ID that you can use to reference BitPay's
+> You can also set an Order ID that you can use to reference BTCPayServer's
 > invoice with the invoice in your order system.
 >
 > `$invoice->setOrderId('You Order ID here')`
@@ -42,7 +42,7 @@ $item->setPrice('19.95');
 $invoice->setItem($item);
 ```
 
-The only thing left is to now send the invoice off to BitPay for the
+The only thing left is to now send the invoice off to BTCPayServer for the
 invoice to be created and for you to send it to your customer.
 
 Creating an Invoice
@@ -91,7 +91,7 @@ $client->createInvoice($invoice);
 ```
 
 The code will update the `$invoice` object and you will be able to
-forward your customer to BitPay's fullscreen invoice.
+forward your customer to BTCPayServer's fullscreen invoice.
 
 ``` {.sourceCode .php}
 header('Location: ' . $invoice->getUrl());
@@ -109,4 +109,4 @@ $invoice->setNotificationUrl('https://example.com/bitpay/ipn');
 
 By adding the Notification URL, it will receive an IPN when the invoice
 is updated. For more information on IPNs, please see the documentation
-on BitPay's website.
+on BTCPayServer's website.

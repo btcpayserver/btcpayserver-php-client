@@ -29,5 +29,5 @@ received is confirmed.
 complete
 ========
 
-This means that BitPay has credited the Merchants account with the
+This means that BTCPayServer has credited the Merchants account with the
 payment received.

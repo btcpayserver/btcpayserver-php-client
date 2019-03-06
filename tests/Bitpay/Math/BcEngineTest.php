@@ -1,7 +1,7 @@
 <?php
 /**
- * @license Copyright 2011-2014 BitPay Inc., MIT License
- * see https://github.com/bitpay/php-bitpay-client/blob/master/LICENSE
+ * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
 namespace Bitpay\Math;
@@ -73,12 +73,12 @@ class BcEngineTest extends \PHPUnit_Framework_TestCase
     public function testiInvertm()
     {
         $math = new BcEngine();
-        
+
         $a = 1234;
         $b = '1234123412341234123412341234123412412341234213412421341342342';
         $c = '0x1234123412341234123412341234123412412341234213412421341342342';
-        
-        
+
+
         $this->assertEquals(0, $math->invertm($a, $a));
         $this->assertEquals(0, $math->invertm($b, $b));
         $this->assertEquals(0, $math->invertm($c, $c));

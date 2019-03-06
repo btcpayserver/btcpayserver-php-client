@@ -1,11 +1,11 @@
 #create_invoices.feature
 Feature: creating an invoice
-  The user won't get any money 
+  The user won't get any money
   If they can't
   Create Invoices
 
   Background:
-    Given the user is authenticated with BitPay
+    Given the user is authenticated with BTCPayServer
 
   @javascript
   Scenario Outline: The request is correct

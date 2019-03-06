@@ -1,7 +1,7 @@
 <?php
 /**
- * @license Copyright 2011-2014 BitPay Inc., MIT License
- * see https://github.com/bitpay/php-bitpay-client/blob/master/LICENSE
+ * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
 namespace Bitpay\Client;
@@ -16,7 +16,7 @@ use Bitpay\PublicKey;
 use Bitpay\PrivateKey;
 
 /**
- * Client used to send requests and receive responses for BitPay's Web API
+ * Client used to send requests and receive responses for BTCPayServer's Web API
  *
  * @package Bitpay
  */
@@ -63,7 +63,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * Set the Public Key to use to help identify who you are to BitPay. Please
+     * Set the Public Key to use to help identify who you are to BTCPayServer. Please
      * note that you must first pair your keys and get a token in return to use.
      *
      * @param PublicKey $key
@@ -107,7 +107,7 @@ class Client implements ClientInterface
      */
     protected function fillInvoiceData(InvoiceInterface $invoice, $data)
     {
-        # BitPay returns the invoice time in milliseconds. PHP's DateTime object expects the time to be in seconds
+        # BTCPayServer returns the invoice time in milliseconds. PHP's DateTime object expects the time to be in seconds
         $invoiceTime = is_numeric($data['invoiceTime']) ? intval($data['invoiceTime']/1000) : $data['invoiceTime'];
         $expirationTime = is_numeric($data['expirationTime']) ? intval($data['expirationTime']/1000) : $data['expirationTime'];
         $currentTime = is_numeric($data['currentTime']) ? intval($data['currentTime']/1000) : $data['currentTime'];
@@ -562,7 +562,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * Returns the Response object that BitPay returned from the request that
+     * Returns the Response object that BTCPayServer returned from the request that
      * was sent
      *
      * @return ResponseInterface
@@ -573,7 +573,7 @@ class Client implements ClientInterface
     }
 
     /**
-     * Returns the request object that was sent to BitPay
+     * Returns the request object that was sent to BTCPayServer
      *
      * @return RequestInterface
      */
@@ -692,7 +692,7 @@ class Client implements ClientInterface
             'User-Agent',
             sprintf('%s/%s (PHP %s)', self::NAME, self::VERSION, phpversion())
         );
-        $request->setHeader('X-BitPay-Plugin-Info', sprintf('%s/%s', self::NAME, self::VERSION));
+        $request->setHeader('X-BTCPayServer-Plugin-Info', sprintf('%s/%s', self::NAME, self::VERSION));
         $request->setHeader('Content-Type', 'application/json');
         $request->setHeader('X-Accept-Version', '2.0.0');
     }

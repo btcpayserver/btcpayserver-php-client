@@ -72,4 +72,4 @@ $keyManager->persist($privateKey);
 
 Cookbook
 ========
-* [Creating your own storage clas](https://github.com/bitpay/php-bitpay-client/blob/master/docs/keypairs/storage.md)
+* [Creating your own storage clas](https://github.com/btcpayserver/php-bitpay-client/blob/master/docs/keypairs/storage.md)

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2014-2015 BitPay
+ * Copyright (c) 2014-2015 BTCPayServer
  *
  * 003 - Creating Invoices
  *
@@ -59,7 +59,7 @@ $item
 $invoice->setItem($item);
 
 /**
- * BitPay supports multiple different currencies. Most shopping cart applications
+ * BTCPayServer supports multiple different currencies. Most shopping cart applications
  * and applications in general have defined set of currencies that can be used.
  * Setting this to one of the supported currencies will create an invoice using
  * the exchange rate for that currency.
@@ -80,7 +80,7 @@ $invoice
  * a customer can view the invoice.
  */
 try {
-    echo "Creating invoice at BitPay now.".PHP_EOL;
+    echo "Creating invoice at BTCPayServer now.".PHP_EOL;
     $client->createInvoice($invoice);
 } catch (\Exception $e) {
     echo "Exception occured: " . $e->getMessage().PHP_EOL;

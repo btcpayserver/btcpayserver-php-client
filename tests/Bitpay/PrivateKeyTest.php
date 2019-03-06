@@ -1,7 +1,7 @@
 <?php
 /**
- * @license Copyright 2011-2014 BitPay Inc., MIT License
- * see https://github.com/bitpay/php-bitpay-client/blob/master/LICENSE
+ * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
 namespace Bitpay;
@@ -28,7 +28,7 @@ class PrivateKeyTest extends \PHPUnit_Framework_TestCase
         } else {
             \Bitpay\Math\Math::setEngine(new \Bitpay\Math\RpEngine());
         }
-        
+
         $priKey = new PrivateKey();
         $this->assertNotNull($priKey);
 
@@ -116,7 +116,7 @@ class PrivateKeyTest extends \PHPUnit_Framework_TestCase
         $priKey->generate();
 
         // Make sure not exceptions are thrown
-        $priKey->sign('BitPay');
+        $priKey->sign('BTCPayServer');
     }
 
     public function testHasValidHex()

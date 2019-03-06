@@ -6,8 +6,8 @@ Feature: pairing with bitpay
 
   @javascript
   Scenario: the client has a correct pairing code
-    Given the user pairs with BitPay with a valid pairing code
-    Then the user is paired with BitPay
+    Given the user pairs with BTCPayServer with a valid pairing code
+    Then the user is paired with BTCPayServer
 
   @javascript
   Scenario Outline: the client has a bad pairing code
@@ -20,7 +20,7 @@ Feature: pairing with bitpay
 
   @javascript
   Scenario Outline: the client has a bad port configuration to an incorrect port
-    When the client fails to pair with BitPay because <status> port <port> is an incorrect port
+    When the client fails to pair with BTCPayServer because <status> port <port> is an incorrect port
     Then they will receive a <error> matching <message>
   Examples:
       | status  | port | error                               | message              |

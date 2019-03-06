@@ -1,7 +1,7 @@
 ##  Testing
 Current Build Status:
 
-[![image](https://travis-ci.org/bitpay/php-bitpay-client.svg?branch=master)](https://travis-ci.org/bitpay/php-bitpay-client)
+[![image](https://travis-ci.org/btcpayserver/php-bitpay-client.svg?branch=master)](https://travis-ci.org/btcpayserver/php-bitpay-client)
 
 Testing ensures that code is stable and that the code quality is high by
 holding every person to the same standards. Before you start, please
@@ -21,7 +21,7 @@ npm install
 >
 > node is used for PhantomJS and a few other tools that help out with
 > the required testing to make sure that the code is able to talk to
-> BitPay servers and should give us an early warning if things update or
+> BTCPayServer servers and should give us an early warning if things update or
 > change without notice.
 
 PHPUnit
@@ -143,6 +143,6 @@ php bin/behat tests/integrations/invoice_create.feature:20
 >
 > A timing issue will occasionally occur saying: "Notice: Undefined
 > variable: response in tests/integrations/bootstrap/FeatureContext.php
-> line 368" and there will be a message from BitPay saying: "This
+> line 368" and there will be a message from BTCPayServer saying: "This
 > endpoint does not support the public facade" This is likely a timing
 > issue and the tests will likely pass when run again.

@@ -1,7 +1,7 @@
 <?php
 /**
- * @license Copyright 2011-2014 BitPay Inc., MIT License
- * see https://github.com/bitpay/php-bitpay-client/blob/master/LICENSE
+ * @license Copyright 2011-2014 BTCPayServer Inc., MIT License
+ * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
  */
 
 namespace Bitpay;
@@ -12,7 +12,7 @@ namespace Bitpay;
 class Autoloader
 {
     /**
-     * Register the autoloader, by default this will put the BitPay autoloader
+     * Register the autoloader, by default this will put the BTCPayServer autoloader
      * first on the stack, to append the autoloader, pass `false` as an argument.
      *
      * Some applications will throw exceptions if the class isn't found and
