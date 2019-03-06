@@ -6,7 +6,7 @@ Add the following to your composer.json
 
 ``` {.sourceCode .json}
 "require": {
-    "btcpayserver/php-client": "~2.0"
+    "psyb0t/btcpayserver-php-client": "~0.1.0"
 }
 ```
 
@@ -15,13 +15,13 @@ Add the following to your composer.json
 > To obtain the LATEST development code which is on the master branch
 > you can either update your
 > [minimum-stability](https://getcomposer.org/doc/04-schema.md#minimum-stability)
-> setting or put the version as `~2.0@dev`
+> setting or put the version as `~0.1.0@dev`
 
 Once you have added this to your composer.json file you will need to
 install the library in your project.
 
 ``` {.sourceCode .bash}
-php composer.phar update btcpayserver/php-client
+php composer.phar update psyb0t/btcpayserver-php-client
 ```
 
 Composer Alternative
@@ -31,7 +31,7 @@ By running this composer command, you will add the library to
 composer.json and install the latest version.
 
 ``` {.sourceCode .bash}
-php composer.phar require "btcpayserver/php-client ~2.0"
+php composer.phar require "psyb0t/btcpayserver-php-client"
 ```
 
 Setup

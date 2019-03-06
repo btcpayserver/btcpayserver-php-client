@@ -694,7 +694,7 @@ class Client implements ClientInterface
         );
         $request->setHeader('X-BTCPayServer-Plugin-Info', sprintf('%s/%s', self::NAME, self::VERSION));
         $request->setHeader('Content-Type', 'application/json');
-        $request->setHeader('X-Accept-Version', '2.0.0');
+        $request->setHeader('X-Accept-Version', '0.1.0');
     }
 
     protected function checkPriceAndCurrency($price, $currency)
