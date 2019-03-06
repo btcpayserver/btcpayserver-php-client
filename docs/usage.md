@@ -41,7 +41,7 @@ allows you to make requests to our API and receive responses back
 without having to do too much work.
 
 You can see a list of services you have access to by checking out the
-[services.xml](https://github.com/btcpayserver/php-bitpay-client/blob/master/src/BTCPayServer/DependencyInjection/services.xml)
+[services.xml](https://github.com/psyb0t/btcpayserver-php-client/blob/master/src/BTCPayServer/DependencyInjection/services.xml)
 file.
 
 To gain access to any of these services, you first need to instantiate
@@ -64,7 +64,7 @@ work. For all the requests you can make, please see the [API
 Documentation](https://btcpayserver.com/api) on the website.
 
 To get started you need to create your
-[Request](https://github.com/btcpayserver/php-bitpay-client/blob/master/src/BTCPayServer/Client/Request.php)
+[Request](https://github.com/psyb0t/btcpayserver-php-client/blob/master/src/BTCPayServer/Client/Request.php)
 
 ``` {.sourceCode .php}
 $request = new \BTCPayServer\Client\Request();
@@ -85,5 +85,5 @@ $response = $client->sendRequest($request);
 
 That's all there is to it. Just make your Request object and have the
 Client send it. You'll get a
-[Response](https://github.com/btcpayserver/php-bitpay-client/blob/master/src/BTCPayServer/Client/ResponseInterface.php)
+[Response](https://github.com/psyb0t/btcpayserver-php-client/blob/master/src/BTCPayServer/Client/ResponseInterface.php)
 object in return which you can use to do whatever it is you need to do.

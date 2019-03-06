@@ -1,5 +1,5 @@
 {
-  "name": "php-bitpay-client",
+  "name": "btcpayserver-php-client",
   "description": "PHP Client Library for the BTCPayServer Crypto Payment Gateway",
   "directories": {
     "lib": "src",
@@ -12,10 +12,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/btcpayserver/php-bitpay-client.git"
+    "url": "https://github.com/psyb0t/btcpayserver-php-client.git"
   },
   "keywords": [
-    "bitpay",
+    "btcpayserver",
     "bitcoin",
     "php",
     "library",
@@ -28,9 +28,9 @@
   "author": "BTCPayServer Developer Community",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/btcpayserver/php-bitpay-client/issues"
+    "url": "https://github.com/psyb0t/btcpayserver-php-client/issues"
   },
-  "homepage": "https://github.com/btcpayserver/php-bitpay-client",
+  "homepage": "https://github.com/psyb0t/btcpayserver-php-client",
   "engines": {
     "node": ">=0.10.33",
     "npm": "~2.1.5"

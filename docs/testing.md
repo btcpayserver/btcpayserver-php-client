@@ -1,7 +1,7 @@
 ##  Testing
 Current Build Status:
 
-[![image](https://travis-ci.org/btcpayserver/php-bitpay-client.svg?branch=master)](https://travis-ci.org/btcpayserver/php-bitpay-client)
+[![image](https://travis-ci.org/psyb0t/btcpayserver-php-client.svg?branch=master)](https://travis-ci.org/psyb0t/btcpayserver-php-client)
 
 Testing ensures that code is stable and that the code quality is high by
 holding every person to the same standards. Before you start, please

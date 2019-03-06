@@ -1,12 +1,12 @@
-btcpayserver/php-bitpay-client
+psyb0t/btcpayserver-php-client
 =================
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/btcpayserver/php-bitpay-client/master/LICENSE.md)
-[![Travis](https://img.shields.io/travis/btcpayserver/php-bitpay-client.svg?style=flat-square)](https://travis-ci.org/btcpayserver/php-bitpay-client)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/psyb0t/btcpayserver-php-client/master/LICENSE.md)
+[![Travis](https://img.shields.io/travis/psyb0t/btcpayserver-php-client.svg?style=flat-square)](https://travis-ci.org/psyb0t/btcpayserver-php-client)
 [![Packagist](https://img.shields.io/packagist/v/btcpayserver/php-client.svg?style=flat-square)](https://packagist.org/packages/btcpayserver/php-client)
-[![Code Climate](https://img.shields.io/codeclimate/github/btcpayserver/php-bitpay-client.svg?style=flat-square)](https://codeclimate.com/github/btcpayserver/php-bitpay-client)
-[![Scrutinizer](https://img.shields.io/scrutinizer/g/btcpayserver/php-bitpay-client.svg?style=flat-square)](https://scrutinizer-ci.com/g/btcpayserver/php-bitpay-client/)
-[![Coveralls](https://img.shields.io/coveralls/btcpayserver/php-bitpay-client.svg?style=flat-square)](https://coveralls.io/r/btcpayserver/php-bitpay-client)
+[![Code Climate](https://img.shields.io/codeclimate/github/psyb0t/btcpayserver-php-client.svg?style=flat-square)](https://codeclimate.com/github/psyb0t/btcpayserver-php-client)
+[![Scrutinizer](https://img.shields.io/scrutinizer/g/psyb0t/btcpayserver-php-client.svg?style=flat-square)](https://scrutinizer-ci.com/g/psyb0t/btcpayserver-php-client/)
+[![Coveralls](https://img.shields.io/coveralls/psyb0t/btcpayserver-php-client.svg?style=flat-square)](https://coveralls.io/r/psyb0t/btcpayserver-php-client)
 
 [![Documentation Status](https://readthedocs.org/projects/php-bitpay-client/badge/?version=latest)](https://readthedocs.org/projects/php-bitpay-client/?badge=latest)
 [![Total Downloads](https://poser.pugx.org/btcpayserver/php-client/downloads.svg)](https://packagist.org/packages/btcpayserver/php-client)
@@ -39,7 +39,7 @@ Add to your composer.json file by hand.
         ...
         {
             "type": "vcs",
-            "url": "https://github.com/btcpayserver/php-bitpay-client"
+            "url": "https://github.com/psyb0t/btcpayserver-php-client"
         }
     ],
     ...
@@ -60,7 +60,7 @@ php composer.phar require btcpayserver/php-client
 
 # Configuration
 
-See https://github.com/btcpayserver/php-bitpay-client/tree/master/examples
+See https://github.com/psyb0t/btcpayserver-php-client/tree/master/examples
 
 # Usage
 
@@ -89,11 +89,11 @@ and the ``examples`` directory for examples on using this library. You should
 be able to run all the examples by running ``php examples/File.php``.
 
 The ``examples/tutorial`` directory provides four scripts that guide you with creating a BTCPayServer invoice:
-https://github.com/btcpayserver/php-bitpay-client/blob/master/examples/tutorial/
+https://github.com/psyb0t/btcpayserver-php-client/blob/master/examples/tutorial/
 
 # Support
 
-* https://github.com/btcpayserver/php-bitpay-client/issues
+* https://github.com/psyb0t/btcpayserver-php-client/issues
 
 # License
 

@@ -4,10 +4,10 @@
     "license": "MIT",
     "minimum-stability": "stable",
     "keywords": ["btcpayserver", "bitcoin"],
-    "homepage": "https://github.com/btcpayserver/php-bitpay-client",
+    "homepage": "https://github.com/psyb0t/btcpayserver-php-client",
     "support": {
-        "issues": "https://github.com/btcpayserver/php-bitpay-client/issues",
-        "source": "https://github.com/btcpayserver/php-bitpay-client"
+        "issues": "https://github.com/psyb0t/btcpayserver-php-client/issues",
+        "source": "https://github.com/psyb0t/btcpayserver-php-client"
     },
     "authors": [
         {

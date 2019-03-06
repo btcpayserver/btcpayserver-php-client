@@ -1,7 +1,7 @@
 <?php
 /**
  * @license Copyright 2019 BTCPayServer, MIT License
- * see https://github.com/btcpayserver/php-bitpay-client/blob/master/LICENSE
+ * see https://github.com/psyb0t/btcpayserver-php-client/blob/master/LICENSE
  */
 
 namespace BTCPayServer\Crypto;
