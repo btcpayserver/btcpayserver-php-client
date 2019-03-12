@@ -77,12 +77,12 @@ $publicKey     = $storageEngine->load('/tmp/public.key');
 /**
  * Create a new client.
  */
-$bitpay = new \BTCPayServer\BTCPayServer();
+$btcpay = new \BTCPayServer\BTCPayServer();
 
 /**
  * Create the client that will be used to send requests to BTCPayServer's API
  */
-$client = $bitpay->get('client');
+$client = $btcpay->get('client');
 
 $client->setPrivateKey($privateKey);
 $client->setPublicKey($publicKey);

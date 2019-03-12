@@ -226,7 +226,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'bitpayphplibrary', u'BTCPayServer PHP Library Documentation',
+    ('index', 'btcpayphplibrary', u'BTCPayServer PHP Library Documentation',
      [u'BTCPayServer Developers'], 1)
 ]
 

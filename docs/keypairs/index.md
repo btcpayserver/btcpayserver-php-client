@@ -72,4 +72,4 @@ $keyManager->persist($privateKey);
 
 Cookbook
 ========
-* [Creating your own storage clas](https://github.com/psyb0t/btcpayserver-php-client/blob/master/docs/keypairs/storage.md)
+* [Creating your own storage clas](https://github.com/btcpayserver/btcpayserver-php-client/blob/master/docs/keypairs/storage.md)

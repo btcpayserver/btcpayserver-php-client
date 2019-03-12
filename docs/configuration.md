@@ -43,16 +43,16 @@ btcpayserver:
 
 Corresponding PHP code:
 ```php
-$bitpay = new \BTCPayServer\BTCPayServer('/path/to/config.yml');
+$btcpay = new \BTCPayServer\BTCPayServer('/path/to/config.yml');
 ```
 
 Example array config
 ------------------------
 
 ```php
-$bitpay = new \BTCPayServer\BTCPayServer(
+$btcpay = new \BTCPayServer\BTCPayServer(
     array(
-        'bitpay' => array(
+        'btcpay' => array(
             'network' => 'testnet',
         )
     )

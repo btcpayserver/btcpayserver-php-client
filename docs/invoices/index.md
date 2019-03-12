@@ -51,9 +51,9 @@ Creating an Invoice
 Create an instance of the BTCPayServer class.
 
 ``` {.sourceCode .php}
-$bitpay = new \BTCPayServer\BTCPayServer(
+$btcpay = new \BTCPayServer\BTCPayServer(
     array(
-        'bitpay' => array(
+        'btcpay' => array(
             'network'     => 'testnet', // testnet or livenet, default is livenet
             'public_key'  => getenv('HOME').'/.btcpayserver/api.pub',
             'private_key' => getenv('HOME').'/.btcpayserver/api.key',
@@ -73,7 +73,7 @@ Next you will need to get the client.
 
 ``` {.sourceCode .php}
 // @var \BTCPayServer\Client\Client
-$client = $bitpay->get('client');
+$client = $btcpay->get('client');
 ```
 
 Inject your `TokenObject` into the client.

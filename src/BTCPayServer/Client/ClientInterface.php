@@ -1,7 +1,7 @@
 <?php
 /**
  * @license Copyright 2019 BTCPayServer, MIT License
- * see https://github.com/psyb0t/btcpayserver-php-client/blob/master/LICENSE
+ * see https://github.com/btcpayserver/btcpayserver-php-client/blob/master/LICENSE
  */
 
 namespace BTCPayServer\Client;
@@ -10,7 +10,7 @@ use BTCPayServer\InvoiceInterface;
 use BTCPayServer\PayoutInterface;
 
 /**
- * Sends request(s) to bitpay server
+ * Sends request(s) to btcpay server
  *
  * @package BTCPayServer
  */

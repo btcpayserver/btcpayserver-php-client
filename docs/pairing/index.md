@@ -10,9 +10,9 @@ Pairing {#pairing-1}
 Create an instance of the BTCPayServer class.
 
 ``` {.sourceCode .php}
-$bitpay = new \BTCPayServer\BTCPayServer(
+$btcpay = new \BTCPayServer\BTCPayServer(
     array(
-        'bitpay' => array(
+        'btcpay' => array(
             'network'     => 'testnet', // testnet or livenet, default is livenet
             'public_key'  => getenv('HOME').'/.btcpayserver/api.pub',
             'private_key' => getenv('HOME').'/.btcpayserver/api.key',
@@ -25,15 +25,15 @@ Next you will need to get the client.
 
 ``` {.sourceCode .php}
 // @var \BTCPayServer\Client\Client
-$client = $bitpay->get('client');
+$client = $btcpay->get('client');
 ```
 
 You will next need to create a SIN based on your Public Key.
 
 ``` {.sourceCode .php}
 // @var \BTCPayServer\KeyManager
-$manager   = $bitpay->get('key_manager');
-$publicKey = $manager->load($bitpay->getContainer()->getParameter('btcpayserver.public_key'));
+$manager   = $btcpay->get('key_manager');
+$publicKey = $manager->load($btcpay->getContainer()->getParameter('btcpayserver.public_key'));
 $sin = new \BTCPayServer\SinKey();
 $sin->setPublicKey($publicKey);
 $sin->generate();

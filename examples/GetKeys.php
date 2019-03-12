@@ -23,7 +23,7 @@ printf("PEM keypair:  %s\n", $private->pemEncode($keypair));
 
 // -or- if you've got a PEM-encoded text file containing your key pair, we can use this
 
-$keys = file_get_contents(getenv('HOME') . '/.php-bitpay-client/key.pem');
+$keys = file_get_contents(getenv('HOME') . '/.php-btcpay-client/key.pem');
 if (isset($keys) && strlen($keys) > 0) {
     $keys = chop($keys);
 

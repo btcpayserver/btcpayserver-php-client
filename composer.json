@@ -1,13 +1,13 @@
 {
-    "name": "psyb0t/btcpayserver-php-client",
+    "name": "btcpayserver/btcpayserver-php-client",
     "description": "PHP Library to work with the new cryptographically secure BTCPayServer API",
     "license": "MIT",
     "minimum-stability": "stable",
     "keywords": ["btcpayserver", "bitcoin"],
-    "homepage": "https://github.com/psyb0t/btcpayserver-php-client",
+    "homepage": "https://github.com/btcpayserver/btcpayserver-php-client",
     "support": {
-        "issues": "https://github.com/psyb0t/btcpayserver-php-client/issues",
-        "source": "https://github.com/psyb0t/btcpayserver-php-client"
+        "issues": "https://github.com/btcpayserver/btcpayserver-php-client/issues",
+        "source": "https://github.com/btcpayserver/btcpayserver-php-client"
     },
     "authors": [
         {

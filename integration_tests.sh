@@ -7,7 +7,7 @@ set_variables ()
 			regex="^[a-z0-9!#\$%&'*+/=?^_\`{|}~-]+(\.[a-z0-9!#$%&'*+/=?^_\`{|}~-]+)*@([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z0-9]([a-z0-9-]*[a-z0-9])?\$";
 			if [[ "$EMAIL" =~ $regex ]]
 			then
-				export BITPAY_EMAIL=$EMAIL
+				export BTCPAY_EMAIL=$EMAIL
 				break
 			else
 				echo "Please input a valid email"
@@ -39,10 +39,10 @@ set_variables ()
 if [ -z "$1" ]
 then
 	echo "No parameters passed so using Environment Variables"
-	if [ -z "$BITPAY_EMAIL" ] || [ -z "$BITPAY_PASSWORD"]
+	if [ -z "$BTCPAY_EMAIL" ] || [ -z "$BTCPAY_PASSWORD"]
 	then
 		echo "ERROR: No Email or password are set."
-		echo "set BITPAY_EMAIL and BITPAY_PASSWORD as environment variables"
+		echo "set BTCPAY_EMAIL and BTCPAY_PASSWORD as environment variables"
 		echo "or pass them as arguments when running this script"
 		while true; do
 			read -p "Do you wish to set your environment variables here? " yn
@@ -53,7 +53,7 @@ then
 			esac
 		done
 	else
-		echo "Environment Variables already exist for BITPAY."
+		echo "Environment Variables already exist for BTCPAY."
 	fi
 else
 	echo "Username $1 and Password $2 passed from command line"
@@ -64,9 +64,9 @@ else
 
 fi
 
-export BITPAY_EMAIL=$EMAIL
-export BITPAY_PASSWORD=$PASSWORD
-export BITPAY_URL=$URL
+export BTCPAY_EMAIL=$EMAIL
+export BTCPAY_PASSWORD=$PASSWORD
+export BTCPAY_URL=$URL
 echo "Using Email: $EMAIL"
 echo "Using URL: $URL"
 

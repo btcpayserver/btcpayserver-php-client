@@ -1,7 +1,7 @@
 <?php
 /**
  * @license Copyright 2019 BTCPayServer, MIT License
- * see https://github.com/psyb0t/btcpayserver-php-client/blob/master/LICENSE
+ * see https://github.com/btcpayserver/btcpayserver-php-client/blob/master/LICENSE
  */
 
 namespace BTCPayServer\Config;
@@ -25,7 +25,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode    = $treeBuilder->root('bitpay');
+        $rootNode    = $treeBuilder->root('btcpay');
         $rootNode
             ->children()
                 ->scalarNode('public_key')

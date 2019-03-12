@@ -1,7 +1,7 @@
 <?php
 /**
  * @license Copyright 2019 BTCPayServer, MIT License
- * see https://github.com/psyb0t/btcpayserver-php-client/blob/master/LICENSE
+ * see https://github.com/btcpayserver/btcpayserver-php-client/blob/master/LICENSE
  */
 
 namespace BTCPayServer\DependencyInjection;
@@ -42,7 +42,7 @@ class BTCPayServerExtension implements ExtensionInterface
      */
     public function getAlias()
     {
-        return 'bitpay';
+        return 'btcpay';
     }
 
     /**

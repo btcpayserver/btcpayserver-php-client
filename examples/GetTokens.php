@@ -27,9 +27,9 @@ $publicKey     = $storageEngine->load('/tmp/btcpayserver.pub');
  * Create a new client. You can see the example of how to configure this using
  * a yml file as well.
  */
-$bitpay = new \BTCPayServer\BTCPayServer(
+$btcpay = new \BTCPayServer\BTCPayServer(
     array(
-        'bitpay' => array(
+        'btcpay' => array(
             'public_key'  => '/tmp/btcpayserver.pub', //see tutorial/001.php and 002.php
             'private_key' => '/tmp/btcpayserver.pri',
             'key_storage' => 'BTCPayServer\Storage\EncryptedFilesystemStorage',
@@ -41,7 +41,7 @@ $bitpay = new \BTCPayServer\BTCPayServer(
 /**
  * Create the client that will be used to send requests to BTCPayServer's API
  */
-$client = $bitpay->get('client');
+$client = $btcpay->get('client');
 
 $client->setPrivateKey($privateKey);
 $client->setPublicKey($publicKey);

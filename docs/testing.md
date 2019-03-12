@@ -1,7 +1,7 @@
 ##  Testing
 Current Build Status:
 
-[![image](https://travis-ci.org/psyb0t/btcpayserver-php-client.svg?branch=master)](https://travis-ci.org/psyb0t/btcpayserver-php-client)
+[![image](https://travis-ci.org/btcpayserver/btcpayserver-php-client.svg?branch=master)](https://travis-ci.org/btcpayserver/btcpayserver-php-client)
 
 Testing ensures that code is stable and that the code quality is high by
 holding every person to the same standards. Before you start, please
@@ -112,7 +112,7 @@ source ./integration_tests.sh 'https://bobert.bp:8090' bobert@gmail.com 'abc123%
 
 You can configure which instance of btcpayserver.com this will test with to by
 changing the url in the behat.yml file. Make sure you replace username
-and password with the credentials used to log into the bitpay site you
+and password with the credentials used to log into the btcpay site you
 are testing with.
 
 You can also run specific tests from a command like so:
@@ -130,7 +130,7 @@ php bin/behat tests/integrations/invoice_create.feature:20
 > **note**
 >
 > Tests run individually require you to set environment variables for
-> your bitpay credentials or they must be set in the behat.yml file.
+> your btcpay credentials or they must be set in the behat.yml file.
 >
 > Also keep in mind that rate limiters may hinder some tests and they
 > need to be reset every so often.

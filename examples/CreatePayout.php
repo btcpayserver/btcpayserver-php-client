@@ -46,7 +46,7 @@ $public->generate($private);
 
 $adapter = new \BTCPayServer\Client\Adapter\CurlAdapter();
 
-$bitpay = new \BTCPayServer\BTCPayServer();
+$btcpay = new \BTCPayServer\BTCPayServer();
 
 $client = new \BTCPayServer\Client\Client();
 $client->setPrivateKey($private);

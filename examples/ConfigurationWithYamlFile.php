@@ -10,4 +10,4 @@ require __DIR__ . '/../vendor/autoload.php';
  * you the ability make some easy to use configuration files. You just need
  * to pass in the path to the yml file.
  */
-$bitpay = new \BTCPayServer\BTCPayServer(__DIR__ . '/config.yml');
+$btcpay = new \BTCPayServer\BTCPayServer(__DIR__ . '/config.yml');
