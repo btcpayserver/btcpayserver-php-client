@@ -14,6 +14,10 @@ btcpayserver/btcpayserver-php-client
 
 This is a self-contained PHP implementation of BTCPayServer's cryptographically secure API: https://github.com/btcpayserver/btcpayserver-doc/blob/master/CustomIntegration.md
 
+# Before you start
+
+If your application requires BitPay compatibility go to this repository instead https://github.com/btcpayserver/php-bitpay-client
+
 # Installation
 
 ## Composer
