@@ -598,10 +598,7 @@ class Invoice implements InvoiceInterface
      */
     public function setOrderId($orderId)
     {
-        if (!empty($orderId) && ctype_print($orderId)) {
-            $this->orderId = trim($orderId);
-        }
-
+        $this->orderId = trim($orderId);
         return $this;
     }
 
