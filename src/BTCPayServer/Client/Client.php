@@ -164,6 +164,7 @@ class Client implements ClientInterface
             'transactionSpeed'  => $invoice->getTransactionSpeed(),
             'fullNotifications' => $invoice->isFullNotifications(),
             'extendedNotifications' => $invoice->isExtendedNotifications(),
+            'redirectAutomatically' => $invoice->isRedirectAutomatically(),
             'notificationEmail' => $invoice->getNotificationEmail(),
             'redirectURL'       => $invoice->getRedirectUrl(),
             'orderID'           => $invoice->getOrderId(),
