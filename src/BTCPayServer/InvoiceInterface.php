@@ -187,6 +187,15 @@ interface InvoiceInterface
     public function isExtendedNotifications();
 
     /**
+     * default value: false
+     * ● true: Redirect from the checkout UI to the set redirect url
+     * ● false: checkout UIwill not redirect but will display a button with a  link to the set redirect url
+     *
+     * @return boolean
+     */
+    public function isRedirectAutomatically();
+
+    /**
      * The unique id of the invoice assigned by btcpayserver.com
      *
      * @return string

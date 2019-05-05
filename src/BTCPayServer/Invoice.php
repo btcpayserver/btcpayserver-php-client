@@ -68,6 +68,11 @@ class Invoice implements InvoiceInterface
     protected $extendedNotifications = false;
 
     /**
+     * @var boolean
+     */
+    protected $redirectAutomatically = false;
+    
+    /**
      * @var string
      */
     protected $id;
@@ -438,6 +443,19 @@ class Invoice implements InvoiceInterface
         $this->extendedNotifications = (boolean) $notifications;
 
         return $this;
+    }
+            
+    /**
+     * @inheritdoc
+     */
+    public function isRedirectAutomatically()
+    {
+        return $this->redirectAutomatically;
+    }
+     public function setRedirectAutomatically($redirectAutomatically)
+    {
+        $this->redirectAutomatically = (boolean) $redirectAutomatically;
+         return $this;
     }
 
     /**
