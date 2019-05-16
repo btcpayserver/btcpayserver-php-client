@@ -5,7 +5,7 @@
  * 003 - Creating Invoices
  *
  * Requirements:
- *   - Account on https://test.btcpayserver.com
+ *   - Account on https://testnet.demo.btcpayserver.org
  *   - Basic PHP Knowledge
  *   - Private and Public keys from 001.php
  *   - Token value obtained from 002.php
@@ -20,7 +20,7 @@ $client        = new \BTCPayServer\Client\Client();
 $adapter       = new \BTCPayServer\Client\Adapter\CurlAdapter();
 $client->setPrivateKey($privateKey);
 $client->setPublicKey($publicKey);
-$client->setUri('https://btcpay.server/');
+$client->setUri('https://testnet.demo.btcpayserver.org/');
 $client->setAdapter($adapter);
 // ---------------------------
 
@@ -64,7 +64,7 @@ $invoice->setItem($item);
  * Setting this to one of the supported currencies will create an invoice using
  * the exchange rate for that currency.
  *
- * @see https://test.btcpayserver.com/bitcoin-exchange-rates for supported currencies
+ * @see https://docs.btcpayserver.org/faq-and-common-issues/faq-general#which-cryptocurrencies-are-supported-in-btcpay for supported currencies
  */
 $invoice->setCurrency(new \BTCPayServer\Currency('USD'));
 
