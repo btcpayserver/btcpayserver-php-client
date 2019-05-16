@@ -3,10 +3,9 @@
  * Copyright (c) 2014-2017 BTCPayServer
  *
  * 004 - Hosted payment page: create & display invoice
- * For details on displaying invoices, see https://btcpayserver.com/docs/display-invoice
- *
+ * For details on displaying invoices, see https://docs.btcpayserver.org/integrations/customintegration#modal-checkout
  * Requirements:
- *   - Account on https://test.btcpayserver.com
+ *   - Account on https://testnet.demo.btcpayserver.org
  *   - Basic PHP Knowledge
  *   - Private and Public keys from 001.php
  *   - Token value obtained from 002.php
@@ -67,7 +66,7 @@ $invoice->setItem($item);
  * Setting this to one of the supported currencies will create an invoice using
  * the exchange rate for that currency.
  *
- * @see https://test.btcpayserver.com/bitcoin-exchange-rates for supported currencies
+ * @see https://docs.btcpayserver.org/faq-and-common-issues/faq-general#which-cryptocurrencies-are-supported-in-btcpay for supported currencies
  */
 $invoice->setCurrency(new \BTCPayServer\Currency('USD'));
 
@@ -97,16 +96,16 @@ try {
   <body bgcolor="rgb(21,28,111)" textcolor="rgb(255,255,255)">
     <button onclick="openInvoice()">Pay Now</button>
     <br><br><br>
-    For more information about BTCPayServer's modal CSS invoice, please see <a href="https://btcpayserver.com/docs/display-invoice" target="_blank">https://btcpayserver.com/docs/display-invoice</a>
+    For more information about BTCPayServer's modal CSS invoice, please see <a href="https://docs.btcpayserver.org/integrations/customintegration#modal-checkout" target="_blank">https://btcpayserver.com/docs/display-invoice</a>
   </body>
-  <script src="https://btcpayserver.com/btcpayserver.js"> </script>
+  <script src="https://testnet.demo.btcpayserver.org/modal/btcpay.js"> </script>
   <script>
     function openInvoice() {
       var network = "testnet"
       if (network == "testnet")
-        btcpayserver.setApiUrlPrefix("https://test.btcpayserver.com")
+        btcpayserver.setApiUrlPrefix("https://testnet.demo.btcpayserver.org")
       else
-        btcpayserver.setApiUrlPrefix("https://btcpayserver.com")
+        btcpayserver.setApiUrlPrefix("https://btcpayserver.org/")
       btcpayserver.showInvoice("<?php echo $invoice->getId();?>");
     }
   </script>

@@ -7,7 +7,7 @@
  * Requirements:
  *   - Basic PHP Knowledge
  *   - Private and Public keys from 001.php
- *   - Account on https://test.btcpayserver.com
+ *   - Account on https://testnet.demo.btcpayserver.org/
  *   - Pairing code
  */
 require __DIR__.'/../../vendor/autoload.php';
@@ -49,7 +49,7 @@ $client->setUri('https://btcpay.server/');
 $client->setAdapter($adapter);
 
 /**
- * Visit https://test.btcpayserver.com/api-tokens and create a new pairing code. Pairing
+ * Visit https://testnet.demo.btcpayserver.org/api-tokens and create a new pairing code. Pairing
  * codes can only be used once and the generated code is valid for only 24 hours.
  */
 $pairingCode = 'InsertPairingCodeHere';

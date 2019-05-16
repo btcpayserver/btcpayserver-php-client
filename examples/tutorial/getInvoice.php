@@ -5,7 +5,7 @@
  * getInvoice
  *
  * Requirements:
- *   - Account on https://test.btcpayserver.com
+ *   - Account on https://testnet.demo.btcpayserver.org
  *   - Baisic PHP Knowledge
  *   - Private and Public keys from 001.php
  *   - Token value obtained from 002.php
@@ -22,7 +22,7 @@ $client        = new \BTCPayServer\Client\Client();
 $adapter       = new \BTCPayServer\Client\Adapter\CurlAdapter();
 $client->setPrivateKey($privateKey);
 $client->setPublicKey($publicKey);
-$client->setUri('https://btcpay.server/');
+$client->setUri('https://testnet.demo.btcpayserver.org');
 $client->setAdapter($adapter);
 
 $token = new \BTCPayServer\Token();
