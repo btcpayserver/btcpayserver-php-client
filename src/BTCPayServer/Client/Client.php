@@ -120,7 +120,7 @@ class Client implements ClientInterface
             ->setStatus($data['status'])
             ->setBtcPrice(array_key_exists('btcPrice', $data) ? $data['btcPrice'] : '')
             ->setPrice($data['price'])
-            ->setTaxIncluded($data['taxIncluded'])
+            ->setTaxIncluded(array_key_exists('taxIncluded', $data) ? $data['taxIncluded'] : 0)
             ->setCurrency(new \BTCPayServer\Currency($data['currency']))
             ->setOrderId(array_key_exists('orderId', $data) ? $data['orderId'] : '')
             ->setInvoiceTime($invoiceTime)
