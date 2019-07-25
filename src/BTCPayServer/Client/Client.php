@@ -198,14 +198,11 @@ class Client implements ClientInterface
         $this->request  = $request;
         $this->response = $this->sendRequest($request);
 
-        $body = json_decode($this->response->getBody(), true);
-        $error_message = false;
-        $error_message = (!empty($body['error'])) ? $body['error'] : $error_message;
-        $error_message = (!empty($body['errors'])) ? $body['errors'] : $error_message;
-        $error_message = (is_array($error_message)) ? implode("\n", $error_message) : $error_message;
-        if (false !== $error_message) {
-            throw new \Exception($error_message);
+        if($this->response->getStatusCode() === 401){
+            throw new \Exception('Unauthorized');
         }
+
+        $body = $this->parseResponse();
         $data = $body['data'];
 
         $invoice = $this->fillInvoiceData($invoice, $data);
@@ -293,14 +290,7 @@ class Client implements ClientInterface
 
         $this->request  = $request;
         $this->response = $this->sendRequest($request);
-        $body = json_decode($this->response->getBody(), true);
-        $error_message = false;
-        $error_message = (!empty($body['error'])) ? $body['error'] : $error_message;
-        $error_message = (!empty($body['errors'])) ? $body['errors'] : $error_message;
-        $error_message = (is_array($error_message)) ? implode("\n", $error_message) : $error_message;
-        if (false !== $error_message) {
-            throw new \Exception($error_message);
-        }
+        $body = $this->parseResponse();
 
         $data = $body['data'];
         $payout
@@ -333,14 +323,7 @@ class Client implements ClientInterface
 
         $this->request  = $request;
         $this->response = $this->sendRequest($this->request);
-        $body           = json_decode($this->response->getBody(), true);
-        $error_message = false;
-        $error_message = (!empty($body['error'])) ? $body['error'] : $error_message;
-        $error_message = (!empty($body['errors'])) ? $body['errors'] : $error_message;
-        $error_message = (is_array($error_message)) ? implode("\n", $error_message) : $error_message;
-        if (false !== $error_message) {
-            throw new \Exception($error_message);
-        }
+        $body = $this->parseResponse();
 
         $payouts = array();
 
@@ -700,5 +683,23 @@ class Client implements ClientInterface
 
     protected function checkPriceAndCurrency($price, $currency)
     {
+    }
+
+    private function parseResponse(){
+        $bodyString = $this->response->getBody();
+
+        if($this->response->getStatusCode() === 401){
+            throw new \Exception($bodyString);
+        }
+
+        $body = json_decode($bodyString, true);
+        $error_message = false;
+        $error_message = (!empty($body['error'])) ? $body['error'] : $error_message;
+        $error_message = (!empty($body['errors'])) ? $body['errors'] : $error_message;
+        $error_message = (is_array($error_message)) ? implode("\n", $error_message) : $error_message;
+        if (false !== $error_message) {
+            throw new \Exception($error_message);
+        }
+        return $body;
     }
 }
