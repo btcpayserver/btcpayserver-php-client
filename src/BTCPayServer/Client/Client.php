@@ -198,10 +198,6 @@ class Client implements ClientInterface
         $this->request  = $request;
         $this->response = $this->sendRequest($request);
 
-        if($this->response->getStatusCode() === 401){
-            throw new \Exception('Unauthorized');
-        }
-
         $body = $this->parseResponse();
         $data = $body['data'];
 
@@ -685,6 +681,10 @@ class Client implements ClientInterface
     {
     }
 
+    /**
+     * @return array
+     * @throws \Exception
+     */
     private function parseResponse(){
         $bodyString = $this->response->getBody();
 
