@@ -21,13 +21,13 @@
         }
     },
     "require": {
-        "php": ">=5.4",
+        "php": ">=7.1",
         "ext-bcmath": "*",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-openssl": "*",
-        "symfony/config": "^2.3 || ^3",
-        "symfony/dependency-injection": "^2.3 || ^3"
+        "symfony/config": "^2.3 || ^3.0 || ^4.0",
+        "symfony/dependency-injection": "^2.3 || ^3.0 || ^4.0"
     },
     "require-dev": {
         "behat/behat": "2.5.*@stable",
