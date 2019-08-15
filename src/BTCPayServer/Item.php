@@ -30,11 +30,6 @@ class Item implements ItemInterface
     protected $price;
 
     /**
-     * @var float
-     */
-    protected $taxIncluded;
-
-    /**
      * @var integer
      */
     protected $quantity;
@@ -102,16 +97,6 @@ class Item implements ItemInterface
     }
 
     /**
-     * @inheritdoc
-     *
-     * @return float
-     */
-    public function getTaxIncluded()
-    {
-        return $this->taxIncluded;
-    }
-
-    /**
      * @param mixed $price A float, integer, or en_US formatted numeric string
      *
      * @return ItemInterface
@@ -123,17 +108,6 @@ class Item implements ItemInterface
         }
 
         $this->price = (float)$price;
-
-        return $this;
-    }
-
-    public function setTaxIncluded($taxIncluded)
-    {
-        if (is_string($taxIncluded)) {
-            $this->checkPriceFormat($taxIncluded);
-        }
-
-        $this->taxIncluded = (float)$taxIncluded;
 
         return $this;
     }
@@ -183,8 +157,16 @@ class Item implements ItemInterface
      * values with more than 6 decimals.
      *
      * @param string $price The price value to check
+     * @throws \Exception
      */
     protected function checkPriceFormat($price)
     {
+        if ($price === '0') {
+            return;
+        }
+        $converted = (float)$price;
+        if ($converted == 0) {
+            throw new \BTCPayServer\Client\ArgumentException("Price must be formatted as a float ". $converted);
+        }
     }
 }

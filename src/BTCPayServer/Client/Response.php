@@ -65,14 +65,15 @@ class Response implements ResponseInterface
             $tmp = explode($delimiter, $rawResponse, 2);// grab the 100 Continue header
             $rawResponse = $tmp[1];// update the response, purging the most recent 100 Continue header
         }// repeat
-
+        
         $lines    = preg_split('/(\\r?\\n)/', $rawResponse);
         $linesLen = count($lines);
 
         for ($i = 0; $i < $linesLen; $i++) {
             if (0 == $i) {
-                preg_match('/^HTTP\/(\d\.\d|\d)\s(\d+)/', $lines[$i], $statusLine);
-
+                // Example: HTTP/2 404
+                preg_match('/^HTTP\/([\d\.]+)\s(\d+)/', $lines[$i], $statusLine);
+    
                 $response->setStatusCode($statusCode = $statusLine[2]);
 
                 continue;

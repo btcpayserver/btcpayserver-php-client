@@ -107,29 +107,25 @@ class Client implements ClientInterface
      */
     protected function fillInvoiceData(InvoiceInterface $invoice, $data)
     {
-        # BTCPayServer returns the invoice time in milliseconds. PHP's DateTime object expects the time to be in seconds
+        // Returns the invoice time in milliseconds. PHP's DateTime object expects the time to be in seconds
         $invoiceTime = is_numeric($data['invoiceTime']) ? intval($data['invoiceTime']/1000) : $data['invoiceTime'];
         $expirationTime = is_numeric($data['expirationTime']) ? intval($data['expirationTime']/1000) : $data['expirationTime'];
         $currentTime = is_numeric($data['currentTime']) ? intval($data['currentTime']/1000) : $data['currentTime'];
-
+        
         $invoiceToken = new \BTCPayServer\Token();
         $invoice
             ->setToken($invoiceToken->setToken($data['token']))
             ->setUrl($data['url'])
             ->setPosData(array_key_exists('posData', $data) ? $data['posData'] : '')
             ->setStatus($data['status'])
-            ->setBtcPrice(array_key_exists('btcPrice', $data) ? $data['btcPrice'] : '')
             ->setPrice($data['price'])
-            ->setTaxIncluded(array_key_exists('taxIncluded', $data) ? $data['taxIncluded'] : 0)
             ->setCurrency(new \BTCPayServer\Currency($data['currency']))
             ->setOrderId(array_key_exists('orderId', $data) ? $data['orderId'] : '')
             ->setInvoiceTime($invoiceTime)
             ->setExpirationTime($expirationTime)
             ->setCurrentTime($currentTime)
             ->setId($data['id'])
-            ->setBtcPaid(array_key_exists('btcPaid', $data) ? $data['btcPaid'] : '')
             ->setAmountPaid(array_key_exists('amountPaid', $data) ? $data['amountPaid'] : '')
-            ->setRate(array_key_exists('rate', $data) ? $data['rate'] : '')
             ->setExceptionStatus($data['exceptionStatus'])
             ->setRefundAddresses(array_key_exists('refundAddresses', $data) ? $data['refundAddresses'] : '')
             ->setTransactionCurrency(array_key_exists('transactionCurrency', $data) ? $data['transactionCurrency'] : null)
@@ -157,14 +153,12 @@ class Client implements ClientInterface
 
         $body = array(
             'price'             => $item->getPrice(),
-            'taxIncluded'       => $item->getTaxIncluded(),
             'currency'          => $currency->getCode(),
             'posData'           => $invoice->getPosData(),
             'notificationURL'   => $invoice->getNotificationUrl(),
             'transactionSpeed'  => $invoice->getTransactionSpeed(),
             'fullNotifications' => $invoice->isFullNotifications(),
             'extendedNotifications' => $invoice->isExtendedNotifications(),
-            'redirectAutomatically' => $invoice->isRedirectAutomatically(),
             'notificationEmail' => $invoice->getNotificationEmail(),
             'redirectURL'       => $invoice->getRedirectUrl(),
             'orderID'           => $invoice->getOrderId(),
@@ -185,12 +179,6 @@ class Client implements ClientInterface
             'nonce'             => Util::nonce(),
             'token'             => $this->token->getToken(),
         );
-
-        foreach(array_keys($body) as $key) {
-          if(null === $body[$key]) {
-            unset($body[$key]);
-          }
-        }
 
         $request->setBody(json_encode($body));
         $this->addIdentityHeader($request);
@@ -217,7 +205,7 @@ class Client implements ClientInterface
         $this->response = $this->sendRequest($this->request);
         $body           = json_decode($this->response->getBody(), true);
         if (empty($body['data'])) {
-            throw new \Exception('Error with request: no data returned');
+            throw new \BTCPayServer\Client\BTCPayServerException('Error with request: no data returned');
         }
         $currencies = $body['data'];
         array_walk($currencies, function (&$value, $key) {
@@ -386,7 +374,7 @@ class Client implements ClientInterface
 
         $body           = json_decode($this->response->getBody(), true);
         if (empty($body['data'])) {
-            throw new \Exception('Error with request: no data returned');
+            throw new \BTCPayServer\Client\BTCPayServerException('Error with request: no data returned');
         }
 
         $data   = $body['data'];
@@ -412,7 +400,7 @@ class Client implements ClientInterface
 
         $body           = json_decode($this->response->getBody(), true);
         if (empty($body['data'])) {
-            throw new \Exception('Error with request: no data returned');
+            throw new \BTCPayServer\Client\BTCPayServerException('Error with request: no data returned');
         }
         $data   = $body['data'];
 
@@ -474,7 +462,7 @@ class Client implements ClientInterface
         $this->response = $this->sendRequest($this->request);
         $body           = json_decode($this->response->getBody(), true);
         if (empty($body['data'])) {
-            throw new \Exception('Error with request: no data returned');
+            throw new \BTCPayServer\Client\BTCPayServerException('Error with request: no data returned');
         }
 
         $tokens = array();
@@ -515,7 +503,7 @@ class Client implements ClientInterface
         }
 
         if($this->response->getStatusCode() >= 400) {
-            throw new \Exception('invalid status code: '. $this->response->getStatusCode());
+            throw new BTCPayServerException('invalid status code: '. $this->response->getStatusCode());
         }
 
         $tkn = $body['data'][0];
@@ -580,7 +568,7 @@ class Client implements ClientInterface
         $body = json_decode($this->response->getBody(), true);
 
         if (isset($body['error'])) {
-            throw new \Exception($body['error']);
+            throw new BTCPayServerException($body['error']);
         }
 
         $data = $body['data'];
@@ -592,7 +580,7 @@ class Client implements ClientInterface
     }
 
 
-
+    
 
 
     /**
@@ -615,7 +603,7 @@ class Client implements ClientInterface
     protected function addIdentityHeader(RequestInterface $request)
     {
         if (null === $this->publicKey) {
-            throw new \Exception('Please set your Public Key.');
+            throw new \BTCPayServer\Client\BTCPayServerException('Please set your Public Key.');
         }
 
         $request->setHeader('x-identity', (string) $this->publicKey);
@@ -627,7 +615,7 @@ class Client implements ClientInterface
     protected function addSignatureHeader(RequestInterface $request)
     {
         if (null === $this->privateKey) {
-            throw new \Exception('Please set your Private Key');
+            throw new BTCPayServerException('Please set your Private Key');
         }
 
         $url = $request->getFullUri();
@@ -639,22 +627,17 @@ class Client implements ClientInterface
         );
 
         $signature = $this->privateKey->sign($message);
-
         $request->setHeader('x-signature', $signature);
     }
 
     /**
      * @return RequestInterface
-     *
-     * @throws BTCPayServerException
      */
     protected function createNewRequest()
     {
-        if ($this->uri === null) {
-            throw new BTCPayServerException('You should provider the url of your BTCPAY server');
-        }
         $request = new Request();
-        $request->setUri($this->uri);
+        $request->setHost($this->uri->getApiHost());
+        $request->setPort($this->network->getApiPort());
         $this->prepareRequestHeaders($request);
 
         return $request;
@@ -674,32 +657,21 @@ class Client implements ClientInterface
         );
         $request->setHeader('X-BTCPayServer-Plugin-Info', sprintf('%s/%s', self::NAME, self::VERSION));
         $request->setHeader('Content-Type', 'application/json');
-        $request->setHeader('X-Accept-Version', '0.1.0');
+        $request->setHeader('X-Accept-Version', '2.0.0');
     }
 
     protected function checkPriceAndCurrency($price, $currency)
     {
-    }
-
-    /**
-     * @return array
-     * @throws \Exception
-     */
-    private function parseResponse(){
-        $bodyString = $this->response->getBody();
-
-        if($this->response->getStatusCode() === 401){
-            throw new \Exception($bodyString);
+        $decimalPosition = strpos($price, '.');
+        if ($decimalPosition == 0) {
+            $decimalPrecision = 0;
+        } else {
+            $decimalPrecision = strlen(substr($price, $decimalPosition + 1));
         }
-
-        $body = json_decode($bodyString, true);
-        $error_message = false;
-        $error_message = (!empty($body['error'])) ? $body['error'] : $error_message;
-        $error_message = (!empty($body['errors'])) ? $body['errors'] : $error_message;
-        $error_message = (is_array($error_message)) ? implode("\n", $error_message) : $error_message;
-        if (false !== $error_message) {
-            throw new \Exception($error_message);
+        if ($currency !== 'BTC' && $decimalPrecision > 2) {
+            throw new \BTCPayServer\Client\BTCPayServerException('Incorrect price format or currency type.');
+        } elseif ($decimalPrecision > 6) {
+            throw new \BTCPayServer\Client\BTCPayServerException('Incorrect price format or currency type.');
         }
-        return $body;
     }
 }

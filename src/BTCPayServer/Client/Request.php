@@ -38,11 +38,25 @@ class Request implements RequestInterface
     protected $method;
 
     /**
+     * This should be something such as `test.btcpayserver.com` or just `btcpayserver.com`
+     *
+     * @var string
+     */
+    protected $host;
+
+    /**
      * The path is added to the end of the host
      *
      * @var string
      */
     protected $path;
+
+    /**
+     * Default is 443 but should be changed by whatever is passed in through the Adapter. 
+     *
+     * @var integer
+     */
+    protected $port;
 
     /**
      */
@@ -68,7 +82,7 @@ class Request implements RequestInterface
      */
     public function __toString()
     {
-        $request = sprintf("%s %s HTTP/1.1\r\n", $this->getMethod(), $this->getFullUri());
+        $request = sprintf("%s %s HTTP/1.1\r\n", $this->getMethod(), $this->getUriWithPort());
         $request .= $this->getHeadersAsString();
         $request .= $this->getBody();
 
@@ -81,6 +95,24 @@ class Request implements RequestInterface
     public function isMethod($method)
     {
         return (strtoupper($method) == strtoupper($this->method));
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPort()
+    {
+        return $this->port;
+    }
+
+    /**
+     * This is called in the Adapter
+     *
+     * @inheritdoc
+     */
+    public function setPort($port)
+    {
+        $this->port = $port;
     }
 
     /**
@@ -105,31 +137,55 @@ class Request implements RequestInterface
     /**
      * @inheritdoc
      */
-    public function getUri()
+    public function getSchema()
     {
-        return $this->uri;
+        return 'https';
     }
 
-        /**
+    /**
      * @inheritdoc
      */
-    public function getFullUri()
+    public function getUri()
     {
-        $uriNormalized = rtrim($this->getUri(), '/');
-        $pathNormalized = ltrim($this->getPath(), '/');
         return sprintf(
-            '%s/%s',
-            $uriNormalized,
-            $pathNormalized
+            '%s://%s/%s',
+            $this->getSchema(),
+            $this->getHost(),
+            $this->getPath()
         );
     }
 
     /**
      * @inheritdoc
      */
-    public function setUri($uri)
+    public function getUriWithPort()
     {
-        $this->uri = $uri;
+        return sprintf(
+            '%s://%s:%s/%s',
+            $this->getSchema(),
+            $this->getHost(),
+            $this->getPort(),
+            $this->getPath()
+        );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getHost()
+    {
+        return $this->host;
+    }
+
+    /**
+     * Sets the host for the request
+     *
+     * @param string $host
+     */
+    public function setHost($host)
+    {
+        $this->host = $host;
+
         return $this;
     }
 
