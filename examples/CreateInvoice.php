@@ -66,30 +66,15 @@ $currency->setCode('USD');
 $invoice->setCurrency($currency);
 
 /**
- * To load up keys that you have previously saved, you need to use the same
- * storage engine. You also need to tell it the location of the key you want
- * to load.
+ * Create a new client. You can see the example of how to configure this using
+ * a yml file as well.
  */
-$storageEngine = new \BTCPayServer\Storage\FilesystemStorage();
-$privateKey    = $storageEngine->load('/tmp/private.key');
-$publicKey     = $storageEngine->load('/tmp/public.key');
+$btcpay = new \BTCPayServer\BTCPayServer(__DIR__ . '/config.yml');
 
 /**
- * Create a new client.
- */
-$btcpay = new \BTCPayServer\BTCPayServer();
-
-/**
- * Create the client that will be used to send requests to BTCPayServer's API
+ * Create the client that will be used to send requests to BitPay's API
  */
 $client = $btcpay->get('client');
-
-$client->setPrivateKey($privateKey);
-$client->setPublicKey($publicKey);
-/**
- * Add your btcpayserver url
- */
-$client->setUri('https://btcpay.server/');
 
 /**
  * You will need to set the token that was returned when you paired your

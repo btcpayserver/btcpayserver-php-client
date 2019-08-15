@@ -1,27 +1,31 @@
 <?php
 /**
- * Copyright (c) 2014-2017 BTCPayServer
+ * Copyright (c) 2014-2017 BitPay
  *
  * 004 - Hosted payment page: create & display invoice
- * For details on displaying invoices, see https://docs.btcpayserver.org/integrations/customintegration#modal-checkout
+ * For details on displaying invoices, see https://bitpay.com/docs/display-invoice
+ *
  * Requirements:
- *   - Account on https://testnet.demo.btcpayserver.org
+ *   - Account on https://test.bitpay.com
  *   - Basic PHP Knowledge
  *   - Private and Public keys from 001.php
  *   - Token value obtained from 002.php
  *   - A webserver to run the code. Running locally works with firefox, but not with Safari & Chrome
  */
+$key_dir = '/tmp';
 require __DIR__.'/../../vendor/autoload.php';
 
-// See 002.php for explanation
-$storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage('YourTopSecretPassword'); // Password may need to be updated if you changed it
-$privateKey    = $storageEngine->load('/tmp/btcpayserver.pri');
-$publicKey     = $storageEngine->load('/tmp/btcpayserver.pub');
+$storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage('TopSecretPassword');
+$privateKey = $storageEngine->load($key_dir . '/bitpay.pri');
+$publicKey = $storageEngine->load($key_dir . '/bitpay.pub');
+
+
 $client        = new \BTCPayServer\Client\Client();
+//$network       = new \BTCPayServer\Network\Testnet();
 $adapter       = new \BTCPayServer\Client\Adapter\CurlAdapter();
 $client->setPrivateKey($privateKey);
 $client->setPublicKey($publicKey);
-$client->setUri('https://btcpay.server/');
+//$client->setNetwork($network);
 $client->setAdapter($adapter);
 // ---------------------------
 
@@ -61,12 +65,12 @@ $item
 $invoice->setItem($item);
 
 /**
- * BTCPayServer supports multiple different currencies. Most shopping cart applications
+ * BitPay supports multiple different currencies. Most shopping cart applications
  * and applications in general have defined set of currencies that can be used.
  * Setting this to one of the supported currencies will create an invoice using
  * the exchange rate for that currency.
  *
- * @see https://docs.btcpayserver.org/faq-and-common-issues/faq-general#which-cryptocurrencies-are-supported-in-btcpay for supported currencies
+ * @see https://test.bitpay.com/bitcoin-exchange-rates for supported currencies
  */
 $invoice->setCurrency(new \BTCPayServer\Currency('USD'));
 
@@ -74,7 +78,7 @@ $invoice->setCurrency(new \BTCPayServer\Currency('USD'));
 $invoice
     ->setOrderId('OrderIdFromYourSystem')
     // You will receive IPN's at this URL, should be HTTPS for security purposes!
-    ->setNotificationUrl('https://store.example.com/btcpayserver/callback');
+    ->setNotificationUrl('https://store.example.com/bitpay/callback');
 
 
 /**
@@ -92,21 +96,17 @@ try {
 }
 ?>
 <html>
-  <head><title>BTCPayServer - Modal CSS invoice demo</title></head>
+  <head><title>BitPay - Modal CSS invoice demo</title></head>
   <body bgcolor="rgb(21,28,111)" textcolor="rgb(255,255,255)">
     <button onclick="openInvoice()">Pay Now</button>
     <br><br><br>
-    For more information about BTCPayServer's modal CSS invoice, please see <a href="https://docs.btcpayserver.org/integrations/customintegration#modal-checkout" target="_blank">https://btcpayserver.com/docs/display-invoice</a>
+    For more information about BitPay's modal CSS invoice, please see <a href="https://bitpay.com/docs/display-invoice" target="_blank">https://bitpay.com/docs/display-invoice</a>
   </body>
-  <script src="https://testnet.demo.btcpayserver.org/modal/btcpay.js"> </script>
+  <script src="https://bitpay.com/bitpay.js"> </script>
   <script>
     function openInvoice() {
-      var network = "testnet"
-      if (network == "testnet")
-        btcpayserver.setApiUrlPrefix("https://testnet.demo.btcpayserver.org")
-      else
-        btcpayserver.setApiUrlPrefix("https://btcpayserver.org/")
-      btcpayserver.showInvoice("<?php echo $invoice->getId();?>");
+      bitpay.setApiUrlPrefix("https://btcpayserver.com")
+      bitpay.showInvoice("<?php echo $invoice->getId();?>");
     }
   </script>
 </html>

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2014-2015 BTCPayServer
+ * Copyright (c) 2014-2015 BitPay
  *
  * 001 - Generate and Persist Keys
  *
@@ -9,18 +9,15 @@
  */
 
 // If you have not already done so, please run `composer.phar install`
+#where to store keys
+$key_dir = '/tmp';
 require __DIR__.'/../../vendor/autoload.php';
-
 /**
  * Start by creating a PrivateKey object
  */
-$privateKey = new \BTCPayServer\PrivateKey('/tmp/btcpayserver.pri');
-
-// Generate a random number
-$privateKey->generate();
 
 // You can generate a private key with only one line of code like so
-$privateKey = \BTCPayServer\PrivateKey::create('/tmp/btcpayserver.pri')->generate();
+$privateKey = \BTCPayServer\PrivateKey::create( $key_dir . '/bitpay.pri')->generate();
 
 // NOTE: This has overridden the previous $privateKey variable, although its
 //       not an issue in this case since we have not used this key for
@@ -29,7 +26,7 @@ $privateKey = \BTCPayServer\PrivateKey::create('/tmp/btcpayserver.pri')->generat
 /**
  * Once we have a private key, a public key is created from it.
  */
-$publicKey = new \BTCPayServer\PublicKey('/tmp/btcpayserver.pub');
+$publicKey = new \BTCPayServer\PublicKey($key_dir . '/bitpay.pub');
 
 // Inject the private key into the public key
 $publicKey->setPrivateKey($privateKey);
@@ -38,7 +35,7 @@ $publicKey->setPrivateKey($privateKey);
 $publicKey->generate();
 
 // NOTE: You can again do all of this with one line of code like so:
-//       `$publicKey = \BTCPayServer\PublicKey::create('/tmp/btcpayserver.pub')->setPrivateKey($privateKey)->generate();`
+//       `$publicKey = \BTCPayServer\PublicKey::create('/tmp/bitpay.pub')->setPrivateKey($privateKey)->generate();`
 
 /**
  * Now that you have a private and public key generated, you will need to store
@@ -52,12 +49,15 @@ $publicKey->generate();
  * It's recommended that you use the EncryptedFilesystemStorage engine to persist your
  * keys. You can, of course, create your own as long as it implements the StorageInterface
  */
-$storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage('YourTopSecretPassword');
+$storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage('TopSecretPassword');
 $storageEngine->persist($privateKey);
 $storageEngine->persist($publicKey);
 
 /**
  * This is all for the first tutorial, you can run this script from the command
  * line `php examples/tutorial/001.php` This will generate and create two files
- * located at `/tmp/btcpayserver.pri` and `/tmp/btcpayserver.pub`
+ * located at `/tmp/bitpay.pri` and `/tmp/bitpay.pub`
  */
+
+
+?>

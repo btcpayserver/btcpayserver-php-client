@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2014-2015 BTCPayServer
+ * Copyright (c) 2014-2015 BitPay
  */
 
 /**
