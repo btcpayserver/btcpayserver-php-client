@@ -18,6 +18,16 @@ This is a self-contained PHP implementation of BTCPayServer's cryptographically 
 
 If your application requires BitPay compatibility go to this repository instead https://github.com/btcpayserver/php-bitpay-client
 
+# Important upgrade notes
+
+## Version 4.0.0
+- The latest changes made in BitPay's v4 API are now reflected in this API.
+- If you previously had "401 unauthorized" issues with this API, these should now be fixed. 
+- This PHP API no longer depends on Symfony, making this framework independent. If you were using this API in combination with Symfony and require a Symfony service, you can get the old files from the `old-master` branch. We recommended you to keep the Symfony stuff separate.
+
+## Older versions
+- Previous versions were not numbered.
+
 # Installation
 
 ## Composer
@@ -40,24 +50,6 @@ See https://github.com/btcpayserver/btcpayserver-php-client/tree/master/examples
 
 # Usage
 
-## Autoloader
-
-To use the library's autoloader (which doesn't include composer dependencies)
-instead of composer's autoloader, use the following code:
-
-```php
-<?php
-$autoloader = __DIR__ . '/relative/path/to/src/BTCPayServer/Autoloader.php';
-if (true === file_exists($autoloader) &&
-    true === is_readable($autoloader))
-{
-    require_once $autoloader;
-    \BTCPayServer\Autoloader::register();
-} else {
-    throw new Exception('BTCPayServer Library could not be loaded');
-}
-```
-
 ## Documentation
 
 Please see the ``docs`` directory for information on how to use this library
@@ -70,27 +62,3 @@ https://github.com/btcpayserver/btcpayserver-php-client/blob/master/examples/tut
 # Support
 
 * https://github.com/btcpayserver/btcpayserver-php-client/issues
-
-# License
-
-The MIT License (MIT)
-
-Copyright (c) 2017 BTCPayServer, Inc.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
