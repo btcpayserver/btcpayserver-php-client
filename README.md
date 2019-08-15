@@ -25,7 +25,7 @@ If your application requires BitPay compatibility go to this repository instead 
 - If you previously had "401 unauthorized" issues with this API, these should now be fixed. 
 - This PHP API no longer depends on Symfony, making this framework independent. If you were using this API in combination with Symfony and require a Symfony service, you can get the old files from the `old-master` branch. We recommended you to keep the Symfony stuff separate.
 
-## Older versions
+## Version 0.1.1
 - Previous versions were not numbered.
 
 # Installation
