@@ -38,6 +38,12 @@ class Request implements RequestInterface
     protected $method;
 
     /**
+     * This should be "http" or "https"
+     * @var string
+     */
+    protected $scheme;
+
+    /**
      * This should be something such as `test.btcpayserver.com` or just `btcpayserver.com`
      *
      * @var string
@@ -52,7 +58,7 @@ class Request implements RequestInterface
     protected $path;
 
     /**
-     * Default is 443 but should be changed by whatever is passed in through the Adapter. 
+     * Default is 443 but should be changed by whatever is passed in through the Adapter.
      *
      * @var integer
      */
@@ -100,6 +106,24 @@ class Request implements RequestInterface
     /**
      * @inheritdoc
      */
+    public function getScheme()
+    {
+        return $this->scheme;
+    }
+
+    /**
+     * This is called in the Adapter
+     *
+     * @inheritdoc
+     */
+    public function setScheme(string $scheme)
+    {
+        $this->scheme = $scheme;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getPort()
     {
         return $this->port;
@@ -110,7 +134,7 @@ class Request implements RequestInterface
      *
      * @inheritdoc
      */
-    public function setPort($port)
+    public function setPort(int $port)
     {
         $this->port = $port;
     }
@@ -137,19 +161,11 @@ class Request implements RequestInterface
     /**
      * @inheritdoc
      */
-    public function getSchema()
-    {
-        return 'https';
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getUri()
     {
         return sprintf(
             '%s://%s/%s',
-            $this->getSchema(),
+            $this->getScheme(),
             $this->getHost(),
             $this->getPath()
         );
@@ -182,7 +198,7 @@ class Request implements RequestInterface
      *
      * @param string $host
      */
-    public function setHost($host)
+    public function setHost(string $host)
     {
         $this->host = $host;
 
@@ -274,7 +290,7 @@ class Request implements RequestInterface
     }
 
     /**
-     * @param string $host
+     * @inheritdoc
      */
     public function setPath($path)
     {

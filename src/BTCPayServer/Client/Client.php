@@ -7,7 +7,6 @@
 namespace BTCPayServer\Client;
 
 use BTCPayServer\Client\Adapter\AdapterInterface;
-use BTCPayServer\Network\NetworkInterface;
 use BTCPayServer\TokenInterface;
 use BTCPayServer\InvoiceInterface;
 use BTCPayServer\PayoutInterface;
@@ -53,13 +52,12 @@ class Client implements ClientInterface
     protected $privateKey;
 
     /**
-     * @var uri
+     * @var string
      */
     protected $uri;
 
-    public function setUri($uri)
-    {
-        $this->uri = trim($uri);
+    public function setUri(string $uri){
+        $this->uri = $uri;
     }
 
     /**
@@ -111,7 +109,7 @@ class Client implements ClientInterface
         $invoiceTime = is_numeric($data['invoiceTime']) ? intval($data['invoiceTime']/1000) : $data['invoiceTime'];
         $expirationTime = is_numeric($data['expirationTime']) ? intval($data['expirationTime']/1000) : $data['expirationTime'];
         $currentTime = is_numeric($data['currentTime']) ? intval($data['currentTime']/1000) : $data['currentTime'];
-        
+
         $invoiceToken = new \BTCPayServer\Token();
         $invoice
             ->setToken($invoiceToken->setToken($data['token']))
@@ -580,7 +578,7 @@ class Client implements ClientInterface
     }
 
 
-    
+
 
 
     /**
@@ -618,7 +616,7 @@ class Client implements ClientInterface
             throw new BTCPayServerException('Please set your Private Key');
         }
 
-        $url = $request->getFullUri();
+        $url = $request->getUri();
 
         $message = sprintf(
             '%s%s',
@@ -636,8 +634,14 @@ class Client implements ClientInterface
     protected function createNewRequest()
     {
         $request = new Request();
-        $request->setHost($this->uri->getApiHost());
-        $request->setPort($this->network->getApiPort());
+
+        $host = parse_url($this->uri,PHP_URL_HOST);
+        $port = parse_url($this->uri,PHP_URL_PORT);
+        $scheme = parse_url($this->uri,PHP_URL_SCHEME);
+
+        $request->setHost($host);
+        $request->setPort($port);
+        $request->setScheme($scheme);
         $this->prepareRequestHeaders($request);
 
         return $request;
@@ -673,5 +677,26 @@ class Client implements ClientInterface
         } elseif ($decimalPrecision > 6) {
             throw new \BTCPayServer\Client\BTCPayServerException('Incorrect price format or currency type.');
         }
+    }
+
+    /**
+     * @return array
+     * @throws \Exception
+     */
+    private function parseResponse()
+    {
+        $bodyString = $this->response->getBody();
+        if($this->response->getStatusCode() === 401){
+            throw new \Exception($bodyString);
+        }
+        $body = json_decode($bodyString, true);
+        $error_message = false;
+        $error_message = (!empty($body['error'])) ? $body['error'] : $error_message;
+        $error_message = (!empty($body['errors'])) ? $body['errors'] : $error_message;
+        $error_message = (is_array($error_message)) ? implode("\n", $error_message) : $error_message;
+        if (false !== $error_message) {
+            throw new \BTCPayServer\Client\BTCPayServerException($error_message);
+        }
+        return $body;
     }
 }

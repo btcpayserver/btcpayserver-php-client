@@ -25,11 +25,11 @@ interface RequestInterface
     public function getMethod();
 
     /**
-     * Should always return https
+     * Returns "http" or "https"
      *
      * @return string
      */
-    public function getSchema();
+    public function getScheme();
 
     /**
      * Returns the host to send the request to. The host would be something
