@@ -16,8 +16,6 @@ use BTCPayServer\PayoutInterface;
  */
 interface ClientInterface
 {
-    const TESTNET = '0x6F';
-    const LIVENET = '0x00';
 
     /**
      * These can be changed/updated so when the request is sent to BTCPayServer it
@@ -26,7 +24,7 @@ interface ClientInterface
      * @see RFC2616 section 14.43 for User-Agent Format
      */
     const NAME    = 'BTCPayServer PHP-Client';
-    const VERSION = '2.2.20';
+    const VERSION = '4.0.0';
 
     //public function createApplication(ApplicationInterface $application);
 

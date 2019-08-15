@@ -37,11 +37,6 @@ interface ItemInterface
     /**
      * @return string
      */
-    public function getTaxIncluded();
-
-    /**
-     * @return string
-     */
     public function getQuantity();
 
     /**

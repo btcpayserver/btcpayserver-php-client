@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2014-2015 BTCPayServer
+ * Copyright (c) 2014-2015 BitPay
  */
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -8,7 +8,7 @@ require __DIR__ . '/../vendor/autoload.php';
 $client = new \BTCPayServer\Client\Client();
 $client->setAdapter(new \BTCPayServer\Client\Adapter\CurlAdapter());
 $request = new \BTCPayServer\Client\Request();
-$request->setUri('https://btcpay.server/');
+$request->setHost('test.btcpayserver.com');
 $request->setMethod(\BTCPayServer\Client\Request::METHOD_GET);
 $request->setPath('rates/USD');
 

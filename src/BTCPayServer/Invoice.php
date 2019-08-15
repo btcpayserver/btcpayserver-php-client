@@ -68,11 +68,6 @@ class Invoice implements InvoiceInterface
     protected $extendedNotifications = false;
 
     /**
-     * @var boolean
-     */
-    protected $redirectAutomatically = false;
-    
-    /**
      * @var string
      */
     protected $id;
@@ -81,12 +76,6 @@ class Invoice implements InvoiceInterface
      * @var string
      */
     protected $url;
-
-    /**
-     * @deprecated Deprecated with introduction of BCH
-     * @var float
-     */
-    protected $btcPrice;
 
     /**
      * @var \DateTime
@@ -113,22 +102,11 @@ class Invoice implements InvoiceInterface
      */
     protected $exceptionStatus;
 
-    /**
-     * @deprecated Deprecated with introduction of BCH
-     * @var
-     */
-    protected $btcPaid;
-
+    
      /**
      * @var
      */
     protected $amountPaid;
-
-    /**
-     * @deprecated Deprecated with introduction of BCH
-     * @var
-     */
-    protected $rate;
 
     /**
      * @var
@@ -170,14 +148,6 @@ class Invoice implements InvoiceInterface
     }
 
     /**
-     * @inheritdoc
-     */
-    public function getTaxIncluded()
-    {
-        return $this->getItem()->getTaxIncluded();
-    }
-
-    /**
      * @param float $price
      *
      * @return InvoiceInterface
@@ -186,20 +156,6 @@ class Invoice implements InvoiceInterface
     {
         if (!empty($price)) {
             $this->getItem()->setPrice($price);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param float $taxIncluded
-     *
-     * @return InvoiceInterface
-     */
-    public function setTaxIncluded($taxIncluded)
-    {
-        if (!empty($taxIncluded)) {
-            $this->getItem()->setTaxIncluded($taxIncluded);
         }
 
         return $this;
@@ -444,19 +400,6 @@ class Invoice implements InvoiceInterface
 
         return $this;
     }
-            
-    /**
-     * @inheritdoc
-     */
-    public function isRedirectAutomatically()
-    {
-        return $this->redirectAutomatically;
-    }
-     public function setRedirectAutomatically($redirectAutomatically)
-    {
-        $this->redirectAutomatically = (boolean) $redirectAutomatically;
-         return $this;
-    }
 
     /**
      * @inheritdoc
@@ -497,30 +440,6 @@ class Invoice implements InvoiceInterface
     {
         if (!empty($url) && ctype_print($url)) {
             $this->url = trim($url);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @deprecated Deprecated with introduction of BCH
-     * @inheritdoc
-     */
-    public function getBtcPrice()
-    {
-        return $this->btcPrice;
-    }
-
-    /**
-     * @deprecated Deprecated with introduction of BCH
-     * @param float $btcPrice
-     *
-     * @return InvoiceInterface
-     */
-    public function setBtcPrice($btcPrice)
-    {
-        if (!empty($btcPrice)) {
-            $this->btcPrice = $btcPrice;
         }
 
         return $this;
@@ -616,7 +535,10 @@ class Invoice implements InvoiceInterface
      */
     public function setOrderId($orderId)
     {
-        $this->orderId = trim($orderId);
+        if (!empty($orderId) && ctype_print($orderId)) {
+            $this->orderId = trim($orderId);
+        }
+
         return $this;
     }
 
@@ -743,30 +665,6 @@ class Invoice implements InvoiceInterface
     }
 
     /**
-     * @deprecated Deprecated with introduction of BCH
-     * @param void
-     * @return
-     */
-    public function getBtcPaid()
-    {
-        return $this->btcPaid;
-    }
-
-    /**
-     * @deprecated Deprecated with introduction of BCH
-     * @param
-     * @return Invoice
-     */
-    public function setBtcPaid($btcPaid)
-    {
-        if (isset($btcPaid)) {
-            $this->btcPaid = $btcPaid;
-        }
-
-        return $this;
-    }
-
-    /**
      * @param void
      * @return
      */
@@ -783,30 +681,6 @@ class Invoice implements InvoiceInterface
     {
         if (isset($amountPaid)) {
             $this->amountPaid = $amountPaid;
-        }
-
-        return $this;
-    }
-
-    /**
-     * @deprecated Deprecated with introduction of BCH
-     * @param void
-     * @return Invoice
-     */
-    public function getRate()
-    {
-        return $this->rate;
-    }
-
-    /**
-     * @deprecated Deprecated with introduction of BCH
-     * @param
-     * @return
-     */
-    public function setRate($rate)
-    {
-        if (!empty($rate)) {
-            $this->rate = $rate;
         }
 
         return $this;
@@ -897,7 +771,7 @@ class Invoice implements InvoiceInterface
 
     /**
      * @param void
-     * @return Invoice
+     * @return InvoiceInterface
      */
     public function getPaymentSubtotals()
     {
@@ -905,8 +779,8 @@ class Invoice implements InvoiceInterface
     }
 
     /**
-     * @param
-     * @return
+     * @param 
+     * @return InvoiceInterface
      */
     public function setPaymentSubtotals($paymentSubtotals)
     {
@@ -918,7 +792,7 @@ class Invoice implements InvoiceInterface
     }
      /**
      * @param void
-     * @return Invoice
+     * @return InvoiceInterface
      */
     public function getPaymentTotals()
     {
@@ -926,8 +800,8 @@ class Invoice implements InvoiceInterface
     }
 
     /**
-     * @param
-     * @return
+     * @param 
+     * @return InvoiceInterface
      */
     public function setPaymentTotals($paymentTotals)
     {

@@ -18,14 +18,14 @@ interface InvoiceInterface
      * to the associated bitcoin address are credited to the invoice.  If an invoice has
      * received a partial payment, it will still reflect a status of new to the merchant
      * (from a merchant system perspective, an invoice is either paid or not paid, partial
-     * payments and over payments are handled by btcpayserver.com by either refunding the
+     * payments and over payments are handled by BTCPayServer by either refunding the
      * customer or applying the funds to a new invoice.
      */
     const STATUS_NEW = 'new';
 
     /**
-     * As soon as full payment (or over payment) is received, an invoice goes into the
-     * paid status.
+     * As soon as full payment (or over payment) is received, an medium or low speed invoice goes into the
+     * paid status. A high speed invoice immediately goes into 'confirmed', see below.
      */
     const STATUS_PAID = 'paid';
 
@@ -43,7 +43,7 @@ interface InvoiceInterface
     const STATUS_CONFIRMED = 'confirmed';
 
     /**
-     * When an invoice is complete, it means that BTCPayServer.com has credited the
+     * When an invoice is complete, it means that BTCPayServer has credited the
      * merchant’s account for the invoice.  Currently, 6 confirmation blocks on the
      * bitcoin network are required for an invoice to be complete.  Note, in the future (for
      * qualified payers), invoices may move to a complete status immediately upon
@@ -62,7 +62,7 @@ interface InvoiceInterface
      * An invoice is considered invalid when it was paid, but payment was not confirmed
      * within 1 hour after receipt.  It is possible that some transactions on the bitcoin
      * network can take longer than 1 hour to be included in a block.  In such
-     * circumstances, once payment is confirmed, BTCPayServer.com will make arrangements
+     * circumstances, once payment is confirmed, BTCPayServer will make arrangements
      * with the merchant regarding the funds (which can either be credited to the
      * merchant account on another invoice, or returned to the buyer).
      */
@@ -76,20 +76,8 @@ interface InvoiceInterface
     const TRANSACTION_SPEED_LOW    = 'low';
 
     /**
-     * This is the amount that is required to be collected from the buyer. Note, if this is
-     * specified in a currency other than BTC, the price will be converted into BTC at
-     * market exchange rates to determine the amount collected from the buyer.
-     *
-     * @return string
-     */
-    public function getPrice();
-
-    public function getTaxIncluded();
-
-    /**
      * This is the currency code set for the price setting.  The pricing currencies
-     * currently supported are USD, EUR, BTC, and all of the codes listed on this page:
-     * https://btcpayserver.com/bitcoin­exchange­rates
+     * currently supported are USD, EUR, BTC, etc
      *
      * @return CurrencyInterface
      */
@@ -187,16 +175,7 @@ interface InvoiceInterface
     public function isExtendedNotifications();
 
     /**
-     * default value: false
-     * ● true: Redirect from the checkout UI to the set redirect url
-     * ● false: checkout UIwill not redirect but will display a button with a  link to the set redirect url
-     *
-     * @return boolean
-     */
-    public function isRedirectAutomatically();
-
-    /**
-     * The unique id of the invoice assigned by btcpayserver.com
+     * The unique id of the invoice assigned by BTCPayServer
      *
      * @return string
      */
@@ -208,14 +187,6 @@ interface InvoiceInterface
      * @return string
      */
     public function getUrl();
-
-    /**
-     * The amount of bitcoins being requested for payment of this invoice (same as the
-     * price if the merchant set the price in BTC).
-     *
-     * @return string
-     */
-    public function getBtcPrice();
 
     /**
      * The time the invoice was created in milliseconds since midnight January 1,
@@ -235,7 +206,7 @@ interface InvoiceInterface
     public function getExpirationTime();
 
     /**
-     * The current time on the BTCPayServer.com system (by subtracting the current time from
+     * The current time on the BTCPayServer system (by subtracting the current time from
      * the expiration time, the amount of time remaining for payment can be
      * determined). Time format is “2014­01­01T19:01:01.123Z”.
      *
@@ -365,13 +336,6 @@ interface InvoiceInterface
      */
     public function getExceptionStatus();
 
-    /**
-     */
-    public function getBtcPaid();
-
-    /**
-     */
-    public function getRate();
 
     /**
      */
@@ -388,4 +352,20 @@ interface InvoiceInterface
      * @return array|object
      */
     public function getRefundAddresses();
+
+    public function getTransactionCurrency();
+
+    public function getPaymentSubtotals();
+
+    /**
+    * Equivalent to price for each supported transactionCurrency, excluding minerFees.
+    * The key is the currency and the value is an amount indicated in the smallest possible unit
+    * for each supported transactionCurrency (e.g satoshis for BTC and BCH)
+    * ex: '{"BCH": 1023200, "BTC": 113100 }'
+    */
+    public function getPaymentTotals();
+
+    public function getAmountPaid();
+
+    public function getExchangeRates();
 }

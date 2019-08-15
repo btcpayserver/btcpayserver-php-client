@@ -1,10 +1,10 @@
 ####
-# Copyright (c) 2014-2015 BTCPayServer
+# Copyright (c) 2014-2015 BitPay
 #
 # Example config using a yml file
 #
-btcpayserver:
+bitpay:
     network: testnet
-    public_key: /tmp/btcpayserver.pub
-    private_key: /tmp/btcpayserver.pri
+    public_key: /tmp/bitpay.pub
+    private_key: /tmp/bitpay.pri
     key_storage_password: YourTopSecretPassword

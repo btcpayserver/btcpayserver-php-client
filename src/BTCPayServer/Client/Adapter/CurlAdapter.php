@@ -80,11 +80,8 @@ class CurlAdapter implements AdapterInterface
         /** @var ResponseInterface */
         $response = Response::createFromRawResponse($raw);
 
-        // For some unknown reason, on some machine, the status code is equal to 0
-        // If that's the case, let's just ask to curl the real http code
-        if ($response->getStatusCode() === 0)
-            $response->setStatusCode(curl_getinfo($curl, CURLINFO_HTTP_CODE));
         curl_close($curl);
+
         return $response;
     }
 
@@ -97,7 +94,8 @@ class CurlAdapter implements AdapterInterface
     private function getCurlDefaultOptions(RequestInterface $request)
     {
         return array(
-            CURLOPT_URL            => $request->getFullUri(),
+            CURLOPT_URL            => $request->getUri(),
+            CURLOPT_PORT           => $request->getPort(),
             CURLOPT_CUSTOMREQUEST  => $request->getMethod(),
             CURLOPT_HTTPHEADER     => $request->getHeaderFields(),
             CURLOPT_TIMEOUT        => 10,
