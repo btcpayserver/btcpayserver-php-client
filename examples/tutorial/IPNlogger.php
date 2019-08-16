@@ -11,7 +11,7 @@
  *   - Token value obtained from 002.php
  *   - Invoice created & paid
  */
-require __DIR__.'/../../vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
 
 $myfile = fopen("/tmp/BitPayIPN.log", "a");
@@ -34,7 +34,7 @@ if (true === empty($ipn)) {
     throw new \Exception('Could not decode the JSON payload from BitPay.');
 }
 
-if (true === empty($ipn -> id)) {
+if (true === empty($ipn->id)) {
     fwrite($myfile, $date . " : Error. Invalid BTCPayServer payment notification message received - did not receive invoice ID.\n");
     fclose($myfile);
     throw new \Exception('Invalid BTCPayServer payment notification message received - did not receive invoice ID.');
@@ -43,10 +43,9 @@ if (true === empty($ipn -> id)) {
 // Now fetch the invoice from BitPay
 // This is needed, since the IPN does not contain any authentication
 
-$client        = new \BTCPayServer\Client\Client();
-//$network       = new \BTCPayServer\Network\Testnet();
-$adapter       = new \BTCPayServer\Client\Adapter\CurlAdapter();
-//$client->setNetwork($network);
+$client = new \BTCPayServer\Client\Client();
+$adapter = new \BTCPayServer\Client\Adapter\CurlAdapter();
+$client->setUri('https://my-btcpay-server.com');
 $client->setAdapter($adapter);
 
 $token = new \BTCPayServer\Token();
@@ -62,8 +61,8 @@ $invoiceStatus = $invoice->getStatus();
 $invoiceExceptionStatus = $invoice->getExceptionStatus();
 $invoicePrice = $invoice->getPrice();
 
-fwrite($myfile, $date . " : IPN received for BitPay invoice ".$invoiceId." . Status = " .$invoiceStatus." / exceptionStatus = " . $invoiceExceptionStatus." Price = ". $invoicePrice. "\n");
-fwrite($myfile, "Raw IPN: ". $raw_post_data."\n");
+fwrite($myfile, $date . " : IPN received for BitPay invoice " . $invoiceId . " . Status = " . $invoiceStatus . " / exceptionStatus = " . $invoiceExceptionStatus . " Price = " . $invoicePrice . "\n");
+fwrite($myfile, "Raw IPN: " . $raw_post_data . "\n");
 
 //Respond with HTTP 200, so BitPay knows the IPN has been received correctly
 //If BitPay receives <> HTTP 200, then BitPay will try to send the IPN again with increasing intervals for two more hours.

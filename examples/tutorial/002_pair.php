@@ -11,7 +11,7 @@
  *   - Pairing code
  */
 $key_dir = '/tmp';
-require __DIR__.'/../../vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
 
 /**
@@ -42,7 +42,7 @@ $adapter = new \BTCPayServer\Client\Adapter\CurlAdapter();
  */
 $client->setPrivateKey($privateKey);
 $client->setPublicKey($publicKey);
-//$client->setNetwork($network);
+$client->setUri('https://my-btcpay-server.com');
 $client->setAdapter($adapter);
 
 /**
@@ -63,19 +63,20 @@ error_log('$pairingCode: ' . $pairingCode);
 error_log('$sin: ' . $sin);
 /**** end ****/
 
-#'empty' will be POS
-#payroll
-#merchant
 
-if ($facade == ''):
+// An integration with BTCPay server is typically the "merchant" facade.
+$facade = 'merchant';
+// 'empty' will be POS
+// payroll
+// merchant
+
+if (!$facade):
     try {
-        $token = $client->createToken(
-            array(
+        $token = $client->createToken(array(
                 'pairingCode' => $pairingCode,
                 'label' => 'description',
-                'id' => (string) $sin,
-            )
-        );
+                'id' => (string)$sin,
+            ));
     } catch (\Exception $e) {
         /**
          * The code will throw an exception if anything goes wrong, if you did not
@@ -93,8 +94,8 @@ if ($facade == ''):
          * You can use the entire request/response to help figure out what went
          * wrong, but for right now, we will just var_dump them.
          */
-        echo (string) $request . PHP_EOL . PHP_EOL . PHP_EOL;
-        echo (string) $response . PHP_EOL . PHP_EOL;
+        echo (string)$request . PHP_EOL . PHP_EOL . PHP_EOL;
+        echo (string)$response . PHP_EOL . PHP_EOL;
         /**
          * NOTE: The `(string)` is include so that the objects are converted to a
          *       user friendly string.
@@ -115,45 +116,43 @@ endif;
 
 if ($facade == 'merchant' || $facade == 'payroll'):
     try {
-        $token = $client->createToken(
-            array(
-                'facade'      => $facade,
-                'label'       => 'label this token',
-                'id'          => (string) $sin,
-            )
-        );
-        
-            
+        $token = $client->createToken(array(
+                'facade' => $facade,
+                'label' => 'label this token',
+                'id' => (string)$sin,
+            ));
+
+
         echo "<pre>";
         var_dump($token);
         echo "</pre>";
-        
+
         $pairingCode = $token->GetpairingCode();
 
         $url = 'https://btcpayserver.com/api-access-request?pairingCode=' . $pairingCode;
-        
+
         echo "\n$url";
         echo "\n";
-        echo 'Token obtained: '.$token->getToken().PHP_EOL;
-        
+        echo 'Token obtained: ' . $token->getToken() . PHP_EOL;
+
     } catch (\Exception $e) {
-        echo "Exception occured: " . $e->getMessage().PHP_EOL;
+        echo "Exception occured: " . $e->getMessage() . PHP_EOL;
 
-    echo "Pairing failed. Please check whether you're trying to pair a production pairing code on test.".PHP_EOL;
-    $request  = $client->getRequest();
-    $response = $client->getResponse();
-    /**
-     * You can use the entire request/response to help figure out what went
-     * wrong, but for right now, we will just var_dump them.
-     */
-    echo (string) $request.PHP_EOL.PHP_EOL.PHP_EOL;
-    echo (string) $response.PHP_EOL.PHP_EOL;
-    /**
-     * NOTE: The `(string)` is include so that the objects are converted to a
-     *       user friendly string.
-     */
+        echo "Pairing failed. Please check whether you're trying to pair a production pairing code on test." . PHP_EOL;
+        $request = $client->getRequest();
+        $response = $client->getResponse();
+        /**
+         * You can use the entire request/response to help figure out what went
+         * wrong, but for right now, we will just var_dump them.
+         */
+        echo (string)$request . PHP_EOL . PHP_EOL . PHP_EOL;
+        echo (string)$response . PHP_EOL . PHP_EOL;
+        /**
+         * NOTE: The `(string)` is include so that the objects are converted to a
+         *       user friendly string.
+         */
 
-    exit(1); // We do not want to continue if something went wrong
+        exit(1); // We do not want to continue if something went wrong
 
     }
 endif;

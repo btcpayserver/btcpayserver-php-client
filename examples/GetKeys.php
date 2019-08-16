@@ -16,7 +16,10 @@ printf("Public Key:  %s\n", $public);
 printf("Private Key: %s\n", $private);
 printf("Sin Key:     %s\n\n", $sin);
 
-$keypair = array($private->getHex(), $public->getHex());
+$keypair = array(
+    $private->getHex(),
+    $public->getHex()
+);
 
 printf("PEM keypair:  %s\n", $private->pemEncode($keypair));
 

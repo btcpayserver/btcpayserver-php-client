@@ -19,16 +19,15 @@ require __DIR__ . '/../vendor/autoload.php';
  * Create a new client. You can see the example of how to configure this using
  * a yml file as well.
  */
-$btcpay = new \BTCPayServer\BTCPayServer(
-    array(
+$btcpay = new \BTCPayServer\BTCPayServer(array(
         'btcpay' => array(
-            'public_key'  => '/tmp/btcpayserver.pub', //see tutorial/001.php and 002.php
+            'public_key' => '/tmp/btcpayserver.pub',
+            //see tutorial/001.php and 002.php
             'private_key' => '/tmp/btcpayserver.pri',
             'key_storage' => 'BTCPayServer\Storage\EncryptedFilesystemStorage',
             'key_storage_password' => 'YourTopSecretPassword'
         )
-    )
-);
+    ));
 
 /**
  * Create the client that will be used to send requests to BitPay's API

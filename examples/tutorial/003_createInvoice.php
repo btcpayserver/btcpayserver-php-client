@@ -11,7 +11,7 @@
  *   - Token value obtained from 002.php
  */
 $key_dir = '/tmp';
-require __DIR__.'/../../vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
 // See 002.php for explanation
 #$storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage('YourTopSecretPassword'); // Password may need to be updated if you changed it
@@ -20,12 +20,12 @@ $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage('TopSecret
 $privateKey = $storageEngine->load($key_dir . '/bitpay.pri');
 $publicKey = $storageEngine->load($key_dir . '/bitpay.pub');
 
-$client        = new \BTCPayServer\Client\Client();
+$client = new \BTCPayServer\Client\Client();
 //$network       = new \BTCPayServer\Network\Testnet();
-$adapter       = new \BTCPayServer\Client\Adapter\CurlAdapter();
+$adapter = new \BTCPayServer\Client\Adapter\CurlAdapter();
 $client->setPrivateKey($privateKey);
 $client->setPublicKey($publicKey);
-//$client->setNetwork($network);
+$client->setUri('https://my-btcpay-server.com');
 $client->setAdapter($adapter);
 // ---------------------------
 
@@ -47,8 +47,7 @@ $client->setToken($token);
 $invoice = new \BTCPayServer\Invoice();
 
 $buyer = new \BTCPayServer\Buyer();
-$buyer
-    ->setEmail('buyeremail@test.com');
+$buyer->setEmail('buyeremail@test.com');
 
 // Add the buyers info to invoice
 $invoice->setBuyer($buyer);
@@ -57,10 +56,7 @@ $invoice->setBuyer($buyer);
  * Item is used to keep track of a few things
  */
 $item = new \BTCPayServer\Item();
-$item
-    ->setCode('skuNumber')
-    ->setDescription('General Description of Item')
-    ->setPrice('1.99');
+$item->setCode('skuNumber')->setDescription('General Description of Item')->setPrice('1.99');
 $invoice->setItem($item);
 
 /**
@@ -74,8 +70,7 @@ $invoice->setItem($item);
 $invoice->setCurrency(new \BTCPayServer\Currency('USD'));
 
 // Configure the rest of the invoice
-$invoice
-    ->setOrderId('OrderIdFromYourSystem')
+$invoice->setOrderId('OrderIdFromYourSystem')
     // You will receive IPN's at this URL, should be HTTPS for security purposes!
     ->setNotificationUrl('https://store.example.com/bitpay/callback');
 
@@ -85,17 +80,17 @@ $invoice
  * a customer can view the invoice.
  */
 try {
-    echo "Creating invoice at BitPay now.".PHP_EOL;
+    echo "Creating invoice at BitPay now." . PHP_EOL;
     $client->createInvoice($invoice);
 } catch (\Exception $e) {
-    echo "Exception occured: " . $e->getMessage().PHP_EOL;
-    $request  = $client->getRequest();
+    echo "Exception occured: " . $e->getMessage() . PHP_EOL;
+    $request = $client->getRequest();
     $response = $client->getResponse();
-    echo (string) $request.PHP_EOL.PHP_EOL.PHP_EOL;
-    echo (string) $response.PHP_EOL.PHP_EOL;
+    echo (string)$request . PHP_EOL . PHP_EOL . PHP_EOL;
+    echo (string)$response . PHP_EOL . PHP_EOL;
     exit(1); // We do not want to continue if something went wrong
 }
 
-echo 'Invoice "'.$invoice->getId().'" created, see '.$invoice->getUrl().PHP_EOL;
-echo "Verbose details.".PHP_EOL;
+echo 'Invoice "' . $invoice->getId() . '" created, see ' . $invoice->getUrl() . PHP_EOL;
+echo "Verbose details." . PHP_EOL;
 print_r($invoice);

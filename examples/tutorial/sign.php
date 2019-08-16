@@ -1,14 +1,14 @@
 <?php
 
-require __DIR__.'/../../vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
 $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage('TopSecretPassword');
-$private    = $storageEngine->load('/tmp/private_key.key');
-$public     = $storageEngine->load('/tmp/public_key.key');
+$private = $storageEngine->load('/tmp/private_key.key');
+$public = $storageEngine->load('/tmp/public_key.key');
 $public->setPrivateKey($private);
 $public->generate();
 
-$sin    = new \BTCPayServer\SinKey('/tmp/sin.key');
+$sin = new \BTCPayServer\SinKey('/tmp/sin.key');
 $sin->setPublicKey($public);
 $sin->generate();
 

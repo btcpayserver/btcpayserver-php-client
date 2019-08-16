@@ -12,8 +12,8 @@ require __DIR__ . '/../vendor/autoload.php';
  * this example, however, the keys are not persisted on disk or in a database.
  */
 $private = new \BTCPayServer\PrivateKey('/tmp/private_key.key');
-$public  = new \BTCPayServer\PublicKey('/tmp/public_key.key');
-$sin     = new \BTCPayServer\SinKey('/tmp/sin.key');
+$public = new \BTCPayServer\PublicKey('/tmp/public_key.key');
+$sin = new \BTCPayServer\SinKey('/tmp/sin.key');
 
 // Generate Private Key values
 $private->generate();

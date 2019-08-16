@@ -4,14 +4,13 @@ require __DIR__ . '/../vendor/autoload.php';
 #require __DIR__.'/../../vendor/autoload.php';
 
 
-
 #$storageEngine = new \BTCPayServer\Storage\FilesystemStorage();
 $storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage('YourTopSecretPassword');
 
 
 $private = $storageEngine->load('/tmp/bitpay.pri');
-$public  = new \BTCPayServer\PublicKey('/tmp/bitpay.pub');
-error_log('$private '.$private);
+$public = new \BTCPayServer\PublicKey('/tmp/bitpay.pub');
+error_log('$private ' . $private);
 $public->setPrivateKey($private);
 $public->generate();
 

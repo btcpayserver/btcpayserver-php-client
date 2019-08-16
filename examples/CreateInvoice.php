@@ -16,30 +16,16 @@ require __DIR__ . '/../vendor/autoload.php';
  * Create an Item object that will be used later
  */
 $item = new \BTCPayServer\Item();
-$item
-    ->setCode('skuNumber')
-    ->setDescription('General Description of Item')
-    ->setPrice('1.99');
+$item->setCode('skuNumber')->setDescription('General Description of Item')->setPrice('1.99');
 
 /**
  * Create Buyer object that will be used later.
  */
 $buyer = new \BTCPayServer\Buyer();
-$buyer
-    ->setFirstName('Some')
-    ->setLastName('Customer')
-    ->setPhone('555-5555-5555')
-    ->setEmail('test@test.com')
-    ->setAddress(
-        array(
+$buyer->setFirstName('Some')->setLastName('Customer')->setPhone('555-5555-5555')->setEmail('test@test.com')->setAddress(array(
             '123 Main St',
             'Suite 1',
-        )
-    )
-    ->setCity('Atlanta')
-    ->setState('GA')
-    ->setZip('30120')
-    ->setCountry('US');
+        ))->setCity('Atlanta')->setState('GA')->setZip('30120')->setCountry('US');
 
 /**
  * Create the invoice
@@ -50,8 +36,7 @@ $invoice->setItem($item);
 // Add the buyers info to invoice
 $invoice->setBuyer($buyer);
 // Configure the rest of the invoice
-$invoice
-    ->setOrderId('OrderIdFromYourSystem')
+$invoice->setOrderId('OrderIdFromYourSystem')
     // You will receive IPN's at this URL, should be HTTPS for security purposes!
     ->setNotificationUrl('https://store.example.com/btcpayserver/callback');
 
@@ -88,8 +73,4 @@ $client->setToken($token);
 // Send invoice
 $client->createInvoice($invoice);
 
-var_dump(
-    (string) $client->getRequest(),
-    (string) $client->getResponse(),
-    $invoice
-);
+var_dump((string)$client->getRequest(), (string)$client->getResponse(), $invoice);

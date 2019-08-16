@@ -11,14 +11,13 @@
  *   - Token value obtained from 002.php
  *   - Invoice created
  */
-require __DIR__.'/../../vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
 // Now fetch the invoice from BitPay
 
-$client        = new \BTCPayServer\Client\Client();
-//$network = new \BTCPayServer\Network\Livenet();
-$adapter       = new \BTCPayServer\Client\Adapter\CurlAdapter();
-//$client->setNetwork($network);
+$client = new \BTCPayServer\Client\Client();
+$adapter = new \BTCPayServer\Client\Adapter\CurlAdapter();
+$client->setUri('https://my-btcpay-server.com');
 $client->setAdapter($adapter);
 
 $token = new \BTCPayServer\Token();
@@ -31,10 +30,10 @@ $client->setToken($token);
  */
 $invoice = $client->getInvoice("UpdateThisValue");
 
-$request  = $client->getRequest();
+$request = $client->getRequest();
 $response = $client->getResponse();
-echo (string) $request.PHP_EOL.PHP_EOL.PHP_EOL;
-echo (string) $response.PHP_EOL.PHP_EOL;
+echo (string)$request . PHP_EOL . PHP_EOL . PHP_EOL;
+echo (string)$response . PHP_EOL . PHP_EOL;
 
 print_r($invoice);
 
