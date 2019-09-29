@@ -178,7 +178,7 @@ class Request implements RequestInterface
     {
         return sprintf(
             '%s://%s:%s/%s',
-            $this->getSchema(),
+            $this->getScheme(),
             $this->getHost(),
             $this->getPort(),
             $this->getPath()
