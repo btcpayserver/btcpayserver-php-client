@@ -18,6 +18,8 @@ This is a self-contained PHP implementation of BTCPayServer's cryptographically 
 
 If your application requires BitPay compatibility go to this repository instead https://github.com/btcpayserver/php-bitpay-client
 
+The files in "examples" are migrated from previous versions and are UNTESTED. If someone can review the example files and improve them, please help out.
+
 # Important upgrade notes
 
 ## Version 0.2.0
