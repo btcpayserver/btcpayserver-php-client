@@ -42,7 +42,7 @@ $adapter = new \BTCPayServer\Client\Adapter\CurlAdapter();
  */
 $client->setPrivateKey($privateKey);
 $client->setPublicKey($publicKey);
-$client->setUri('https://my-btcpay-server.com');
+$client->setUri('https://my-btcpay-server.com:443'); //specify port
 $client->setAdapter($adapter);
 
 /**
