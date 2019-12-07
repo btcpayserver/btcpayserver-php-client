@@ -639,6 +639,14 @@ class Client implements ClientInterface
         $port = parse_url($this->uri,PHP_URL_PORT);
         $scheme = parse_url($this->uri,PHP_URL_SCHEME);
 
+        if($port === null){
+            if($scheme === 'http'){
+                $port = 80;
+            }elseif($scheme === 'https'){
+                $port = 443;
+            }
+        }
+
         $request->setHost($host);
         $request->setPort($port);
         $request->setScheme($scheme);
