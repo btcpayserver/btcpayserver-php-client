@@ -176,6 +176,7 @@ class Client implements ClientInterface
             'guid'              => Util::guid(),
             'nonce'             => Util::nonce(),
             'token'             => $this->token->getToken(),
+            'paymentCurrencies' => $invoice->setTransactionCurrency(),
         );
 
         $request->setBody(json_encode($body));
