@@ -1,6 +1,6 @@
 {
-  "name": "btcpayserver/sdk",
-  "description": "Complete version of the PHP library for the new cryptographically secure BitPay API",
+  "name": "btcpayserver/btcpayserver-php-client",
+  "description": "PHP Library to work with the new cryptographically secure BTCPayServer API",
   "license": "MIT",
   "minimum-stability": "stable",
   "keywords": [
@@ -10,7 +10,7 @@
     "payment",
     "gateway"
   ],
-  "homepage": "https://github.com/btcpayserver/php-btcpay-client-v2",
+  "homepage": "https://github.com/btcpayserver/btcpayserver-php-client",
   "require": {
     "bitpay/key-utils": "^1.0",
     "php": "^7.1",
@@ -21,8 +21,8 @@
   },
   "authors": [
     {
-      "name": "Markus Petzsch",
-      "email": "markus@petzsch.eu"
+      "name": "BTCPayServer Developer Community",
+      "homepage": "https://github.com/btcpayserver"
     }
   ],
   "require-dev": {
