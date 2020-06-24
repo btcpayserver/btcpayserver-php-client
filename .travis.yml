@@ -1,35 +1,5 @@
 language: php
-
 php:
-    - 5.4
-    - 5.5
-    - 5.6
-    - 7.0
-    - 7.1
-    - 7.2
-
-install:
-    - composer install
-    - npm install
-
-before_script:
-    - make phantomjs
-
-script:
-    - php bin/phpunit -c build/
-    - php bin/phpcs -n --standard=PSR1,PSR2 --report=full src/
-
-after_script:
-    - ls -alh build/logs
-    - php bin/coveralls -v
-
-notifications:
-    email: false
-
-matrix:
-    fast_finish: true
-
-# Only build the master branch and pull requests for the master branch
-branches:
-    only:
-        - master
+  - 7.1
+  - 7.2
+  - 7.3
