@@ -1,35 +1,28 @@
-## Using the BitPay PHP client
+## Using the BTCPayServer PHP client
 
-This SDK provides a convenient abstraction of BitPay's [cryptographically-secure API](https://bitpay.com/api) and allows payment gateway developers to focus on payment flow/e-commerce integration rather than on the specific details of client-server interaction using the API.  This SDK optionally provides the flexibility for developers to have control over important details, including the handling of private keys needed for client-server communication.
+This SDK provides a convenient abstraction of BTCPayServer's [cryptographically-secure API](https://docs.btcpayserver.org/CustomIntegration/) and allows payment gateway developers to focus on payment flow/e-commerce integration rather than on the specific details of client-server interaction using the API.  This SDK optionally provides the flexibility for developers to have control over important details, including the handling of private keys needed for client-server communication.
 
-It also implements BitPay's remote client authentication and authorization strategy.  No private or shared-secret information is ever transmitted over the wire.
+It also implements BTCPayServer's remote client authentication and authorization strategy.  No private or shared-secret information is ever transmitted over the wire.
 
 ### Dependencies
 
-You must have a BitPay merchant account to use this SDK.  It's free to [sign-up for a BitPay merchant account](https://bitpay.com/start).
-
-If you need a test account, please visit https://test.bitpay.com/dashboard/signup and register for a BitPay merchant test account. Please fill in all questions, so you get a fully working test account.
-If you are looking for a testnet bitcoin wallet to test with, please visit https://bitpay.com/wallet and
-create a new wallet.
-If you need testnet bitcoin please visit a testnet faucet, e.g. https://testnet.coinfaucet.eu/en/ or http://tpfaucet.appspot.com/
-
-For more information about testing, please see https://bitpay.com/docs/testing
+You must have access to a BTCPayServer merchant account to use this SDK.  For testing purposes the [demo server](https://mainnet.demo.btcpayserver.org/) might be sufficient. If you plan to use BTCPayServer in production it is recommended to look for a 3rd party host or setup your own BTCPayServer instance.
 
 ### Handling your client private key
 
-Each client paired with the BitPay server requires a ECDSA key.  This key provides the security mechanism for all client interaction with the BitPay server. The public key is used to derive the specific client identity that is displayed on your BitPay dashboard.  The public key is also used for securely signing all API requests from the client.  See the [BitPay API](https://bitpay.com/api) for more information.
+Each client paired with a BTCPayServer requires a ECDSA key.  This key provides the security mechanism for all client interaction with a BTCPayServer. The public key is used to derive the specific client identity that is displayed on your BTCPayServer dashboard.  The public key is also used for securely signing all API requests from the client.  See the [BTCPayServer docs](https://docs.btcpayserver.org/) for more information.
 
-The private key should be stored in the client environment such that it cannot be compromised.  If your private key is compromised you should revoke the compromised client identity from the BitPay server and re-pair your client, see the [API tokens](https://bitpay.com/api-tokens) for more information.
+The private key should be stored in the client environment such that it cannot be compromised.  If your private key is compromised you should revoke the compromised client identity from the BTCPayServer and re-pair your client, see the [API tokens](https://docs.btcpayserver.org/CustomIntegration/) for more information.
 
 To generate the configuration file required to load the SDK:
 
-The [BitPay Config Generator](https://github.com/bitpay/php-bitpay-client-v2/blob/master/examples/ConfigGenerator.php) helps to generate the private key, as well as a environment file formatted in JSON or YML which contains all configuration requirements, that should be stored in the client local file system. It is not recommended to transmit the private key over any public or unsecure networks.
+The [BTCPayServer Config Generator](https://github.com/btcpayserver/btcpayserver-php-client/blob/master/examples/ConfigGenerator.php) helps to generate the private key, as well as a environment file formatted in JSON or YML which contains all configuration requirements, that should be stored in the client local file system. It is not recommended to transmit the private key over any public unsecured networks.
 
 The comments in this script will assist you to create the environment file which you will be able to modify it later.
 
 Once the Config Generator has run and generated the Json/Yml correctly, read the console output and follow the instructions in order to pair your new tokens.
 
-The environment file can be either generated by the script mentioned avobe or created manually by copying the following Json or YML structure:
+The environment file can be either generated by the script mentioned before or created manually by copying the following Json or YML structure:
 
 JSON:
 ```json
@@ -99,7 +92,7 @@ Add to your composer.json file by hand.
     ...
     "require": {
         ...
-        "btcpayserver/sdk": "~3.0"
+        "btcpayserver/btcpayserver-php-client": "^2.0.0"
     }
     ...
 }
@@ -108,13 +101,13 @@ Add to your composer.json file by hand.
 Once you have added this, just run:
 
 ```bash
-php composer.phar update btcpayserver/sdk
+php composer.phar update btcpayserver/btcpayserver-php-client
 ```
 
 ### Install using composer
 
 ```bash
-php composer.phar require btcpayserver/sdk:~3.0
+php composer.phar require btcpayserver/btcpayserver-php-client:~2.0
 ```
 
 ### Initializing your BtcPay client
@@ -165,12 +158,6 @@ $invoiceUrl = $invoice->getURL();
 $status = $invoice->getStatus();
 ```
 
-> **WARNING**: 
-If you get the following error when initiating the client for first time:
-"500 Internal Server Error` response: {"error":"Account not setup completely yet."}"
-Please, go back to your BitPay account and complete the required steps.
-More info [here](https://support.bitpay.com/hc/en-us/articles/203010446-How-do-I-apply-for-a-merchant-account-)
-
 ### Retrieve an invoice
 
 ```php
@@ -179,7 +166,7 @@ $invoice = $bitpay->getInvoice($invoice->getId());
 
 ### Get exchange Rates
 
-You can retrieve BitPay's [BBB exchange rates](https://bitpay.com/exchange-rates).
+You can retrieve BTCPayServer's exchange rates:
 
 ```php
 $rates = $bitpay->getRates();
