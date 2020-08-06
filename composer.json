@@ -1,5 +1,5 @@
 {
-  "name": "btcpayserver/btcpayserver-php-client",
+  "name": "petzsch/btcpayserver-php-client",
   "description": "PHP Library to work with the new cryptographically secure BTCPayServer API",
   "license": "MIT",
   "minimum-stability": "stable",
@@ -10,7 +10,7 @@
     "payment",
     "gateway"
   ],
-  "homepage": "https://github.com/btcpayserver/btcpayserver-php-client",
+  "homepage": "https://github.com/petzsch/btcpayserver-php-client",
   "require": {
     "bitpay/key-utils": "^1.0",
     "php": "^7.1",
