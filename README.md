@@ -12,7 +12,7 @@ btcpayserver/btcpayserver-php-client
 [![Total Downloads](https://poser.pugx.org/btcpayserver/btcpayserver-php-client/downloads.svg)](https://packagist.org/packages/btcpayserver/btcpayserver-php-client)
 [![Latest Unstable Version](https://poser.pugx.org/btcpayserver/btcpayserver-php-client/v/unstable.svg)](https://packagist.org/packages/btcpayserver/btcpayserver-php-client)
 
-This is a self-contained PHP implementation of BTCPayServer's cryptographically secure API: https://github.com/btcpayserver/btcpayserver-doc/blob/master/CustomIntegration.md
+This is a self-contained PHP implementation of BTCPayServer's cryptographically secure API: https://github.com/btcpayserver/btcpayserver-doc/blob/master/docs/CustomIntegration.md
 
 # Before you start
 
