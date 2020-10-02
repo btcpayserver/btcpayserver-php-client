@@ -110,21 +110,6 @@ class Client implements ClientInterface
         $expirationTime = is_numeric($data['expirationTime']) ? intval($data['expirationTime']/1000) : $data['expirationTime'];
         $currentTime = is_numeric($data['currentTime']) ? intval($data['currentTime']/1000) : $data['currentTime'];
 
-        // Buyer
-        $buyer = new \BTCPayServer\Buyer();
-        if (array_key_exists('buyer', $data)) {
-            $names = explode(' ', $data['buyer']['name']);
-            $buyer->setFirstName(isset($names[0]) ? $names[0] : '');
-            $buyer->setLastName(isset($names[1]) ? $names[1] : '');
-            $buyer->setAddress(array($data['buyer']['address1'], $data['buyer']['address2']));
-            $buyer->setZip($data['buyer']['postalCode']);
-            $buyer->setCity($data['buyer']['locality']);
-            $buyer->setState($data['buyer']['region']);
-            $buyer->setCountry($data['buyer']['country']);
-            $buyer->setPhone($data['buyer']['phone']);
-            $buyer->setEmail($data['buyer']['email']);
-        }
-
         $invoiceToken = new \BTCPayServer\Token();
         $invoice
             ->setToken($invoiceToken->setToken($data['token']))
@@ -138,7 +123,6 @@ class Client implements ClientInterface
             ->setExpirationTime($expirationTime)
             ->setCurrentTime($currentTime)
             ->setId($data['id'])
-            ->setBuyer($buyer)
             ->setAmountPaid(array_key_exists('amountPaid', $data) ? $data['amountPaid'] : '')
             ->setExceptionStatus($data['exceptionStatus'])
             ->setRefundAddresses(array_key_exists('refundAddresses', $data) ? $data['refundAddresses'] : '')
