@@ -21,7 +21,6 @@ require __DIR__ . '/../../vendor/autoload.php';
 define('KEY_DIR', __DIR__ . '/tmp'); // directory to store your key files
 define('PRIVATE_KEY_NAME', '/btcpay.pri');
 define('PUBLIC_KEY_NAME', '/btcpay.pub');
-
 define('PASSWORD', 'TopSecretPassword'); // change this to a strong password
 
 // Start by creating a PrivateKey object
