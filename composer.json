@@ -1,5 +1,5 @@
 {
-    "name": "btcpayserver/btcpayserver-php-client",
+    "name": "sashmaaan/btcpayserver-php-client",
     "description": "PHP Library to work with the new cryptographically secure BTCPayServer API",
     "license": "MIT",
     "minimum-stability": "stable",
