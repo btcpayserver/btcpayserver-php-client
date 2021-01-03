@@ -368,4 +368,22 @@ interface InvoiceInterface
     public function getAmountPaid();
 
     public function getExchangeRates();
+
+    /**
+     * Get the enforced transaction currencies.
+     *
+     * @return array|null
+     */
+    public function getPaymentCurrencies();
+
+    /**
+     * Set specific invoice currencies and to enforce them on payment step.
+     *
+     * @param array $paymentCurrencies
+     *   The currencies need to match what is supported by BTCPay Server.
+     *   E.g. BTC, BTC_ONCHAIN, BTC_OFFCHAIN, LTC, XMR_MONEROLIKE etc.
+     *
+     * @return InvoiceInterface
+     */
+    public function setPaymentCurrencies($paymentCurrencies);
 }
