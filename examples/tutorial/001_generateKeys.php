@@ -1,36 +1,48 @@
 <?php
-// If you have not already done so, please run `composer.phar install`
-#where to store keys
-$key_dir = __DIR__ . '/tmp';
+
+/**
+ * 001 - Generate keys
+ * 
+ * This script needs to be run only once per BTCPayServer setup. 
+ * For every next request which you´ll send to the BTCPay Server
+ * the request as to be complemented with these keys.
+ *
+ * Requirements:
+ *   - Basic PHP Knowledge
+ *   - if you have not already done so, please run `composer.phar install`
+ */
+
+use BTCPayServer\PrivateKey;
+use BTCPayServer\PublicKey;
+use BTCPayServer\Storage\EncryptedFilesystemStorage;
+
 require __DIR__ . '/../../vendor/autoload.php';
 
-/**
- * Start by creating a PrivateKey object
- */
-// You can generate a private key with only one line of code like so
-$privateKey = \BTCPayServer\PrivateKey::create($key_dir . '/btcpay.pri')->generate();
+define('KEY_DIR', __DIR__ . '/tmp'); // directory to store your key files
+define('PRIVATE_KEY_NAME', '/btcpay.pri');
+define('PUBLIC_KEY_NAME', '/btcpay.pub');
+define('PASSWORD', 'TopSecretPassword'); // change this to a strong password
 
-// NOTE: This has overridden the previous $privateKey variable, although its
-//       not an issue in this case since we have not used this key for
-//       anything yet.
+// Start by creating a PrivateKey object
+$privateKey = PrivateKey::create(KEY_DIR . PRIVATE_KEY_NAME)->generate();
 
-/**
- * Once we have a private key, a public key is created from it.
- */
-$publicKey = new \BTCPayServer\PublicKey($key_dir . '/btcpay.pub');
+// then create a PublicKey Object
+$publicKey = new PublicKey(KEY_DIR . PUBLIC_KEY_NAME);
 
-// Inject the private key into the public key
+// inject the private key into the public key
 $publicKey->setPrivateKey($privateKey);
 
-// Generate the public key
+// generate the public key
 $publicKey->generate();
 
-// NOTE: You can again do all of this with one line of code like so:
-// `$publicKey = \BTCPayServer\PublicKey::create('/tmp/bitpay.pub')->setPrivateKey($privateKey)->generate();`
+/**
+ * NOTE: You can again do all of this with one line of code like so:
+ * $publicKey = \BTCPayServer\PublicKey::create(KEY_DIR . PUBLIC_KEY_NAME)->setPrivateKey($privateKey)->generate();
+ */ 
 
 /**
  * Now that you have a private and public key generated, you will need to store
- * them somewhere. This optioin is up to you and how you store them is up to
+ * them somewhere. This option is up to you and how you store them is up to
  * you. Please be aware that you MUST store the private key with some type
  * of security. If the private key is compromised you will need to repeat this
  * process.
@@ -40,7 +52,7 @@ $publicKey->generate();
  * It's recommended that you use the EncryptedFilesystemStorage engine to persist your
  * keys. You can, of course, create your own as long as it implements the StorageInterface
  */
-$storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage('TopSecretPassword');
+$storageEngine = new EncryptedFilesystemStorage(PASSWORD);
 $storageEngine->persist($privateKey);
 $storageEngine->persist($publicKey);
 

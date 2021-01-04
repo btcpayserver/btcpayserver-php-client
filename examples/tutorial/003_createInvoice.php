@@ -1,39 +1,59 @@
 <?php
+
 /**
- * Copyright (c) 2014-2015 BitPay
- *
  * 003 - Creating Invoices
  *
  * Requirements:
- *   - Account on https://test.bitpay.com
  *   - Basic PHP Knowledge
- *   - Private and Public keys from 001.php
- *   - Token value obtained from 002.php
+ *   - Private and Public keys from 001_generateKeys.php
+ *   - Your "TopSecretPassword" which you used in 001_generateKeys.php
+ *   - Account on a BTCPay Server
+ *   - Token value obtained from 002_pairing.php
  */
-$key_dir = '/tmp';
+
+use BTCPayServer\PrivateKey;
+use BTCPayServer\PublicKey;
+use BTCPayServer\Storage\EncryptedFilesystemStorage;
+use BTCPayServer\Client\Client;
+use BTCPayServer\Client\Adapter\CurlAdapter;
+use BTCPayServer\Token;
+use BTCPayServer\Invoice;
+use BTCPayServer\Buyer;
+use BTCPayServer\Item;
+use BTCPayServer\Currency;
+
 require __DIR__ . '/../../vendor/autoload.php';
 
-// See 002.php for explanation
-#$storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage('YourTopSecretPassword'); // Password may need to be updated if you changed it
+define('KEY_DIR', __DIR__ . '/tmp'); // directory to store your key files
+define('PRIVATE_KEY_NAME', '/btcpay.pri');
+define('PUBLIC_KEY_NAME', '/btcpay.pub');
+define('SIN_NAME', '/sin.key');
+define('PASSWORD', 'TopSecretPassword'); // change this to a strong password
+define('SERVER_URL', 'https://yourserver.domain.com'); // change to your server (no trailing slash)
+define('SERVER_PORT', '443'); // change to your server port
+define('PAIRING_CODE', '<PairingToken>'); // pairing code which you get in the admin panel of your btcpay server
+define('PAIRING_LABEL', 'PairingToken'); // change to whatever you want
+define('TOKEN', '<ApiToken>'); // change to you token received in 002_pairing.php
+define('IPN_CALLBACK', 'https://yourServer.com/ipn_callback.php');
 
-$storageEngine = new \BTCPayServer\Storage\EncryptedFilesystemStorage('TopSecretPassword');
-$privateKey = $storageEngine->load($key_dir . '/bitpay.pri');
-$publicKey = $storageEngine->load($key_dir . '/bitpay.pub');
+$storageEngine = new EncryptedFilesystemStorage(PASSWORD);
+$privateKey = $storageEngine->load(KEY_DIR . PRIVATE_KEY_NAME);
+$publicKey = $storageEngine->load(KEY_DIR . PUBLIC_KEY_NAME);
 
-$client = new \BTCPayServer\Client\Client();
-//$network       = new \BTCPayServer\Network\Testnet();
-$adapter = new \BTCPayServer\Client\Adapter\CurlAdapter();
+$client = new Client();
+$adapter = new CurlAdapter();
+
 $client->setPrivateKey($privateKey);
 $client->setPublicKey($publicKey);
-$client->setUri('https://my-btcpay-server.com:443'); //port required
+$client->setUri(SERVER_URL . ':' . SERVER_PORT);
 $client->setAdapter($adapter);
 // ---------------------------
 
 /**
  * The last object that must be injected is the token object.
  */
-$token = new \BTCPayServer\Token();
-$token->setToken('<api token>'); // UPDATE THIS VALUE
+$token = new Token();
+$token->setToken(TOKEN);
 
 /**
  * Token object is injected into the client
@@ -44,9 +64,9 @@ $client->setToken($token);
  * This is where we will start to create an Invoice object, make sure to check
  * the InvoiceInterface for methods that you can use.
  */
-$invoice = new \BTCPayServer\Invoice();
+$invoice = new Invoice();
 
-$buyer = new \BTCPayServer\Buyer();
+$buyer = new Buyer();
 $buyer->setEmail('buyeremail@test.com');
 
 // Add the buyers info to invoice
@@ -55,7 +75,7 @@ $invoice->setBuyer($buyer);
 /**
  * Item is used to keep track of a few things
  */
-$item = new \BTCPayServer\Item();
+$item = new Item();
 $item->setCode('skuNumber')->setDescription('General Description of Item')->setPrice('1.99');
 $invoice->setItem($item);
 
@@ -67,20 +87,20 @@ $invoice->setItem($item);
  *
  * @see https://test.bitpay.com/bitcoin-exchange-rates for supported currencies
  */
-$invoice->setCurrency(new \BTCPayServer\Currency('USD'));
+$invoice->setCurrency(new Currency('USD'));
 
 // Configure the rest of the invoice
-$invoice->setOrderId('OrderIdFromYourSystem')
-    // You will receive IPN's at this URL, should be HTTPS for security purposes!
-    ->setNotificationUrl('https://store.example.com/bitpay/callback');
+$invoice->setOrderId('OrderIdFromYourSystem');
 
+// You will receive IPN's at this URL, should be HTTPS for security purposes!
+$invoice->setNotificationUrl(IPN_CALLBACK);
 
 /**
  * Updates invoice with new information such as the invoice id and the URL where
  * a customer can view the invoice.
  */
 try {
-    echo "Creating invoice at BitPay now." . PHP_EOL;
+    echo "Creating invoice at your BTCPay Server now." . PHP_EOL;
     $client->createInvoice($invoice);
 } catch (\Exception $e) {
     echo "Exception occured: " . $e->getMessage() . PHP_EOL;
