@@ -9,7 +9,7 @@ class CurrencyUnrestricted extends Currency
    */
   public function setCode($code)
   {
-    $this->code = strtoupper($code);
+    $this->code = $code;
 
     return $this;
   }
