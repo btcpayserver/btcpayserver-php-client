@@ -7,6 +7,7 @@
 namespace BTCPayServer\Client;
 
 use BTCPayServer\Client\Adapter\AdapterInterface;
+use BTCPayServer\CurrencyUnrestricted;
 use BTCPayServer\TokenInterface;
 use BTCPayServer\InvoiceInterface;
 use BTCPayServer\PayoutInterface;
@@ -117,7 +118,7 @@ class Client implements ClientInterface
             ->setPosData(array_key_exists('posData', $data) ? $data['posData'] : '')
             ->setStatus($data['status'])
             ->setPrice($data['price'])
-            ->setCurrency(new \BTCPayServer\Currency($data['currency']))
+            ->setCurrency(new CurrencyUnrestricted($data['currency']))
             ->setOrderId(array_key_exists('orderId', $data) ? $data['orderId'] : '')
             ->setInvoiceTime($invoiceTime)
             ->setExpirationTime($expirationTime)
