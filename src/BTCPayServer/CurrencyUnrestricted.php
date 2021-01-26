@@ -1,6 +1,6 @@
 <?php
 
-namespace Bitpay;
+namespace BTCPayServer;
 
 class CurrencyUnrestricted extends Currency
 {
