@@ -24,7 +24,7 @@ interface ClientInterface
      * @see RFC2616 section 14.43 for User-Agent Format
      */
     const NAME    = 'BTCPayServer PHP-Client';
-    const VERSION = '4.0.0';
+    const VERSION = '4.0.1';
 
     //public function createApplication(ApplicationInterface $application);
 
