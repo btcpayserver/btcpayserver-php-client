@@ -1,3 +1,7 @@
+# === Warning ===
+
+This is the old BitPay based PHP client and should be considered deprecated (even though it currently still works). If you are building something from scratch, [use the new Greenfield API](https://github.com/btcpayserver/btcpayserver-greenfield-php).
+
 btcpayserver/btcpayserver-php-client
 =================
 
@@ -13,10 +17,6 @@ btcpayserver/btcpayserver-php-client
 [![Latest Unstable Version](https://poser.pugx.org/btcpayserver/btcpayserver-php-client/v/unstable.svg)](https://packagist.org/packages/btcpayserver/btcpayserver-php-client)
 
 This is a self-contained PHP implementation of BTCPayServer's cryptographically secure API: https://github.com/btcpayserver/btcpayserver-doc/blob/master/docs/CustomIntegration.md
-
-# === Warning ===
-
-This is the old BitPay based PHP client and should be considered deprecated (even though it currently still works). If you are building something from scratch, [use the new Greenfield API](https://github.com/btcpayserver/btcpayserver-greenfield-php).
 
 # Before you start
 
